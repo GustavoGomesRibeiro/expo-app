@@ -1,0 +1,11 @@
+
+Rotas:
+  ☐ /sessions
+    ☐ /users
+      ☐ Login com user
+      ☐ Login com estabelecimento
+
+    ☐ /establishment
+      ☐ Listar os estabelecimentos
+
+  ☐1:32:00
