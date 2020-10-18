@@ -1,0 +1,14 @@
+
+Alteração na tela de adicionar:
+☐ Fluxo de cadastro de estabelecimentos será feito no app já logado no sistema
+☐ Adicionar tarefas, atividades do estabelecimentos e alguns outros dados.
+
+Mudanca no fluxo de cadastro de estabelecimentos:
+  ☐ Alteracao na tela de login
+    ✔ Remover inputs latitude e longitude(Usario e Estabelecimento) @done(20-10-17 21:14)
+    ☐ Alterar no backend a forma de cadastro, removendo latitude e longitude.
+
+Refatorar o todo o projeto:
+  ☐ Refatoracao das Views
+  ☐ Refatoracao das logicas
+  ☐ Refatoracao adicionando components
