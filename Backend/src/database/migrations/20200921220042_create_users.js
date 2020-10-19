@@ -6,8 +6,6 @@ exports.up = function(knex) {
         table.string('email').unique().notNullable();
         table.string('username').unique().notNullable();
         table.string('password').notNullable();
-        table.string('latitude').notNullable();
-        table.string('longitude').notNullable();
   
     
         table.timestamp('created_at').defaultTo(knex.fn.now());

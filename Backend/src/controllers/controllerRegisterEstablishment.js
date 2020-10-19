@@ -10,7 +10,7 @@ module.exports = {
     },
      
     async  create  (request, response){
-        const { avatar , username, email, establishment,industry, password, whatsapp, latitude, longitude } = request.body;
+        const { avatar , username, email, password } = request.body;
         
         const checkEstablishment = await connection('establishments')
         .where('username', username)
@@ -27,14 +27,9 @@ module.exports = {
             avatar,
             username, 
             email,
-            establishment,
-            industry,
             password: hashedPassword,
-            whatsapp,
-            latitude,
-            longitude
         });
         console.log()
-        return response.json({avatar , username ,email, establishment,industry, whatsapp, latitude, longitude})
+        return response.json({ avatar , username , email })
     } 
 }

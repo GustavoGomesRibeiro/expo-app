@@ -3,7 +3,6 @@ exports.up = function(knex) {
     return knex.schema.createTable('services', function(table){
         table.increments('id');
         table.string('service').notNullable();
-        table.decimal('coast').notNullable();
         
         table.string('establishment_id').notNullable();
 

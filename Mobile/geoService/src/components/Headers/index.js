@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default function Headers({ title, ...rest}) {
-    const [ showCancel, SetShowCancel ] = useState(false);
+    // const [ showCancel, SetShowCancel ] = useState(false);
     
     const navigation = useNavigation();
 
@@ -21,14 +21,18 @@ export default function Headers({ title, ...rest}) {
             </BorderlessButton>
 
             <Text> {title} </Text>
-
+{/* 
             { showCancel ? (
                 <BorderlessButton onPress={handleGoBackToHomePage}>
                     <Feather name='x' size={24} color='#000'/>
                 </BorderlessButton>
             ) : (
             <View/>
-            ) }
+            ) } */}
+            <BorderlessButton onPress={handleGoBackToHomePage}>
+                <Feather name='x' size={24} color='#000'/>
+            </BorderlessButton>
+
         </Header>
     )
 }

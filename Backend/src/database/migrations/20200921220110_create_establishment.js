@@ -5,12 +5,7 @@ exports.up = function(knex) {
         table.string('avatar');
         table.string('username').unique().notNullable();
         table.string('email').unique().notNullable();
-        table.string('establishment').notNullable();
-        table.string('industry').notNullable();
         table.string('password').notNullable();
-        table.string('whatsapp').notNullable();
-        table.string('latitude').notNullable();
-        table.string('longitude').notNullable();
   
     
         table.timestamp('created_at').defaultTo(knex.fn.now());

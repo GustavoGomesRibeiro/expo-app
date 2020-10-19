@@ -13,20 +13,21 @@ export const ImageContainer = styled.View`
   height: 240px;
 `;
 
+
 export const ScrollViewHorizontal = styled.ScrollView.attrs(() => ({
   horizontal: true,
   showHorizontalScrollIndicator: false,
+  pagingEnabled: true,
 }))`
-      height: 240px;
       background: #000;
 `;
 
 export const Image = styled.Image`
-    /* width: Dimensions.get('window').width; */
     width: 100%;
     height: 240px;
     resize-mode: cover;
 `;
+
 export const DetailsContainer = styled.View`
     padding: 24px
 `;
@@ -39,7 +40,7 @@ export const Description = styled.Text`
     font-family: 'Archivo_400Regular';
     color: #000;
     line-height: 24px;
-    margin-top: 16;
+    margin-top: 16px;
 `;
 export const MapContainer = styled.View`
     border-radius: 20px;

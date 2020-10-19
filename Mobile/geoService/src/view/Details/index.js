@@ -2,13 +2,12 @@ import React from 'react';
 import Headers from '../../components/Headers';
 import { Marker } from 'react-native-maps';
 import { Feather, FontAwesome } from 'react-native-vector-icons';
-import logo from '../../assets/logo.png';
 
 import {
     ScrollView,
     Container,
     ImageContainer,
-    ScrollViewHorizontal,
+    // ScrollViewHorizontal,
     Image,
     DetailsContainer,
     Title,
@@ -25,7 +24,7 @@ import {
     ScheduleItemBlue,
     ScheduleItemGreen,
     WhatsApp,
-    Contact
+    Contact,
  } 
  from './styled-components';
 
@@ -33,18 +32,16 @@ export default function Details() {
     return(
     <Container>
         <ScrollView>
-                <Headers/>
+                <Headers title='Detalhes do Estabelecimento'/>
 
                 <ImageContainer>
-                    <ScrollViewHorizontal>
-                        <Image source={logo}/>
-                        <Image source={logo}/>
-                        <Image source={logo}/>
-                    </ScrollViewHorizontal>
+                        {/* <ScrollViewHorizontal> */}
+                            <Image source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }}/>
+                        {/* </ScrollViewHorizontal> */}
                 </ImageContainer>
 
                 <DetailsContainer>
-                    <Title>Estabelecimento de teste</Title>
+                    <Title>Estabelecimento do seu Zé</Title>
                     <Description>Estabelecimento de teste, fazendo os ajustes ainda</Description>
                     <MapContainer>
                         <Map

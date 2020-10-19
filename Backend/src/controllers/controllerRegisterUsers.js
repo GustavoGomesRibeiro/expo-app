@@ -10,7 +10,7 @@ module.exports = {
     },
     
     async  create  (request, response){
-        const { avatar, email, username, password, latitude, longitude } = request.body;
+        const { avatar, email, username, password } = request.body;
 
         const checkUser = await connection('users')
         .where('username', username)
@@ -28,12 +28,10 @@ module.exports = {
             email,
             username,
             password: hashedPassword,
-            latitude,
-            longitude
         });
 
         console.log();
 
-        return response.json({avatar,email,username,latitude,longitude});
+        return response.json({avatar,email,username});
     } 
 }

@@ -32,7 +32,7 @@ export const Footer = styled.View`
         bottom: 20px;
         left: 20px;
         right: 20px;
-        z-index: 5px;
+        z-index: 5;
         flex-direction: row;
         height: 100px;
 `;
@@ -48,10 +48,7 @@ export const FooterTextInput = styled.TextInput`
         font-weight: bold;
         shadow-color: #000;
         shadow-opacity: 0.2;
-        shadow-offset: {
-            width: 4px;
-            height: 4px;
-        };
+        shadow-offset: { width: 4px; height: 4px;};
         elevation: 3;
 `;
 

@@ -1,17 +1,21 @@
 const express = require('express');
 
+const multer = require('multer');
+const uploadConfig = require('./config/upload');
+
 const controllerSessionUsers = require('./controllers/controllerSessionUsers');
 const controllerSessionEstablishment = require('./controllers/controllerSessionEstablishment');
 const controllerRegisterUsers = require('./controllers/controllerRegisterUsers');
 const controllerRegisterEstablishment = require('./controllers/controllerRegisterEstablishment');
 const controllerService = require('./controllers/controllerService');
+const controllerNewEstablishment = require('./controllers/controllerNewEstablishment');
 const controllerConnections = require('./controllers/controllerConnections');
 const ensureAuthenticated = require('./middlewares/ensureAuthenticated');
 // const controllerTest = require('./controllers/controllerTest');
 
 
 const routes = express.Router();
-
+const upload = multer(uploadConfig);
 
 // sessions
 // routes.post('/sessions', controllerSessionUsers.create, controllerSessionEstablishment.create);
@@ -29,6 +33,12 @@ routes.get('/establishments', controllerRegisterEstablishment.index);
 
 //middleware auth
 routes.use(ensureAuthenticated);
+
+//new establishments
+
+routes.get('/newEstablishments', controllerNewEstablishment.index);
+routes.get('/newEstablishments/:id', controllerNewEstablishment.show);
+routes.post('/newEstablishments', upload.array('images') ,controllerNewEstablishment.create);
 
 //service
 

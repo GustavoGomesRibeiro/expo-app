@@ -1,11 +1,37 @@
 
 Rotas:
-  ☐ /sessions
-    ☐ /users
-      ☐ Login com user
-      ☐ Login com estabelecimento
+  ✔ /sessions @done(20-10-18 19:47)
+    ✔ /users @done(20-10-18 19:47)
+      ✔ Login com user @done(20-10-18 19:47)
+      ✔ Login com estabelecimento @done(20-10-18 19:47)
 
-    ☐ /establishment
-      ☐ Listar os estabelecimentos
+    ✔ /Register @done(20-10-18 19:48)
+        ✔ Registro usuario @done(20-10-18 19:48)
+        ✔ Registro Estabelecimento @done(20-10-18 19:48)
 
-  ☐1:32:00
+    ✔ /establishment @done(20-10-18 19:47)
+      ✔ Listar os estabelecimentos @done(20-10-18 19:47)
+    
+    ✔ /newEstablishments @done(20-10-18 19:47)
+        ✔ criar um estabelecimento @done(20-10-18 19:47)
+    
+    
+  Dados para cadastrar Estabelecimento: 
+    ✔ Usuario @done(20-10-18 19:48)
+    ✔ Email @done(20-10-18 19:48)
+    ✔ Senha @done(20-10-18 19:48)
+    ✔ Whatsapp @done(20-10-18 19:48)
+
+  Rota NewEstablishment:
+    ✔ Nome do estabelecimento @done(20-10-18 19:45)
+    ✔ Ramo de atividade @done(20-10-18 19:45)
+    ✔ WhatsApp @done(20-10-18 19:45)
+    ✔ latitude @done(20-10-18 19:45)
+    ✔ longitude @done(20-10-18 19:45)
+    ✔ Horario de funcionamento @done(20-10-18 19:45)
+    ✔ Abre nos finais de semana? @done(20-10-18 19:45)
+
+  Rota de serviços:
+    ✔ Listar servico @done(20-10-18 19:46)
+    ✔ Cadastrar um novo servico @done(20-10-18 19:46)
+    ✔ Deleter servico @done(20-10-18 19:46)

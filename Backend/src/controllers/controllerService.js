@@ -3,31 +3,38 @@ const connection = require('../database/connection');
 module.exports = {
 
     async index (request, response) {
-        const filters = request.query;
+        //filtro
 
-        if ( !filters.service) {
-            return response.status(400).json({
-                error: 'Missing filters to search!'
-            })
-        }
+        // const filters = request.query;
+
+        // if ( !filters.service) {
+        //     return response.status(400).json({
+        //         error: 'Missing filters to search!'
+        //     })
+        // }
+
+        // const service = await connection('services')
+        // .where('establishment_id', establishment_id)
+        // .where('services.service', '=', filters.service)
+        // .join('establishments', 'services.establishment_id', '=', 'establishments.id')
+        // .select(['services.*', 'establishments.*']);
+
         const establishment_id = request.headers.authorization;
 
         const service = await connection('services')
         .where('establishment_id', establishment_id)
-        .where('services.service', '=', filters.service)
-        .join('establishments', 'services.establishment_id', '=', 'establishments.id')
-        .select(['services.*', 'establishments.*']);
+        .select('*');
+
 
         return response.json( service );
     },
 
     async create (request, response) {
-        const { service, coast } = request.body;
+        const { service } = request.body;
         const establishment_id = request.headers.authorization;
 
         const [id] = await connection('services').insert({
             service,
-            coast,
             establishment_id
         });
         console.log()
