@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { MaterialIcons } from '@expo/vector-icons'
+import api from '../../service/api';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {
     Container,
@@ -17,27 +19,44 @@ import { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 
 export default function Search({ navigation }) {
 
-    const [currentRegion, setCurrentRegion] = useState();
+    const userId = AsyncStorage.getItem('id');
+    const [establishments, setEstablishments] = useState([]);
+    const [currentRegion, setCurrentRegion] = useState(null);
+
+    // useEffect(() => {
+    //     async function loadInitialPosition() {
+    //         const { granted } = await requestPermissionsAsync();
+    //         if( granted ) {
+    //             const { coords } = await getCurrentPositionAsync({
+    //                 enableHighAccuracy: true,
+    //             });
+    //             const { latitude, longitude } = coords;
+    //             setCurrentRegion({
+    //                 latitude,
+    //                 longitude,
+    //                 latitudeDelta: 0.04,
+    //                 longitudeDelta: 0.04,
+    //             });
+    //         }
+    //     }
+    //     loadInitialPosition();
+    // }, []);
+
+    console.log(establishments);
 
     useEffect(() => {
-        async function loadInitialPosition() {
-            const { granted } = await requestPermissionsAsync();
-            if( granted ) {
-                const { coords } = await getCurrentPositionAsync({
-                    enableHighAccuracy: true,
-                });
-                const { latitude, longitude } = coords;
-                setCurrentRegion({
-                    latitude,
-                    longitude,
-                    latitudeDelta: 0.04,
-                    longitudeDelta: 0.04,
-                });
+        api.get('/newEstablishments', {
+            headers: {
+                Authorization: userId,
             }
-        }
-        loadInitialPosition();
+        }).then(response => {
+            setEstablishments(response.data);
+        })
     }, []);
 
+    // async function loadEstablishments(){
+
+    // }
 
     function handleRegionChanged(region) {
         console.log(region, 'alteracao de lugar do mapa');
@@ -50,22 +69,27 @@ export default function Search({ navigation }) {
             provider={PROVIDER_GOOGLE}
             onRegionChangeComplete={handleRegionChanged} 
             initialRegion={currentRegion}>
+            {establishments.map((establishment) => {
+                return (
                 <Marker
+                key={establishment.id}
                 calloutAnchor={{
                     x: 4.2,
                     y: 0.8
                 }}
                 coordinate={{
-                    latitude:-23.543885,
-                    longitude: -46.7735394
+                    latitude: establishment.latitude,
+                    longitude: establishment.longitude
                 }}
                 >
                     <Callout tooltip={true} onPress={() => navigation.navigate('Details')}>
                         <CalloutContainer>
-                            <CalloutTitle> Estabelecimendo de teste </CalloutTitle>
+                            <CalloutTitle> {establishment.name} </CalloutTitle>
                         </CalloutContainer>
                     </Callout>
                 </Marker>
+                )
+            })}
             </Map>
 
             <Footer>

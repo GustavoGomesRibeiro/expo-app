@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AntDesign } from '@expo/vector-icons';
-import api from '../../../service/api';
-import AsyncStorage from '@react-native-community/async-storage';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
-import { Alert } from 'react-native';
+import { Contextapi } from '../../../hooks/authContext';
 
 import {
     Container,
@@ -17,6 +15,7 @@ import {
 }from './styled-components';
 
 export default function Login({ navigation }) {
+    const { signInUser } = useContext(Contextapi);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -26,34 +25,14 @@ export default function Login({ navigation }) {
     //     setFocused(true);    
     // }, []);
 
-     authenticate = async () => {
-         if(!username || !password){
-             Alert.alert(
-                 'Informações Inválidas',
-                 'Os campos não podem ficar vazios!'
-                 )
-         } else {
-            try {
-                const response = await api.post('/sessions/users',{
-                    username,
-                    password
-                });
-
-                const token = response.data.token;
-                await AsyncStorage.setItem('@geoService', token);
-
-                console.log(token, "Token");
-
-                navigation.navigate('MainPage');
-
-            } catch (error) {
-                Alert.alert(
-                    'Informações Inválidas',
-                    'Ops! Usuário ou senha estão incorretos!'
-                    );
-            }
-         }
+    function handleSubmit() {
+        signInUser({
+            username: username,
+            password: password
+        });
+        // navigation.navigate('MainPage');
     }
+
     return(
         <Container>
             <Icon>
@@ -66,7 +45,7 @@ export default function Login({ navigation }) {
                 <Input name='username' value={username} onChangeText={setUsername} icon='user' placeholder='Usuario' autoCapitalize='none'/>
                 <Input name='password' value={password} onChangeText={setPassword} icon='lock' placeholder='Senha' secureTextEntry={true}/>
 
-                <Button onPress={authenticate}> Entrar </Button>
+                <Button onPress={handleSubmit}> Entrar </Button>
                 <Footer>
                     <ButtonForgot>
                         <Forgot onPress={() => navigation.navigate('ForgotPassword')}> Esqueci minha senha </Forgot>

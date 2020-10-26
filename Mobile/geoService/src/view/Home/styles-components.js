@@ -14,3 +14,12 @@ export const Services = styled.View`
 `;
 export const TypeServices = styled.View`
 `;
+
+export const ButtonSignOut = styled.TouchableOpacity`
+    background: #ccc;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    border-radius: 8px;
+    height: 58px;
+`;

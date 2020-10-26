@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
+import AppProvider from './hooks';
 import Router from './routes/router';
 
 export default function Index() {
@@ -8,7 +9,9 @@ export default function Index() {
       <>
         <NavigationContainer>
           <StatusBar style="auto" />
-            <Router/>          
+          <AppProvider>
+            <Router/>      
+          </AppProvider>    
         </NavigationContainer>
       </>
   );

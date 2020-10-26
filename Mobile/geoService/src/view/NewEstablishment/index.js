@@ -26,6 +26,9 @@ export default function NewEstablishment() {
 
                 <Label>WhatsApp</Label>
                 <Input/>
+
+                <Label>Ramo de Atividade</Label>
+                <Input/>
                 
                 <Label>Fotos do Estabelecimento</Label>
                 <Add>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Headers from '../../components/Headers';
 import { Marker } from 'react-native-maps';
 import { useNavigation } from '@react-navigation/native';
@@ -12,6 +12,15 @@ import {
 from './styles-components';
 
 export default function Add() {
+    // const [latitude, setLatitude] = useState('');
+    // const [longitude, setLongitude] = useState('');
+
+    // useEffect(() => { effect 
+    //     return () => {
+            
+    //     }
+    // }, [])
+    
     const navigation = useNavigation();
 
     function handleNextStep(){
