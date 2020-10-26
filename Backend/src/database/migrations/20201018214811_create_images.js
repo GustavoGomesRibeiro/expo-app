@@ -3,7 +3,9 @@ exports.up = function(knex) {
     return knex.schema.createTable('images', function(table){
         table.increments('id');
         table.string('path');
+        table.string('images'); 
         table.integer('new_establishment_id');
+        
         table.foreign('new_establishment_id').references('id').inTable('newEstablishments').onUpdate('CASCADE').onDelete('CASCADE');
 
 

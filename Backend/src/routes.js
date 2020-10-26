@@ -10,6 +10,7 @@ const controllerRegisterEstablishment = require('./controllers/controllerRegiste
 const controllerService = require('./controllers/controllerService');
 const controllerNewEstablishment = require('./controllers/controllerNewEstablishment');
 const controllerConnections = require('./controllers/controllerConnections');
+const controllerForgotPassword = require('./controllers/controllerForgotPassword');
 const ensureAuthenticated = require('./middlewares/ensureAuthenticated');
 // const controllerTest = require('./controllers/controllerTest');
 
@@ -21,6 +22,7 @@ const upload = multer(uploadConfig);
 // routes.post('/sessions', controllerSessionUsers.create, controllerSessionEstablishment.create);
 routes.post('/sessions/users', controllerSessionUsers.create);
 routes.post('/sessions/establishments', controllerSessionEstablishment.create);
+routes.post('/forgotPassword', controllerForgotPassword.create);
 
 //register
 routes.post('/users', controllerRegisterUsers.create);
@@ -38,7 +40,7 @@ routes.use(ensureAuthenticated);
 
 routes.get('/newEstablishments', controllerNewEstablishment.index);
 routes.get('/newEstablishments/:id', controllerNewEstablishment.show);
-routes.post('/newEstablishments', upload.array('images') ,controllerNewEstablishment.create);
+routes.post('/newEstablishments', upload.array('images'), controllerNewEstablishment.create);
 
 //service
 

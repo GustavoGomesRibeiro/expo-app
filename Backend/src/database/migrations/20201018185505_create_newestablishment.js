@@ -9,8 +9,8 @@ exports.up = function(knex) {
         table.decimal ('longitude', 2, 10).notNullable();
         table.boolean('open_on_weekends').notNullable(); 
         table.string('opening_hours').notNullable(); 
-        table.string('images'); 
-        
+        // table.string('images'); 
+
         table.string('establishment_id').notNullable();
         table.foreign('establishment_id').references('id').inTable('establishments').onUpdate('CASCADE').onDelete('CASCADE');
 

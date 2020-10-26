@@ -35,3 +35,13 @@ Rotas:
     ✔ Listar servico @done(20-10-18 19:46)
     ✔ Cadastrar um novo servico @done(20-10-18 19:46)
     ✔ Deleter servico @done(20-10-18 19:46)
+
+  Ajuste salvar imagem no backend:
+    ☐ Imagems esta sendo salva, porem como [object, object]
+    ☐ Verificar se é necessario criar um model
+    ☐ Mudar a forma de salvar para Array?
+
+  Ajuste no campo esqueci minha senha: 
+    ☐ Analisar como sera feito o reset de senha
+    ☐ Sera necessario criar novas entidades?
+    
