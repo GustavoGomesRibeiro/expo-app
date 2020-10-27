@@ -13,18 +13,15 @@ import api from '../../../service/api';
 
 
 
-export default function RegisterEstablishment() {
+export default function RegisterEstablishment({ navigation }) {
 
   const [ email, setEmail ] = useState('');
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
-  const [ establishment, setEstablishment ] = useState('');
-  const [ industry, setIndustry ] = useState('');
-  const [ whatsapp, setWhatsapp ] = useState('');
 
 
-  handleregister = async ({ navigation }) => {
-    if(!email || !username || !password || !establishment || !industry || !whatsapp){
+  handleRegister = async () => {
+    if(!email || !username || !password){
       Alert.alert(
         'Informações Inválidas',
         'Os campos não podem ficar vazios!'
@@ -35,9 +32,6 @@ export default function RegisterEstablishment() {
           email,
           username,
           password,
-          establishment,
-          industry,
-          whatsapp
         });
 
         console.log('cadastro establishment', response);
@@ -59,14 +53,11 @@ export default function RegisterEstablishment() {
           <Title> Crie sua conta </Title>
         </Description>
 
-          <Input name='email' icon='mail' placeholder='E-mail'/>
-          <Input name='username' icon='user' placeholder='Username'/>
-          <Input name='password' icon='lock' placeholder='Senha'/>
-          <Input name='establishment' icon='home' placeholder='Nome do estabelecimento'/>
-          <Input name='industry' icon='clipboard' placeholder='Ramo de Atividade'/>
-          <Input name='whatsapp' icon='smartphone' placeholder='WhatsApp'/>
+          <Input value={email} onChangeText={setEmail} name='email' icon='mail' placeholder='E-mail'/>
+          <Input value={username} onChangeText={setUsername} name='username' icon='user' placeholder='Username'/>
+          <Input value={password} onChangeText={setPassword} name='password' icon='lock' placeholder='Senha' secureTextEntry={true}/>
           
-          <Button> Cadastrar </Button>
+          <Button onPress={handleRegister}> Cadastrar </Button>
       </Container>  
     );
 }

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Contextapi } from '../../hooks/authContext';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { MaterialIcons } from '@expo/vector-icons'
 import api from '../../service/api';
-import AsyncStorage from '@react-native-community/async-storage';
 
 import {
     Container,
@@ -12,42 +12,43 @@ import {
     Footer,
     FooterTextInput,
     FooterButton
-
 }
 from './styles-components';
 import { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 
 export default function Search({ navigation }) {
+    const { user } = useContext(Contextapi);
+    console.log(user, 'search');
 
-    const userId = AsyncStorage.getItem('id');
+
     const [establishments, setEstablishments] = useState([]);
     const [currentRegion, setCurrentRegion] = useState(null);
 
-    // useEffect(() => {
-    //     async function loadInitialPosition() {
-    //         const { granted } = await requestPermissionsAsync();
-    //         if( granted ) {
-    //             const { coords } = await getCurrentPositionAsync({
-    //                 enableHighAccuracy: true,
-    //             });
-    //             const { latitude, longitude } = coords;
-    //             setCurrentRegion({
-    //                 latitude,
-    //                 longitude,
-    //                 latitudeDelta: 0.04,
-    //                 longitudeDelta: 0.04,
-    //             });
-    //         }
-    //     }
-    //     loadInitialPosition();
-    // }, []);
+    useEffect(() => {
+        async function loadInitialPosition() {
+            const { granted } = await requestPermissionsAsync();
+            if( granted ) {
+                const { coords } = await getCurrentPositionAsync({
+                    enableHighAccuracy: true,
+                });
+                const { latitude, longitude } = coords;
+                setCurrentRegion({
+                    latitude,
+                    longitude,
+                    latitudeDelta: 0.04,
+                    longitudeDelta: 0.04,
+                });
+            }
+        }
+        loadInitialPosition();
+    }, []);
 
     console.log(establishments);
 
     useEffect(() => {
         api.get('/newEstablishments', {
             headers: {
-                Authorization: userId,
+                Authorization: user.id,
             }
         }).then(response => {
             setEstablishments(response.data);

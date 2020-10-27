@@ -6,22 +6,11 @@ import { FontAwesome5, FontAwesome } from 'react-native-vector-icons';
 // import PlusButton from '../components/PlusButton';
 // routes
 import Home from '../view/Home';
-import Search from '../view/Search';
 import Add from '../view/Add';
-import NewEstablishment from '../view/NewEstablishment';
 import Favorites from '../view/Favorites';
 import Profile from '../view/Profile';
+import NewEstablishment from '../view/NewEstablishment';
 import Details from '../view/Details';
-
-import Signin from '../view/InitialScreen/Signin';
-import SessionUser from '../view/InitialScreen/SessionUser';
-import SessionEstablishment from '../view/InitialScreen/SessionEstablishment';
-import RegisterUser from '../view/InitialScreen/RegisterUser';
-import RegisterEstablishment from '../view/InitialScreen/RegisterEstablishment';
-import ForgotPassword from '../view/InitialScreen/ForgotPassword';
-import Login from '../view/InitialScreen/Login';
-import LoginEstablishment from '../view/InitialScreen/LoginEstablishment';
-
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -67,15 +56,6 @@ const Menu = () => (
             }
             }}
         />
-        <Tab.Screen name='Search' component={Search} options={{
-            tabBarLabel: 'Buscar',
-            tabBarIcon: ({ color, size}) => {
-                return (
-                    <FontAwesome5 name='search' size={size} color={color}/>
-                )
-            },
-            }}
-        />
         <Tab.Screen name='Adicionar' component={Add} options={{
             tabBarLabel: 'Adicionar',
             tabBarIcon: ({ color, size}) => {
@@ -105,23 +85,14 @@ const Menu = () => (
             }}
         />
     </Tab.Navigator>
-
 );
 
-export default function AuthRouter() {
+export default function EstablishmentRouter() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name='Signin' component={Signin} options={{headerShown: false}}/>
-            <Stack.Screen name='SessionUser' component={SessionUser} options={{headerShown: false}}/>
-            <Stack.Screen name='SessionEstablishment' component={SessionEstablishment} options={{headerShown: false}}/>
-            <Stack.Screen name='RegisterUser' component={RegisterUser} options={{headerShown: false}}/>
-            <Stack.Screen name='RegisterEstablishment' component={RegisterEstablishment} options={{headerShown: false}}/>
-            <Stack.Screen name='ForgotPassword' component={ForgotPassword} options={{headerShown: false}}/>
-            <Stack.Screen name='Login' component={Login} options={{headerShown: false}}/>
-            <Stack.Screen name='LoginEstablishment' component={LoginEstablishment} options={{headerShown: false}}/>
-            {/* <Stack.Screen name='MainPage' component={Menu} options={{headerShown: false}}/>
+            <Stack.Screen name='MainPage' component={Menu} options={{headerShown: false}}/>
             <Stack.Screen name='Details' component={Details} options={{headerShown: false}}/>
-            <Stack.Screen name='NewEstablishment' component={NewEstablishment} options={{headerShown: false}}/> */}
+            <Stack.Screen name='NewEstablishment' component={NewEstablishment} options={{headerShown: false}}/>
         </Stack.Navigator>
     );
 }

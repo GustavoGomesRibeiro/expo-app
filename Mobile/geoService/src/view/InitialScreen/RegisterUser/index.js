@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import logo from '../../../assets/logo.png';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
@@ -15,13 +15,12 @@ import {
 
 
 export default function RegisterUser({ navigation }) {
-
+  // const { registerUser } = useContext(Contextapi);
   const [ email, setEmail ] = useState('');
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
 
-
-  handleregister = async () => {
+  handleRegister = async () => {
     if(!email || !username || !password) {
       Alert.alert(
         'Informações Inválidas',
@@ -61,7 +60,7 @@ export default function RegisterUser({ navigation }) {
             {/* <Input value={latitude} keyboardType="numeric" onChangeText={setLatitude} name='latitude' icon="map-pin" placeholder='Latitude'/>
             <Input value={longitude} keyboardType="numeric" onChangeText={setLongitude} name='longitude' icon="map-pin" placeholder='Longitude'/> */}
 
-            <Button onPress={handleregister}> Cadastrar </Button>
+            <Button onPress={handleRegister}> Cadastrar </Button>
       </Container>  
     );
 }
