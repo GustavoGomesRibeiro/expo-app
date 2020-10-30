@@ -12,16 +12,16 @@ from './styles-components';
 
 export default function Home() {
 
-    const { signOut, user, establishment } = useContext(Contextapi);
+    const { signOut, user, establishment, token } = useContext(Contextapi);
 
-    console.log(user, establishment, 'meu user e meu estabelecimento');
+    console.log(user, token, 'usuario esta sendo passado?');
 
       
     return(
         <Container>
             <Context>
                 <Title>
-                    Home {user.username}
+                    Home
                 </Title>
                 <ButtonSignOut title='sair' onPress={signOut}/>
                 <Services>

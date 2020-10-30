@@ -17,8 +17,8 @@ from './styles-components';
 import { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 
 export default function Search({ navigation }) {
-    const { user } = useContext(Contextapi);
-    console.log(user, 'search');
+    const { user, token } = useContext(Contextapi);
+    console.log(user, token, 'search');
 
 
     const [establishments, setEstablishments] = useState([]);
@@ -48,16 +48,15 @@ export default function Search({ navigation }) {
     useEffect(() => {
         api.get('/newEstablishments', {
             headers: {
-                Authorization: user.id,
+                Token: `Bearer ${token}`,
+                Authorization: user.id
             }
         }).then(response => {
             setEstablishments(response.data);
-        })
+        });
     }, []);
 
-    // async function loadEstablishments(){
 
-    // }
 
     function handleRegionChanged(region) {
         console.log(region, 'alteracao de lugar do mapa');
@@ -83,7 +82,7 @@ export default function Search({ navigation }) {
                     longitude: establishment.longitude
                 }}
                 >
-                    <Callout tooltip={true} onPress={() => navigation.navigate('Details')}>
+                    <Callout tooltip={true} onPress={() => navigation.navigate('Details', {id: user.id})}>
                         <CalloutContainer>
                             <CalloutTitle> {establishment.name} </CalloutTitle>
                         </CalloutContainer>

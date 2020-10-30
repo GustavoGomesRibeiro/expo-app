@@ -6,7 +6,7 @@ import api from '../service/api';
 const Contextapi = createContext();
 
 function AuthProvider({ children }){
-    const [ authenticated, setAuthenticated] = useState(false)
+    const [ authenticated, setAuthenticated] = useState({})
     const [ loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -17,7 +17,7 @@ function AuthProvider({ children }){
                 '@geoService:establishment',
             ]);
             if( token[1] && user[1] && establishment[1]) {
-                api.defaults.headers.Authorization  = `Bearer ${token[1]}`;
+                api.defaults.headers.Token  = `Bearer ${token[1]}`;
                 
                 setAuthenticated({ token: token[1], user: JSON.parse(user[1]), establishment: JSON.parse(establishment[1]) })
             }
@@ -32,7 +32,7 @@ function AuthProvider({ children }){
             Alert.alert(
                  'Informações Inválidas',
                  'Os campos não podem ficar vazios!'
-                )
+                );
         } else {        
             try {
             const response = await api.post('/sessions/users', {
@@ -44,14 +44,14 @@ function AuthProvider({ children }){
 
             const { token, user} = response.data;
             
-            console.log(token, user, 'credentials')
+            // console.debug(token, user, 'credentials')
 
             await AsyncStorage.multiSet([
                 ['@geoService:token', token],
                 ['@geoService:user', JSON.stringify(user)],
             ]);
     
-            api.defaults.headers.Authorization  = `Bearer ${token[1]}`;
+            api.defaults.headers.Token  = `Bearer ${token[1]}`;
     
             setAuthenticated({ token, user });
         } catch (error) {
@@ -85,7 +85,7 @@ function AuthProvider({ children }){
                     ['@geoService:establishment', JSON.stringify(establishment)],
                 ]);
         
-                api.defaults.headers.Authorization  = `Bearer ${token[1]}`;
+                api.defaults.headers.Token  = `Bearer ${token[1]}`;
         
                 setAuthenticated({ token, establishment });
             } catch (error) {
@@ -98,14 +98,14 @@ function AuthProvider({ children }){
     }, []);
 
     const signOut = useCallback (async () => {
-        await AsyncStorage.multiRemove(['@geoService:establishment', '@geoService:token']);
+        await AsyncStorage.multiRemove(['@geoService:establishment','@geoService:user', '@geoService:token']);
 
         setAuthenticated({});
     }, []);
 
 
     return (
-        <Contextapi.Provider value={{ user: authenticated.user, establishment: authenticated.establishment, signInUser, signInEstablishment, signOut, loading }}>
+        <Contextapi.Provider value={{ token: authenticated.token, user: authenticated.user , establishment: authenticated.establishment, signInUser, signInEstablishment, signOut, loading }}>
             {children}
         </Contextapi.Provider>
     );
