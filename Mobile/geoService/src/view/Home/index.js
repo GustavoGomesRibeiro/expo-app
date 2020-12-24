@@ -1,34 +1,28 @@
-import React, {useContext} from 'react';
-import { Contextapi } from '../../hooks/authContext';
+import React, { useContext } from "react";
+import { Contextapi } from "../../hooks/authContext";
 import {
-    Container,
-    Title,
-    Context,
-    Services,
-    TypeServices,
-    ButtonSignOut
-}
-from './styles-components';
+  Container,
+  Title,
+  Context,
+  Services,
+  TypeServices,
+  ButtonSignOut,
+} from "./styles-components";
 
 export default function Home() {
+  const { signOut, user, establishment, token } = useContext(Contextapi);
 
-    const { signOut, user, establishment, token } = useContext(Contextapi);
+  console.log(user, establishment, token, "usuario esta sendo passado?");
 
-    console.log(user, token, 'usuario esta sendo passado?');
-
-      
-    return(
-        <Container>
-            <Context>
-                <Title>
-                    Home
-                </Title>
-                <ButtonSignOut title='sair' onPress={signOut}/>
-                <Services>
-                    <TypeServices>
-                    </TypeServices>
-                </Services>
-            </Context>
-        </Container>
-    );
+  return (
+    <Container>
+      <Context>
+        <Title>Home</Title>
+        <ButtonSignOut title="sair" onPress={signOut} />
+        <Services>
+          <TypeServices></TypeServices>
+        </Services>
+      </Context>
+    </Container>
+  );
 }

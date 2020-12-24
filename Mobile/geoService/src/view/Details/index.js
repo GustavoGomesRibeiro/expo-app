@@ -1,140 +1,180 @@
-import React, { useEffect, useState, useContext } from 'react';
-import Headers from '../../components/Headers';
-import { Marker } from 'react-native-maps';
-import { Feather, FontAwesome } from 'react-native-vector-icons';
-import { useRoute } from '@react-navigation/native'
-import api from '../../service/api';
-import { Contextapi } from '../../hooks/authContext';
+import React, { useEffect, useState, useContext } from "react";
+import Headers from "../../components/Headers";
+import { Marker } from "react-native-maps";
+import { Feather, FontAwesome } from "react-native-vector-icons";
+import { useRoute } from "@react-navigation/native";
+import api from "../../service/api";
+import { Contextapi } from "../../hooks/authContext";
+import { Alert, Linking } from "react-native";
 
 import {
-    ScrollView,
-    Container,
-    ImageContainer,
-    // ScrollViewHorizontal,
-    Image,
-    DetailsContainer,
-    Title,
-    Description,
-    MapContainer,
-    Map,
-    RoutesContainer,
-    RoutesText,
-    Divider,
-    ScheduleContainer,
-    ScheduleItem,
-    ScheduleTextBlue,
-    ScheduleTextGreen,
-    ScheduleItemBlue,
-    ScheduleItemGreen,
-    WhatsApp,
-    Contact,
-}
-    from './styled-components';
+  ScrollView,
+  Container,
+  ImageContainer,
+  // ScrollViewHorizontal,
+  Image,
+  DetailsContainer,
+  Title,
+  Description,
+  MapContainer,
+  Map,
+  RoutesContainer,
+  RoutesText,
+  Divider,
+  ScheduleContainer,
+  ScheduleItem,
+  ScheduleTextBlue,
+  ScheduleTextGreen,
+  ScheduleTextRed,
+  ScheduleItemBlue,
+  ScheduleItemGreen,
+  ScheduleItemRed,
+  WhatsApp,
+  Contact,
+} from "./styled-components";
 
 export default function Details() {
-    const { token } = useContext(Contextapi);
-    const route = useRoute();
-    const params = route.params;
+  const { token } = useContext(Contextapi);
+  const route = useRoute();
 
-    const [establishment, setEstablishment] = useState('');
+  const [establishments, setEstablishments] = useState();
+  const params = route.params;
 
-    useEffect(() => {
-        api.get(`/newEstablishments/${params.id}`, {
-            headers: {
-                Token: `Bearer ${token}`,
-                // Authorization: user.id
-            }
-        }).then(response => {
-            setEstablishment(response.data);
-        });
-    }, [params.id]);
+  const message = `Olá ${params.name}, gostaria de avaliar o valor dos serviços, msg teste`;
 
-    if (!establishment) {
-        return (
-            <Title>
-                Carregando...
-            </Title>
-        );
-    }
+  useEffect(() => {
+    api
+      .get(`/newEstablishments/${params.id}`, {
+        headers: {
+          Token: `Bearer ${token}`,
+          // Authorization: user.id,
+        },
+      })
+      .then((response) => {
+        setEstablishments(response.data);
+      });
+  }, [params.id]);
 
-    console.log(route.params);
+  if (!establishments) {
+    return <Title>Carregando...</Title>;
+  }
 
-    return (
-        <Container>
-            <ScrollView>
-                <Headers title='Detalhes do Estabelecimento' />
-                {establishment.map((items) => {
-                    return (
-                        <>
-                            <ImageContainer key={items.id}>
-                                {/* <ScrollViewHorizontal> */}
-                                <Image source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} />
-                                {/* </ScrollViewHorizontal> */}
-                            </ImageContainer>
-
-                            <DetailsContainer >
-                                <Title>{items.name}</Title>
-                                <Description>Estabelecimento de teste, fazendo os ajustes ainda</Description>
-                                <MapContainer>
-                                    <Map
-                                        initialRegion={{
-                                            latitude: -23.5442453,
-                                            longitude: -46.7733957,
-                                            latitudeDelta: 0.008,
-                                            longitudeDelta: 0.008,
-                                        }}
-                                        zoomEnabled={false}
-                                        pitchEnabled={false}
-                                        scrollEnabled={false}
-                                        rotateEnabled={false}
-                                    >
-                                        <Marker
-                                            coordinate={{
-                                                latitude: items.latitude,
-                                                longitude: items.longitude,
-                                            }}
-                                        />
-                                    </Map>
-
-                                    <RoutesContainer>
-                                        <RoutesText> Ver Rota no Google Maps</RoutesText>
-                                    </RoutesContainer>
-                                </MapContainer>
-                            </DetailsContainer>
-
-                            <Divider />
-
-                            <DetailsContainer>
-                                <Title>Instruções de testes</Title>
-                                <Description>Venha conferir os nossos serviços</Description>
-                            </DetailsContainer>
-
-                            <ScheduleContainer>
-                                <ScheduleItem>
-                                    <ScheduleItemBlue>
-                                        <Feather name="clock" size={40} color="#2AB5D1" />
-                                        <ScheduleTextBlue> {items.opening_hours} </ScheduleTextBlue>
-                                    </ScheduleItemBlue>
-                                </ScheduleItem>
-
-                                <ScheduleItem>
-                                    <ScheduleItemGreen>
-                                        <Feather name="info" size={40} color="#39CC83" />
-                                        <ScheduleTextGreen> Atendemos fim de semana </ScheduleTextGreen>
-                                    </ScheduleItemGreen>
-                                </ScheduleItem>
-                            </ScheduleContainer>
-
-                        </>
-
-                    );
-                })}
-
-                <WhatsApp onPress={() => { }}>
-                    <FontAwesome name="whatsapp" size={24} color="#FFF" />
-                    <Contact> Entrar em contato </Contact>
-                </WhatsApp>
-            </ScrollView>
-        </Container>
+  function handleOnPressGoogleMaps() {
+    Linking.openURL(
+      `https://www.google.com/maps/dir/?api=1&destination=${params?.latitude},${params?.longitude}`
     );
+  }
+
+  function sendWhatsapp() {
+    Linking.canOpenURL(
+      `whatsapp://send?phone=55${params.whatsapp}&text=${message}`
+    ).then((supported) => {
+      if (supported) {
+        return `whatsapp://send?phone=55${params.whatsapp}&text=${message}`;
+      } else {
+        return Linking.openURL(
+          `https://api.whatsapp.com/send?phone=55${params.whatsapp}&text=${message}`
+        );
+      }
+    });
+  }
+
+  return (
+    <Container>
+      <ScrollView>
+        <Headers title="Detalhes do Estabelecimento" />
+        {establishments.map((establishment) => {
+          return (
+            <>
+              <ImageContainer key={establishment.id}>
+                {/* <ScrollViewHorizontal> */}
+                <Image
+                  source={{
+                    uri: "https://fmnova.com.br/images/noticias/safe_image.jpg",
+                  }}
+                />
+                {/* </ScrollViewHorizontal> */}
+              </ImageContainer>
+
+              <DetailsContainer>
+                <Title>{establishment.name}</Title>
+                <Description>
+                  Estabelecimento de teste, fazendo os ajustes ainda
+                </Description>
+                <MapContainer>
+                  <Map
+                    // provider={PROVIDER_GOOGLE}
+                    initialRegion={{
+                      latitude: establishment.latitude,
+                      longitude: establishment.longitude,
+                      latitudeDelta: 0.008,
+                      longitudeDelta: 0.008,
+                    }}
+                    zoomEnabled={false}
+                    pitchEnabled={false}
+                    scrollEnabled={false}
+                    rotateEnabled={false}
+                  >
+                    <Marker
+                      coordinate={{
+                        latitude: establishment.latitude,
+                        longitude: establishment.longitude,
+                      }}
+                    />
+                  </Map>
+
+                  <RoutesContainer onPress={handleOnPressGoogleMaps}>
+                    <RoutesText> Ver Rota no Google Maps</RoutesText>
+                  </RoutesContainer>
+                </MapContainer>
+              </DetailsContainer>
+
+              <Divider />
+
+              <DetailsContainer>
+                <Title>Instruções de testes</Title>
+                <Description>Venha conferir os nossos serviços</Description>
+              </DetailsContainer>
+
+              <ScheduleContainer>
+                <ScheduleItem>
+                  <ScheduleItemBlue>
+                    <Feather name="clock" size={40} color="#2AB5D1" />
+                    <ScheduleTextBlue>
+                      {establishment.opening_hours}
+                    </ScheduleTextBlue>
+                  </ScheduleItemBlue>
+                </ScheduleItem>
+
+                {establishment.open_on_weekends === "true" ? (
+                  <ScheduleItem>
+                    <ScheduleItemGreen>
+                      <Feather name="info" size={40} color="#39CC83" />
+                      <ScheduleTextGreen>
+                        Atendemos fim de semana
+                      </ScheduleTextGreen>
+                    </ScheduleItemGreen>
+                  </ScheduleItem>
+                ) : (
+                  <ScheduleItem>
+                    <ScheduleItemRed>
+                      <Feather name="info" size={40} color="#FF669D" />
+                      <ScheduleTextRed>
+                        Não Atendemos fim de semana
+                      </ScheduleTextRed>
+                    </ScheduleItemRed>
+                  </ScheduleItem>
+                )}
+              </ScheduleContainer>
+            </>
+          );
+        })}
+
+        <WhatsApp onPress={sendWhatsapp}>
+          <FontAwesome name="whatsapp" size={24} color="#FFF" />
+          <Contact> Entrar em contato </Contact>
+        </WhatsApp>
+      </ScrollView>
+    </Container>
+  );
 }

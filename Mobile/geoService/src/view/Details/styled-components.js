@@ -1,6 +1,6 @@
-import styled from 'styled-components/native';
-import MapView from 'react-native-maps';
-import { RectButton } from 'react-native-gesture-handler';
+import styled from "styled-components/native";
+import MapView from "react-native-maps";
+import { RectButton } from "react-native-gesture-handler";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -8,72 +8,68 @@ export const Container = styled.SafeAreaView`
 
 export const ScrollView = styled.ScrollView``;
 
-
 export const ImageContainer = styled.View`
   height: 240px;
 `;
-
 
 export const ScrollViewHorizontal = styled.ScrollView.attrs(() => ({
   horizontal: true,
   showHorizontalScrollIndicator: false,
   pagingEnabled: true,
 }))`
-      background: #000;
+  background: #000;
 `;
 
 export const Image = styled.Image`
-    width: 100%;
-    height: 240px;
-    resize-mode: cover;
+  width: 100%;
+  height: 240px;
+  resize-mode: cover;
 `;
 
 export const DetailsContainer = styled.View`
-    padding: 24px
+  padding: 24px;
 `;
 export const Title = styled.Text`
-    color: #000;
-    font-size: 30px;
-    font-family: 'Archivo_700Bold';
+  color: #000;
+  font-size: 30px;
+  font-family: "Archivo_700Bold";
 `;
 export const Description = styled.Text`
-    font-family: 'Archivo_400Regular';
-    color: #000;
-    line-height: 24px;
-    margin-top: 16px;
+  font-family: "Archivo_400Regular";
+  color: #000;
+  line-height: 24px;
+  margin-top: 16px;
 `;
 export const MapContainer = styled.View`
-    border-radius: 20px;
-    overflow: hidden;
-    border-width: 1.2px;
-    border-color: #B3DAE2;
-    margin-top: 40px;
-    background-color: #E6F7FB;
+  border-radius: 20px;
+  overflow: hidden;
+  border-width: 1.2px;
+  border-color: #b3dae2;
+  margin-top: 40px;
+  background-color: #e6f7fb;
 `;
 export const Map = styled(MapView)`
-    width: 100%;
-    height: 150px;
+  width: 100%;
+  height: 150px;
 `;
 
-export const RoutesContainer = styled.View`
-    padding: 16px;
-    align-items: center;
-    justify-content: center;
-
+export const RoutesContainer = styled(RectButton)`
+  padding: 16px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const RoutesText = styled.Text`
-    font-family: 'Archivo_700Bold';
-    color: #000;
+  font-family: "Archivo_700Bold";
+  color: #000;
 `;
 
 export const Divider = styled.View`
-    height: 0.8px;
-    width: 100%;
-    background-color: #000;
-    margin-vertical: 40px;
+  height: 0.8px;
+  width: 100%;
+  background-color: #000;
+  margin-vertical: 40px;
 `;
-
 
 export const ScheduleContainer = styled.View`
   margin-top: 24px;
@@ -85,37 +81,54 @@ export const ScheduleItem = styled.View`
   padding: 20px;
 `;
 export const ScheduleItemBlue = styled.View`
-  background-color: #E6F7FB;
+  background-color: #e6f7fb;
   border-width: 1px;
-  border-color: #B3DAE2;
+  border-color: #b3dae2;
   border-radius: 20px;
   padding: 20px;
 `;
 export const ScheduleItemGreen = styled.View`
-  background-color: #EDFFF6;
+  background-color: #edfff6;
   border-width: 1px;
-  border-color: #A1E9C5;
+  border-color: #a1e9c5;
   border-radius: 20px;
   padding: 20px;
 `;
+
+export const ScheduleItemRed = styled.View`
+  background-color: #fef6f9;
+  border-width: 1px;
+  border-color: #ffbcd4;
+  border-radius: 20px;
+  padding: 20px;
+`;
+
 export const ScheduleTextBlue = styled.Text`
-  font-family: 'Archivo_400Regular';
+  font-family: "Archivo_400Regular";
   font-size: 16px;
   line-height: 24px;
   margin-top: 20px;
-  color: #5C8599;
+  color: #5c8599;
 `;
 
 export const ScheduleTextGreen = styled.Text`
-  font-family: 'Archivo_400Regular';
+  font-family: "Archivo_400Regular";
   font-size: 16px;
   line-height: 24px;
   margin-top: 20px;
-  color: #37C77F;
+  color: #37c77f;
 `;
 
-export const WhatsApp = styled(RectButton)`  
-  background-color: #3CDC8C;
+export const ScheduleTextRed = styled.Text`
+  font-family: "Archivo_400Regular";
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 20px;
+  color: #ff669d;
+`;
+
+export const WhatsApp = styled(RectButton)`
+  background-color: #3cdc8c;
   border-radius: 20px;
   flex-direction: row;
   justify-content: center;
@@ -123,10 +136,9 @@ export const WhatsApp = styled(RectButton)`
   height: 56px;
   margin: 40px 0;
 `;
-export const Contact = styled.Text`  
-  font-family: 'Archivo_700Bold';
-  color: #FFF;
+export const Contact = styled.Text`
+  font-family: "Archivo_700Bold";
+  color: #fff;
   font-size: 16px;
   margin-left: 16px;
 `;
-

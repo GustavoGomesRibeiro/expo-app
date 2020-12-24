@@ -1,54 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import Headers from '../../components/Headers';
-import { Marker } from 'react-native-maps';
-import { useNavigation } from '@react-navigation/native';
-import {
-    Container,
-    Map,
-    Footer,
-    NextButton,
-    Text
-}
-from './styles-components';
+import React, { useState } from "react";
+import Headers from "../../components/Headers";
+import { useNavigation } from "@react-navigation/native";
+import { Marker } from "react-native-maps";
+import { Container, Map, Footer, NextButton, Text } from "./styles-components";
 
 export default function Add() {
-    // const [latitude, setLatitude] = useState('');
-    // const [longitude, setLongitude] = useState('');
+  const navigation = useNavigation();
+  const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
 
-    // useEffect(() => { effect 
-    //     return () => {
-            
-    //     }
-    // }, [])
-    
-    const navigation = useNavigation();
+  function handleNextStep() {
+    navigation.navigate("NewEstablishment", { position });
+  }
 
-    function handleNextStep(){
-        navigation.navigate('NewEstablishment');
-    }
+  function handleSelectPostion(event) {
+    setPosition(event.nativeEvent.coordinate);
+  }
 
-    return(
-        <Container>
-            <Headers title='Estabelecimentos'/>
-            <Map
-              initialRegion={{
-                    latitude: -27.2092052,
-                    longitude: -49.6401092,
-                    latitudeDelta: 0.008,
-                    longitudeDelta: 0.008,
-                }}
-            >
-                <Marker
-                    coordinate={{ latitude: -27.2092052, longitude: -49.6401092 }}
-                />
-            </Map>
+  return (
+    <Container>
+      <Headers title="Estabelecimentos" />
+      <Map
+        initialRegion={{
+          latitude: -23.5442453,
+          longitude: -46.7733957,
+          latitudeDelta: 0.008,
+          longitudeDelta: 0.008,
+        }}
+        onPress={handleSelectPostion}
+      >
+        {position.latitude !== 0 && (
+          <Marker
+            coordinate={{
+              latitude: position.latitude,
+              longitude: position.longitude,
+            }}
+          />
+        )}
+      </Map>
 
-            <Footer>
-                <NextButton onPress={handleNextStep}>
-                    <Text> Próximo </Text>
-                </NextButton>
-            </Footer>
-
-        </Container>
-    );
+      <Footer>
+        {position.latitude !== 0 && (
+          <NextButton onPress={handleNextStep}>
+            <Text> Próximo </Text>
+          </NextButton>
+        )}
+      </Footer>
+    </Container>
+  );
 }
