@@ -25,7 +25,7 @@ import {
 import { Alert } from "react-native";
 
 export default function NewEstablishment() {
-  const { token } = useContext(Contextapi);
+  const { token, establishment } = useContext(Contextapi);
 
   const route = useRoute();
   const params = route.params;
@@ -34,8 +34,8 @@ export default function NewEstablishment() {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [industry, setIndustry] = useState("");
-  const [openingHours, setOpeningHours] = useState("");
-  const [openOnWeekends, setOpenOnWeekends] = useState(true);
+  const [opening_hours, setOpeningHours] = useState("");
+  const [open_on_weekends, setOpenOnWeekends] = useState(true);
   const [images, setImages] = useState([]);
 
   async function handleCreateEstablishment() {
@@ -47,8 +47,8 @@ export default function NewEstablishment() {
     data.append("industry", industry);
     data.append("latitude", String(latitude));
     data.append("longitude", String(longitude));
-    data.append("openingHours", openingHours);
-    data.append("openOnWeekends", String(openOnWeekends));
+    data.append("opening_hours", opening_hours);
+    data.append("open_on_weekends", String(open_on_weekends));
 
     images.forEach((image, index) => {
       data.append("images", {
@@ -58,20 +58,17 @@ export default function NewEstablishment() {
       });
     });
 
-    await api.post(
-      "/newEstablishments",
-      {
-        headers: {
-          Token: `Bearer ${token}`,
-        },
+    await api.post("/newEstablishments", data, {
+      headers: {
+        Token: `Bearer ${token}`,
+        Authorization: establishment.id,
       },
-      data
-    );
+    });
 
-    navigation.navigate("Search");
+    navigation.navigate("Home");
   }
 
-  console.log(token, "verificacao do token");
+  //   console.log("token:", token, "id:", establishment.id, { establishment });
 
   async function handleSelectImages() {
     const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
@@ -133,7 +130,7 @@ export default function NewEstablishment() {
 
         <Label>Horário de funcionamento</Label>
         <Input
-          value={openingHours}
+          value={opening_hours}
           onChangeText={setOpeningHours}
           placeholder="Dás 9h até 18h"
         />
@@ -143,7 +140,7 @@ export default function NewEstablishment() {
           <Switch
             thumbColor="#fff"
             trackColor={{ false: "#ccc", true: "#39CC83" }}
-            value={openOnWeekends}
+            value={open_on_weekends}
             onValueChange={setOpenOnWeekends}
           />
         </SwitchContainer>
