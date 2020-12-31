@@ -32,6 +32,12 @@ export const Title = styled.Text`
   font-size: 30px;
   font-family: "Archivo_700Bold";
 `;
+
+export const AddService = styled.TouchableOpacity`
+  margin-top: 16px;
+  flex-direction: row;
+`;
+
 export const Description = styled.Text`
   font-family: "Archivo_400Regular";
   color: #000;
@@ -139,4 +145,59 @@ export const Contact = styled.Text`
   color: #fff;
   font-size: 16px;
   margin-left: 16px;
+`;
+export const ContainerModal = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+  background: #fff;
+  border-radius: 15px;
+`;
+export const ContainerButton = styled.View`
+  flex-direction: row;
+  margin-top: 20px;
+`;
+export const AddModalServices = styled.TouchableOpacity`
+  background: #000;
+  width: 100px;
+  height: 58px;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const CloseModal = styled.TouchableOpacity`
+  background: #000;
+  width: 100px;
+  height: 58px;
+  border-radius: 15px;
+  margin-left: 20px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TextTitle = styled.Text`
+  color: #fff;
+  font-size: 18px;
+  font-family: Archivo_700Bold;
+`;
+export const ContainerStyle = styled.View`
+  flex-direction: row;
+`;
+
+export const Style = styled.View`
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid #1bd163;
+  margin-left: 15px;
+`;
+export const DescriptionService = styled.Text`
+  font-family: "Archivo_400Regular";
+  color: #000;
+  line-height: 24px;
 `;

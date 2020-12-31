@@ -81,3 +81,7 @@ export const Image = styled.Image`
   margin-bottom: 32px;
   margin-right: 8px;
 `;
+
+export const PickerContainer = styled.View`
+  /* height: 150px; */
+`;

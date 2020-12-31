@@ -16,7 +16,7 @@ import {
   Footer,
   FooterTextInput,
   FooterButton,
-} from "./styles-components";
+} from "./styled-components";
 import { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
 
 export default function Search({ navigation }) {

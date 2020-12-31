@@ -3,7 +3,7 @@ import FeatherIcon from "react-native-vector-icons/Feather";
 
 export const Container = styled.View`
   margin-top: 8px;
-  width: 100%;
+  width: 80%;
   height: 58px;
   background: #232129;
   border-radius: 8px;

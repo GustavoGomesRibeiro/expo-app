@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -8,9 +8,7 @@ export const Container = styled.SafeAreaView`
 export const Context = styled.ScrollView``;
 
 export const Title = styled.Text`
-    color: #fff;
+  color: #fff;
 `;
-export const Services = styled.View`
-`;
-export const TypeServices = styled.View`
-`;
+export const Services = styled.View``;
+export const TypeServices = styled.View``;

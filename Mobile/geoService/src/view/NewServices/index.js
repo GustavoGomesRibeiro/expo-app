@@ -5,6 +5,7 @@ import { useRoute } from "@react-navigation/native";
 import { Contextapi } from "../../hooks/authContext";
 import { Linking } from "react-native";
 import Modal from "react-native-modal";
+import { useNavigation } from "@react-navigation/native";
 
 import api from "../../service/api";
 import Headers from "../../components/Headers";
@@ -33,18 +34,43 @@ import {
   ScheduleItemBlue,
   ScheduleItemGreen,
   ScheduleItemRed,
-  WhatsApp,
-  Contact,
+  ContainerModal,
+  ContainerButton,
+  AddModalServices,
+  CloseModal,
+  TextTitle,
+  // ContainerStyle,
+  Style,
+  DescriptionService,
+  // ContainerInput,
+  // InputService,
 } from "./styled-components";
 
-export default function Details() {
-  const { token } = useContext(Contextapi);
+export default function NewServices() {
+  const { token, establishment } = useContext(Contextapi);
   const route = useRoute();
+  const navigation = useNavigation();
 
-  const [establishments, setEstablishments] = useState();
   const params = route.params;
 
-  const message = `Olá ${params.name}, gostaria de avaliar o valor dos serviços, msg teste`;
+  const [establishments, setEstablishments] = useState();
+  const [loadServices, setLoadServices] = useState();
+
+  const [service, setService] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  useEffect(() => {
+    api
+      .get("/services", {
+        headers: {
+          Token: `Bearer ${token}`,
+          Authorization: establishment.id,
+        },
+      })
+      .then((response) => {
+        setLoadServices(response.data);
+      });
+  }, [loadServices]);
 
   useEffect(() => {
     api
@@ -59,6 +85,8 @@ export default function Details() {
       });
   }, [params.id]);
 
+  console.log(loadServices);
+
   if (!establishments) {
     return <Title>Carregando...</Title>;
   }
@@ -69,18 +97,23 @@ export default function Details() {
     );
   }
 
-  function sendWhatsapp() {
-    Linking.canOpenURL(
-      `whatsapp://send?phone=55${params.whatsapp}&text=${message}`
-    ).then((supported) => {
-      if (supported) {
-        return `whatsapp://send?phone=55${params.whatsapp}&text=${message}`;
-      } else {
-        return Linking.openURL(
-          `https://api.whatsapp.com/send?phone=55${params.whatsapp}&text=${message}`
-        );
+  function toggleModalVisible() {
+    setIsModalVisible(!isModalVisible);
+  }
+
+  async function handleAddServices() {
+    await api.post(
+      "/services",
+      { service },
+      {
+        headers: {
+          Token: `Bearer ${token}`,
+          Authorization: establishment.id,
+        },
       }
-    });
+    );
+    console.log(handleAddServices);
+    navigation.navigate("NewServices");
   }
 
   return (
@@ -139,8 +172,61 @@ export default function Details() {
               <DetailsContainer>
                 <Title>Nossos Serviços</Title>
                 <AddService>
-                  <Description>Venha conferir os nossos serviços</Description>
+                  <EvilIcons
+                    name="plus"
+                    size={36}
+                    color="#1bd163"
+                    onPress={toggleModalVisible}
+                  />
+                  {loadServices.length !== 0 ? (
+                    loadServices.map((item) => {
+                      return (
+                        // <ContainerStyle>
+                        <Style>
+                          <DescriptionService>
+                            {item.service}
+                          </DescriptionService>
+                        </Style>
+                        // </ContainerStyle>
+                      );
+                    })
+                  ) : (
+                    <EvilIcons
+                      name="plus"
+                      size={36}
+                      color="#1bd163"
+                      onPress={toggleModalVisible}
+                    />
+                  )}
                 </AddService>
+                <Modal isVisible={isModalVisible}>
+                  <ContainerModal>
+                    <Description> Serviços</Description>
+                    {/* <ContainerInput> */}
+                    <InputModal
+                      name="service"
+                      placeholder="Digite o seus serviços"
+                      icon="settings"
+                      value={service}
+                      onChangeText={setService}
+                      autoCapitalize="true"
+                    />
+                    {/* </ContainerInput> */}
+
+                    <ContainerButton>
+                      <AddModalServices
+                        title="Criar"
+                        onPress={handleAddServices}
+                      >
+                        <TextTitle> Criar </TextTitle>
+                      </AddModalServices>
+                      <CloseModal title="Fechar" onPress={toggleModalVisible}>
+                        <TextTitle> Fechar </TextTitle>
+                      </CloseModal>
+                    </ContainerButton>
+                  </ContainerModal>
+                </Modal>
+                {/* <Description>Venha conferir os nossos serviços</Description> */}
               </DetailsContainer>
 
               <ScheduleContainer>
@@ -176,11 +262,6 @@ export default function Details() {
             </>
           );
         })}
-
-        <WhatsApp onPress={sendWhatsapp}>
-          <FontAwesome name="whatsapp" size={24} color="#FFF" />
-          <Contact> Entrar em contato </Contact>
-        </WhatsApp>
       </ScrollView>
     </Container>
   );

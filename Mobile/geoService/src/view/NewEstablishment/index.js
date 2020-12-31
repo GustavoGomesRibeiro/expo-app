@@ -6,6 +6,7 @@ import { useRoute } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import api from "../../service/api";
 import { useNavigation } from "@react-navigation/native";
+import { Picker } from "@react-native-picker/picker";
 
 import {
   Container,
@@ -20,6 +21,7 @@ import {
   ButtonText,
   UploadImages,
   Image,
+  PickerContainer,
 } from "./styled-components";
 
 import { Alert } from "react-native";
@@ -33,8 +35,14 @@ export default function NewEstablishment() {
 
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-  const [industry, setIndustry] = useState("");
-  const [opening_hours, setOpeningHours] = useState("");
+  const [industry, setIndustry] = useState({
+    type: "Mecânico de carros",
+    type: "Mecânico de motos",
+  });
+  const [opening_hours, setOpeningHours] = useState({
+    hours: "Das 8h às 17h",
+    hours: "Das 9h às 18h",
+  });
   const [open_on_weekends, setOpenOnWeekends] = useState(true);
   const [images, setImages] = useState([]);
 
@@ -112,11 +120,20 @@ export default function NewEstablishment() {
         />
 
         <Label>Ramo de Atividade</Label>
-        <Input
+        {/* <Input
           value={industry}
           onChangeText={setIndustry}
           placeholder="Mecânico"
-        />
+        /> */}
+        <Picker
+          selectedValue={industry}
+          onValueChange={setIndustry}
+          // style={{ height: 150 }}
+        >
+          <Picker.Item label="Escolha Ramo de Atividades" value="" />
+          <Picker.Item label="Mecânico de carros" value="Mecânico de carros" />
+          <Picker.Item label="Mecânico de motos" value="Mecânico de motos" />
+        </Picker>
 
         <Label>Fotos do Estabelecimento</Label>
         <UploadImages>
@@ -128,13 +145,18 @@ export default function NewEstablishment() {
           <Feather name="plus" size={24} color="#000" />
         </Add>
 
-        <Label>Horário de funcionamento</Label>
-        <Input
-          value={opening_hours}
-          onChangeText={setOpeningHours}
-          placeholder="Dás 9h até 18h"
-        />
-
+        <PickerContainer>
+          <Label>Horário de funcionamento</Label>
+          <Picker
+            selectedValue={opening_hours}
+            onValueChange={setOpeningHours}
+            // style={{ height: 150 }}
+          >
+            <Picker.Item label="Escolha o horário de funcionamento" value="" />
+            <Picker.Item label="Das 8h às 17h" value="Das 8h às 17h" />
+            <Picker.Item label="Das 9h às 18h" value="Das 9h às 18h" />
+          </Picker>
+        </PickerContainer>
         <SwitchContainer>
           <Label> Atende final de semana?</Label>
           <Switch

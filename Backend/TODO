@@ -44,4 +44,9 @@ Rotas:
   Ajuste no campo esqueci minha senha: 
     ☐ Analisar como sera feito o reset de senha
     ☐ Sera necessario criar novas entidades?
-    
+  
+  Adicionar uma nova tabela para favoritos:
+    ✔ Criar uma tabela favoritos @done(20-12-27 17:00)
+    ✔ Criar uma nova controller favorites @done(20-12-27 16:49)
+    ✔ Criar um usuario teste, favoritando ele @done(20-12-30 11:23)
+    ✔ Trazer os estabelecimentos favoritados apenas com user. @done(20-12-30 11:23)
