@@ -55,6 +55,10 @@ routes.get("/listEstablishments", controllerQuantifyEstablishments.show);
 
 routes.get("/favoriteEstablishments", controllerFavoriteEstablishments.index);
 routes.post("/favoriteEstablishments", controllerFavoriteEstablishments.create);
+routes.delete(
+  "/favoriteEstablishments/:id",
+  controllerFavoriteEstablishments.delete
+);
 
 //service
 

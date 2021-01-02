@@ -6,6 +6,8 @@ import {
 } from "expo-location";
 import { MaterialIcons } from "@expo/vector-icons";
 import api from "../../service/api";
+import Headers from "../../components/Headers";
+
 // import * as Location from "expo-location";
 
 import {
@@ -90,6 +92,7 @@ export default function Search({ navigation }) {
 
   return (
     <Container>
+      <Headers title="Localizar estabelecimentos" />
       <Map
         provider={PROVIDER_GOOGLE}
         onRegionChangeComplete={handleRegionChanged}

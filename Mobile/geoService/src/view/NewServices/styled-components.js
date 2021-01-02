@@ -183,9 +183,6 @@ export const TextTitle = styled.Text`
   font-size: 18px;
   font-family: Archivo_700Bold;
 `;
-export const ContainerStyle = styled.View`
-  flex-direction: row;
-`;
 
 export const Style = styled.View`
   justify-content: center;

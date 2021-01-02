@@ -32,6 +32,26 @@ export const Title = styled.Text`
   font-size: 30px;
   font-family: "Archivo_700Bold";
 `;
+
+export const AddService = styled.View`
+  flex-direction: row;
+`;
+
+export const Style = styled.View`
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid #1bd163;
+  margin-left: 15px;
+`;
+export const DescriptionService = styled.Text`
+  font-family: "Archivo_400Regular";
+  color: #000;
+  line-height: 24px;
+`;
+
 export const Description = styled.Text`
   font-family: "Archivo_400Regular";
   color: #000;
@@ -139,4 +159,38 @@ export const Contact = styled.Text`
   color: #fff;
   font-size: 16px;
   margin-left: 16px;
+`;
+
+export const Footer = styled.View`
+  /* background-color: #fafafc; */
+  padding: 24px;
+  align-items: center;
+`;
+
+export const ContainerButtons = styled.View`
+  flex-direction: row;
+  margin-top: 16px;
+`;
+
+export const ButtonFavorite = styled(RectButton)`
+  background-color: #8257e5;
+  flex: 1;
+  height: 56px;
+  border-radius: 8px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+`;
+
+export const ButtonWhatsApp = styled(RectButton)`
+  background-color: #04d361;
+  flex: 1;
+  height: 56px;
+  border-radius: 8px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  /* margin-right: 8px; */
 `;

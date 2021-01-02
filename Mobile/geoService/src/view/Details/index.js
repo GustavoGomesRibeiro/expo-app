@@ -4,11 +4,9 @@ import { Marker } from "react-native-maps";
 import { useRoute } from "@react-navigation/native";
 import { Contextapi } from "../../hooks/authContext";
 import { Linking } from "react-native";
-import Modal from "react-native-modal";
 
 import api from "../../service/api";
 import Headers from "../../components/Headers";
-import InputModal from "../../components/InputModal";
 
 import {
   ScrollView,
@@ -19,6 +17,8 @@ import {
   DetailsContainer,
   Title,
   AddService,
+  Style,
+  DescriptionService,
   Description,
   MapContainer,
   Map,
@@ -33,6 +33,10 @@ import {
   ScheduleItemBlue,
   ScheduleItemGreen,
   ScheduleItemRed,
+  Footer,
+  ContainerButtons,
+  ButtonFavorite,
+  ButtonWhatsApp,
   WhatsApp,
   Contact,
 } from "./styled-components";
@@ -41,10 +45,24 @@ export default function Details() {
   const { token } = useContext(Contextapi);
   const route = useRoute();
 
+  const [services, setServices] = useState();
   const [establishments, setEstablishments] = useState();
   const params = route.params;
 
   const message = `Olá ${params.name}, gostaria de avaliar o valor dos serviços, msg teste`;
+
+  useEffect(() => {
+    api
+      .get("/services", {
+        headers: {
+          Token: `Bearer ${token}`,
+          Authorization: params.id,
+        },
+      })
+      .then((response) => {
+        setServices(response.data);
+      });
+  }, []);
 
   useEffect(() => {
     api
@@ -139,7 +157,19 @@ export default function Details() {
               <DetailsContainer>
                 <Title>Nossos Serviços</Title>
                 <AddService>
-                  <Description>Venha conferir os nossos serviços</Description>
+                  {services.length !== 0 ? (
+                    services.map((item) => {
+                      return (
+                        <Style>
+                          <DescriptionService>
+                            {item.service}
+                          </DescriptionService>
+                        </Style>
+                      );
+                    })
+                  ) : (
+                    <Description>Sem serviços cadastrados</Description>
+                  )}
                 </AddService>
               </DetailsContainer>
 
@@ -177,10 +207,18 @@ export default function Details() {
           );
         })}
 
-        <WhatsApp onPress={sendWhatsapp}>
-          <FontAwesome name="whatsapp" size={24} color="#FFF" />
-          <Contact> Entrar em contato </Contact>
-        </WhatsApp>
+        <Footer>
+          <ContainerButtons>
+            <ButtonFavorite onPress={() => {}}>
+              <FontAwesome name="heart-o" size={24} color="#fff" />
+            </ButtonFavorite>
+
+            <ButtonWhatsApp onPress={sendWhatsapp}>
+              <FontAwesome name="whatsapp" size={24} color="#FFF" />
+              <Contact>Entrar em contato</Contact>
+            </ButtonWhatsApp>
+          </ContainerButtons>
+        </Footer>
       </ScrollView>
     </Container>
   );

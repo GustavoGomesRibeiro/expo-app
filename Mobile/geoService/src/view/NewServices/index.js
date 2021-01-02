@@ -181,13 +181,11 @@ export default function NewServices() {
                   {loadServices.length !== 0 ? (
                     loadServices.map((item) => {
                       return (
-                        // <ContainerStyle>
                         <Style>
                           <DescriptionService>
                             {item.service}
                           </DescriptionService>
                         </Style>
-                        // </ContainerStyle>
                       );
                     })
                   ) : (
