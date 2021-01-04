@@ -23,6 +23,10 @@ module.exports = {
     return response.json(listFavoriteEstablishment);
   },
 
+  // async show(request, response) {
+
+  // },
+
   async create(request, response) {
     const { user_id } = request.body;
 

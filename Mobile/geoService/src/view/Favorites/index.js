@@ -33,8 +33,6 @@ export default function Favorites() {
 
   const [establishments, setEstablishments] = useState([]);
 
-  const message = `Olá ${establishments.name}, gostaria de avaliar o valor dos serviços, msg teste`;
-
   useEffect(() => {
     api
       .get(`/favoriteEstablishments`, {
@@ -48,24 +46,25 @@ export default function Favorites() {
       });
   }, []);
 
-  console.log(establishments.user_id, "wpp");
   console.log(establishments, "carregando establecimentos");
 
-  function handleOnPressGoogleMaps() {
+  function handleOnPressGoogleMaps(establishment) {
     Linking.openURL(
-      `https://www.google.com/maps/dir/?api=1&destination=${establishments?.latitude},${establishments?.longitude}`
+      `https://www.google.com/maps/dir/?api=1&destination=${establishment?.latitude},${establishment?.longitude}`
     );
   }
 
-  function handleSendWhatsApp() {
+  function handleSendWhatsApp(establishment) {
+    const message = `Olá ${establishment.name}, gostaria de avaliar o valor dos serviços, msg teste`;
+
     Linking.canOpenURL(
-      `whatsapp://send?phone=55${establishments.whatsapp}&text=${message}`
+      `whatsapp://send?phone=55${establishment.whatsapp}&text=${message}`
     ).then((supported) => {
       if (supported) {
-        return `whatsapp://send?phone=55${establishments.whatsapp}&text=${message}`;
+        return `whatsapp://send?phone=55${establishment.whatsapp}&text=${message}`;
       } else {
         return Linking.openURL(
-          `https://api.whatsapp.com/send?phone=55${establishments.whatsapp}&text=${message}`
+          `https://api.whatsapp.com/send?phone=55${establishment.whatsapp}&text=${message}`
         );
       }
     });
@@ -74,7 +73,7 @@ export default function Favorites() {
     <Container>
       <CustomHeader title="Favoritos" />
       <Context>
-        {establishments.user_id === 1 ? (
+        {establishments.length ? (
           establishments.map((establishment) => {
             return (
               <ContainerMain key={establishment.id}>
@@ -93,7 +92,7 @@ export default function Favorites() {
                         <TextServices>Mecanico</TextServices>
                       </Style>
                       <Style>
-                        <TextServices>Mecanico de moto</TextServices>
+                        <TextServices>Mecanico</TextServices>
                       </Style>
                     </ContainerService>
                   </ProfileFavoritedInfo>
@@ -121,7 +120,9 @@ export default function Favorites() {
                     />
                   </Map>
 
-                  <RoutesContainer onPress={handleOnPressGoogleMaps}>
+                  <RoutesContainer
+                    onPress={() => handleOnPressGoogleMaps(establishment)}
+                  >
                     <RoutesText> Ver Rota no Google Maps</RoutesText>
                   </RoutesContainer>
                 </MapContainer>
@@ -132,7 +133,9 @@ export default function Favorites() {
                       <FontAwesome name="heart-o" size={24} color="#fff" />
                     </ButtonFavorite>
 
-                    <ButtonWhatsApp onPress={handleSendWhatsApp}>
+                    <ButtonWhatsApp
+                      onPress={() => handleSendWhatsApp(establishment)}
+                    >
                       <FontAwesome name="whatsapp" size={24} color="#FFF" />
                       <Contact>Entrar em contato</Contact>
                     </ButtonWhatsApp>
@@ -148,7 +151,7 @@ export default function Favorites() {
                 <FontAwesome name="heart-o" size={24} color="#fff" />
               </ButtonFavorite>
 
-              <ButtonWhatsApp onPress={handleSendWhatsApp}>
+              <ButtonWhatsApp onPress={() => handleSendWhatsApp(establishment)}>
                 <FontAwesome name="whatsapp" size={24} color="#FFF" />
                 <Contact>Entrar em contato</Contact>
               </ButtonWhatsApp>
