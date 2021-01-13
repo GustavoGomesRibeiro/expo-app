@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Feather, FontAwesome, EvilIcons } from "@expo/vector-icons";
+import { Feather, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { Marker } from "react-native-maps";
 import { useRoute } from "@react-navigation/native";
 import { Contextapi } from "../../hooks/authContext";
@@ -11,6 +11,7 @@ import Headers from "../../components/Headers";
 import {
   ScrollView,
   Container,
+  Content,
   ImageContainer,
   ScrollViewHorizontal,
   Image,
@@ -35,47 +36,59 @@ import {
   ScheduleItemRed,
   Footer,
   ContainerButtons,
+  Switch,
   ButtonFavorite,
+  ButtonUnFavorite,
   ButtonWhatsApp,
   WhatsApp,
   Contact,
 } from "./styled-components";
 
 export default function Details() {
-  const { token } = useContext(Contextapi);
+  const { token, user } = useContext(Contextapi);
   const route = useRoute();
 
   const [services, setServices] = useState();
   const [establishments, setEstablishments] = useState();
+  const [isFavorite, setIsFavorite] = useState([]);
+  const [favorite, setFavorite] = useState(true);
   const params = route.params;
 
   const message = `Olá ${params.name}, gostaria de avaliar o valor dos serviços, msg teste`;
 
   useEffect(() => {
-    api
-      .get("/services", {
+    async function loadServices() {
+      const response = await api.get("/services", {
         headers: {
           Token: `Bearer ${token}`,
-          Authorization: params.id,
+          Authorization: user.id,
         },
-      })
-      .then((response) => {
-        setServices(response.data);
       });
-  }, []);
+      setServices(response.data);
+    }
+    loadServices();
 
-  useEffect(() => {
-    api
-      .get(`/newEstablishments/${params.id}`, {
+    async function loadEstablishment() {
+      const response = await api.get(`/newEstablishments/${params.id}`, {
         headers: {
           Token: `Bearer ${token}`,
-          // Authorization: user.id,
         },
-      })
-      .then((response) => {
-        setEstablishments(response.data);
       });
-  }, [params.id]);
+      setEstablishments(response.data);
+    }
+    loadEstablishment();
+
+    async function loadFavorites() {
+      const response = await api.get(`/favoriteEstablishments`, {
+        headers: {
+          Token: `Bearer ${token}`,
+          Authorization: user.id,
+        },
+      });
+      setIsFavorite(response.data);
+    }
+    loadFavorites();
+  }, [params.id, isFavorite]);
 
   if (!establishments) {
     return <Title>Carregando...</Title>;
@@ -101,14 +114,37 @@ export default function Details() {
     });
   }
 
+  async function handleAddToFavorites() {
+    await api.post(
+      "/favoriteEstablishments",
+      { favorite },
+      {
+        headers: {
+          Token: `Bearer ${token}`,
+          Authorization: user.id,
+        },
+      }
+    );
+  }
+
+  async function handleDeleteToFavorites(id) {
+    await api.delete(`/favoriteEstablishments/${id}`, {
+      headers: {
+        Token: `Bearer ${token}`,
+        Authorization: user.id,
+      },
+    });
+    setIsFavorite(isFavorite.filter((item) => item.id !== id));
+  }
+
   return (
     <Container>
       <ScrollView>
         <Headers title="Detalhes do Estabelecimento" />
         {establishments.map((establishment) => {
           return (
-            <>
-              <ImageContainer key={establishment.id}>
+            <Content key={establishment.id}>
+              <ImageContainer>
                 <ScrollViewHorizontal>
                   <Image
                     source={{
@@ -157,10 +193,10 @@ export default function Details() {
               <DetailsContainer>
                 <Title>Nossos Serviços</Title>
                 <AddService>
-                  {services.length !== 0 ? (
+                  {services.length ? (
                     services.map((item) => {
                       return (
-                        <Style>
+                        <Style key={item.id}>
                           <DescriptionService>
                             {item.service}
                           </DescriptionService>
@@ -203,15 +239,47 @@ export default function Details() {
                   </ScheduleItem>
                 )}
               </ScheduleContainer>
-            </>
+            </Content>
           );
         })}
 
         <Footer>
           <ContainerButtons>
-            <ButtonFavorite onPress={() => {}}>
-              <FontAwesome name="heart-o" size={24} color="#fff" />
-            </ButtonFavorite>
+            {isFavorite.length ? (
+              isFavorite.reduce((item) => {
+                return (
+                  <Switch
+                    thumbColor="#fff"
+                    trackColor={{ false: "#ccc", true: "#39CC83" }}
+                    value={favorite}
+                    onPress={setFavorite}
+                    // favorited={}
+                  >
+                    <ButtonUnFavorite
+                      onPress={() => handleDeleteToFavorites(item.id)}
+                    >
+                      <Ionicons
+                        name="md-heart-dislike"
+                        size={24}
+                        color="#fff"
+                      />
+                    </ButtonUnFavorite>
+                  </Switch>
+                );
+              })
+            ) : (
+              <Switch
+                thumbColor="#fff"
+                trackColor={{ false: "#ccc", true: "#39CC83" }}
+                value={favorite}
+                onPress={setFavorite}
+                // favorited={}
+              >
+                <ButtonFavorite onPress={handleAddToFavorites}>
+                  <FontAwesome name="heart" size={24} color="#fff" />
+                </ButtonFavorite>
+              </Switch>
+            )}
 
             <ButtonWhatsApp onPress={sendWhatsapp}>
               <FontAwesome name="whatsapp" size={24} color="#FFF" />

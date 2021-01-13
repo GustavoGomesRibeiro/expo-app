@@ -178,10 +178,10 @@ export default function NewServices() {
                     color="#1bd163"
                     onPress={toggleModalVisible}
                   />
-                  {loadServices.length !== 0 ? (
+                  {loadServices.length ? (
                     loadServices.map((item) => {
                       return (
-                        <Style>
+                        <Style key={item.id}>
                           <DescriptionService>
                             {item.service}
                           </DescriptionService>

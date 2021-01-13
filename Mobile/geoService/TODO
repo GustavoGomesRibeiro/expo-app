@@ -3,7 +3,7 @@ page Home:
   ☐ Mostrar ultimos estabelecimentos acessados.
 
 page Details:
-  ☐ Carregar os servicos criados pelo establecimentos.
+  ✔ Carregar os servicos criados pelo establecimentos. @done(21-01-05 20:54)
   ☐ Corrigir scroll horizontal dos detalhes.
   
 page NewEstablishment:
@@ -13,8 +13,8 @@ page NewEstablishment:
   ☐ Estabelecimento pode add imagem ao criar um estabelecimento.
 
 page Favorite:
-  ☐ Criacao da tela favoritos
-  ☐ Trazer os estabelecimentos favoritados pelo usuario
+  ✔ Criacao da tela favoritos @done(21-01-05 20:54)
+  ✔ Trazer os estabelecimentos favoritados pelo usuario @done(21-01-05 20:54)
 
 page Search:
   ☐ Poder pesquisar por serviços desejados.

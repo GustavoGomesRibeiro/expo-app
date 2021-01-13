@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import CustomHeader from "../../components/CustomHeader";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { Marker } from "react-native-maps";
 import { Contextapi } from "../../hooks/authContext";
-import { Linking } from "react-native";
+import { Alert, Linking } from "react-native";
+import like from "../../assets/like.png";
 import api from "../../service/api";
 
 import {
@@ -26,6 +27,10 @@ import {
   Map,
   RoutesContainer,
   RoutesText,
+  ImageLike,
+  Like,
+  MessageLike,
+  Bold,
 } from "./styles-components";
 
 export default function Favorites() {
@@ -33,20 +38,31 @@ export default function Favorites() {
 
   const [establishments, setEstablishments] = useState([]);
 
+  // useEffect(() => {
+  //   api
+  //     .get(`/favoriteEstablishments`, {
+  //       headers: {
+  //         Token: `Bearer ${token}`,
+  //         Authorization: user.id,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setEstablishments(response.data);
+  //     });
+  // }, [establishments]);
+
   useEffect(() => {
-    api
-      .get(`/favoriteEstablishments`, {
+    async function loadFavorites() {
+      const response = await api.get("/favoriteEstablishments", {
         headers: {
           Token: `Bearer ${token}`,
           Authorization: user.id,
         },
-      })
-      .then((response) => {
-        setEstablishments(response.data);
       });
+      setEstablishments(response.data);
+    }
+    loadFavorites();
   }, []);
-
-  console.log(establishments, "carregando establecimentos");
 
   function handleOnPressGoogleMaps(establishment) {
     Linking.openURL(
@@ -68,6 +84,22 @@ export default function Favorites() {
         );
       }
     });
+  }
+
+  async function handleRemoveFavorite(id) {
+    await api.delete(`/favoriteEstablishments/${id}`, {
+      headers: {
+        Token: `Bearer ${token}`,
+        Authorization: user.id,
+      },
+    });
+    setEstablishments(
+      establishments.filter((establishment) => establishment.id !== id)
+    );
+  }
+
+  if (!establishments) {
+    return <TextServices> Carregando...</TextServices>;
   }
   return (
     <Container>
@@ -129,8 +161,14 @@ export default function Favorites() {
 
                 <Footer>
                   <ContainerButtons>
-                    <ButtonFavorite onPress={() => {}}>
-                      <FontAwesome name="heart-o" size={24} color="#fff" />
+                    <ButtonFavorite
+                      onPress={() => handleRemoveFavorite(establishment.id)}
+                    >
+                      <Ionicons
+                        name="md-heart-dislike"
+                        size={24}
+                        color="#fff"
+                      />
                     </ButtonFavorite>
 
                     <ButtonWhatsApp
@@ -145,18 +183,13 @@ export default function Favorites() {
             );
           })
         ) : (
-          <Footer>
-            <ContainerButtons>
-              <ButtonFavorite onPress={() => {}}>
-                <FontAwesome name="heart-o" size={24} color="#fff" />
-              </ButtonFavorite>
-
-              <ButtonWhatsApp onPress={() => handleSendWhatsApp(establishment)}>
-                <FontAwesome name="whatsapp" size={24} color="#FFF" />
-                <Contact>Entrar em contato</Contact>
-              </ButtonWhatsApp>
-            </ContainerButtons>
-          </Footer>
+          <ImageLike>
+            <Like source={like} />
+            <MessageLike>
+              Acesso rápido ao {"\n"}seus{" "}
+              <Bold>estabelecimentos favoritos</Bold>.
+            </MessageLike>
+          </ImageLike>
         )}
       </Context>
     </Container>

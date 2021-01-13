@@ -76,7 +76,7 @@ export const ContainerButtons = styled.View`
   margin-top: 16px;
 `;
 export const ButtonFavorite = styled(RectButton)`
-  background-color: #8257e5;
+  background-color: #e33d3d;
   flex: 1;
   height: 56px;
   border-radius: 8px;
@@ -100,7 +100,7 @@ export const Contact = styled.Text`
   font-family: "Archivo_700Bold";
   color: #fff;
   font-size: 16px;
-  margin-left: 16px;
+  margin-left: 5px;
 `;
 
 export const MapContainer = styled.View`
@@ -125,4 +125,28 @@ export const RoutesContainer = styled(RectButton)`
 export const RoutesText = styled.Text`
   font-family: "Archivo_700Bold";
   color: #000;
+`;
+
+export const ImageLike = styled.View`
+  /* margin-top: 150px; */
+  /* justify-content: center; */
+  align-items: center;
+`;
+export const Like = styled.Image`
+  width: 100%;
+  resize-mode: contain;
+  margin-top: -300px;
+`;
+export const MessageLike = styled.Text`
+  margin-top: -250px;
+  color: #000;
+  font-size: 32px;
+  font-family: "Archivo_400Regular";
+  line-height: 37px;
+`;
+
+export const Bold = styled.Text`
+  color: #000;
+  font-family: "Archivo_700Bold";
+  line-height: 37px;
 `;

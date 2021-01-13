@@ -7,6 +7,7 @@ import {
   Title,
   Context,
   Content,
+  ProfileContainer,
   ImageBackground,
   Image,
   Img,
@@ -41,15 +42,15 @@ export default function Profile({ navigation }) {
     <Container>
       <Context>
         <Headers title="Perfil" />
-        {establishments.length !== 1 ? (
-          <Title>Seus Estabelecimentos </Title>
+        {establishments.length ? (
+          <Title>Seu Estabelecimento </Title>
         ) : (
-          <Title>Seu Estabelecimento</Title>
+          <Title>Seus Estabelecimentos</Title>
         )}
         <Content>
           {establishments.map((establishment) => {
             return (
-              <>
+              <ProfileContainer key={establishment.id}>
                 {/* <Image>
                   <Img
                     source={{
@@ -59,7 +60,6 @@ export default function Profile({ navigation }) {
                   />
                 </Image> */}
                 <ButtonDetails
-                  key={establishment.id}
                   onPress={() =>
                     navigation.navigate("NewServices", {
                       id: establishment.id,
@@ -76,7 +76,7 @@ export default function Profile({ navigation }) {
                     </ImageBackground>
                   </ContentEstablishment>
                 </ButtonDetails>
-              </>
+              </ProfileContainer>
             );
           })}
         </Content>

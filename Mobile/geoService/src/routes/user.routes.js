@@ -20,7 +20,7 @@ const Menu = () => (
       style: {
         elevation: 0,
         shadowOpacity: 0,
-        height: 64,
+        height: 80,
         backgroundColor: "#131418",
         borderTopColor: "rgba(255,255,255,0.2)",
       },
@@ -32,7 +32,9 @@ const Menu = () => (
       iconStyle: {
         flex: 0,
         width: 20,
-        height: 20,
+        height: 24,
+        marginBottom: 5,
+        marginTop: 5,
       },
       labelStyle: {
         fontFamily: "Archivo_700Bold",

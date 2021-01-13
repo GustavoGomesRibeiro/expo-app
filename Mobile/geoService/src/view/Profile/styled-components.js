@@ -24,6 +24,7 @@ export const Content = styled.View`
   align-items: center;
   justify-content: center;
 `;
+export const ProfileContainer = styled.View``;
 // export const Image = styled.View`
 //   /* background: #ccc;
 //   width: 100px;

@@ -8,6 +8,8 @@ export const Container = styled.SafeAreaView`
 
 export const ScrollView = styled.ScrollView``;
 
+export const Content = styled.View``;
+
 export const ImageContainer = styled.View``;
 
 export const ScrollViewHorizontal = styled.ScrollView.attrs(() => ({
@@ -35,16 +37,22 @@ export const Title = styled.Text`
 
 export const AddService = styled.View`
   flex-direction: row;
+  flex-wrap: wrap;
+  /* flex: 1; */
 `;
 
 export const Style = styled.View`
+  /* flex-wrap: wrap; */
+  /* align-content: flex-start; */
+  /* flex: 1; */
   justify-content: center;
   align-items: center;
-  width: 80px;
+  width: 170px;
   height: 30px;
   border-radius: 15px;
   border: 1px solid #1bd163;
-  margin-left: 15px;
+  margin-right: 10px;
+  margin-top: 10px;
 `;
 export const DescriptionService = styled.Text`
   font-family: "Archivo_400Regular";
@@ -172,8 +180,30 @@ export const ContainerButtons = styled.View`
   margin-top: 16px;
 `;
 
+export const Switch = styled.Switch`
+  /* background-color: #8257e5; */
+  flex: 1;
+  height: 56px;
+  border-radius: 8px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+`;
+
 export const ButtonFavorite = styled(RectButton)`
   background-color: #8257e5;
+  flex: 1;
+  height: 56px;
+  border-radius: 8px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+`;
+
+export const ButtonUnFavorite = styled(RectButton)`
+  background-color: #e33d3d;
   flex: 1;
   height: 56px;
   border-radius: 8px;
