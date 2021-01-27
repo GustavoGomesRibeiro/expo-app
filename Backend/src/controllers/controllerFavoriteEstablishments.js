@@ -2,56 +2,56 @@ const connection = require("../database/connection");
 
 module.exports = {
   async index(request, response) {
-    const establishmentFavorited_id = request.headers.authorization;
+    const company_id = request.headers.authorization;
 
     const listFavoriteEstablishment = await connection("favorites")
-      .where("establishmentFavorited_id", establishmentFavorited_id)
-      .join("newEstablishments")
+      .where("company_id", company_id)
+      .join("company")
       .select([
         "favorites.*",
-        "newEstablishments.name",
-        "newEstablishments.industry",
-        "newEstablishments.whatsapp",
-        "newEstablishments.latitude",
-        "newEstablishments.longitude",
-        "newEstablishments.open_on_weekends",
-        "newEstablishments.opening_hours",
-        "newEstablishments.establishment_id",
-        "newEstablishments.created_at",
-        "newEstablishments.updated_at",
+        "company.name",
+        "company.industry",
+        "company.whatsapp",
+        "company.latitude",
+        "company.longitude",
+        "company.open_on_weekends",
+        "company.opening_hours",
       ]);
     return response.json(listFavoriteEstablishment);
   },
 
-  // async show(request, response) {
+  async show(request, response) {
+    const { id } = request.params;
 
-  // },
+    const listFavorites = await connection("favorites").where("id", id);
+
+    return response.json(listFavorites);
+  },
 
   async create(request, response) {
-    const { user_id } = request.body;
+    const { user_id, company_id } = request.body;
 
-    const establishmentFavorited_id = request.headers.authorization;
     const [id] = await connection("favorites").insert({
       user_id,
-      establishmentFavorited_id,
+      company_id,
     });
     console.log();
     return response.json({ id });
   },
+
   async delete(request, response) {
     const { id } = request.params;
-    const establishmentFavorited_id = request.headers.authorization;
+    const company_id = request.headers.authorization;
 
     const favorite = await connection("favorites")
       .where("id", id)
-      .select("establishmentFavorited_id")
+      .select("company_id")
       .first();
 
-    if (favorite.establishmentFavorited_id !== establishmentFavorited_id) {
+    if (favorite.company_id !== parseInt(company_id)) {
       return response.status(401).json({ error: "Não autorizado" });
     }
     await connection("favorites").where("id", id).delete();
-
     return response.status(204).send();
   },
 };

@@ -14,6 +14,7 @@ import InputModal from "../../components/InputModal";
 import {
   ScrollView,
   Container,
+  Content,
   ImageContainer,
   ScrollViewHorizontal,
   Image,
@@ -54,17 +55,17 @@ export default function NewServices() {
   const params = route.params;
 
   const [establishments, setEstablishments] = useState();
-  const [loadServices, setLoadServices] = useState();
+  const [loadServices, setLoadServices] = useState([]);
 
   const [service, setService] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     api
-      .get("/services", {
+      .get(`/services`, {
         headers: {
           Token: `Bearer ${token}`,
-          Authorization: establishment.id,
+          Authorization: params.id,
         },
       })
       .then((response) => {
@@ -74,7 +75,7 @@ export default function NewServices() {
 
   useEffect(() => {
     api
-      .get(`/newEstablishments/${params.id}`, {
+      .get(`/company/${params.id}`, {
         headers: {
           Token: `Bearer ${token}`,
           // Authorization: user.id,
@@ -84,8 +85,6 @@ export default function NewServices() {
         setEstablishments(response.data);
       });
   }, [params.id]);
-
-  console.log(loadServices);
 
   if (!establishments) {
     return <Title>Carregando...</Title>;
@@ -104,15 +103,13 @@ export default function NewServices() {
   async function handleAddServices() {
     await api.post(
       "/services",
-      { service },
+      { service: service, company_id: params.id },
       {
         headers: {
           Token: `Bearer ${token}`,
-          Authorization: establishment.id,
         },
       }
     );
-    console.log(handleAddServices);
     navigation.navigate("NewServices");
   }
 
@@ -122,8 +119,8 @@ export default function NewServices() {
         <Headers title="Detalhes do Estabelecimento" />
         {establishments.map((establishment) => {
           return (
-            <>
-              <ImageContainer key={establishment.id}>
+            <Content key={establishment.id}>
+              <ImageContainer>
                 <ScrollViewHorizontal>
                   <Image
                     source={{
@@ -207,7 +204,7 @@ export default function NewServices() {
                       icon="settings"
                       value={service}
                       onChangeText={setService}
-                      autoCapitalize="true"
+                      // autoCapitalize="true"
                     />
                     {/* </ContainerInput> */}
 
@@ -257,7 +254,7 @@ export default function NewServices() {
                   </ScheduleItem>
                 )}
               </ScheduleContainer>
-            </>
+            </Content>
           );
         })}
       </ScrollView>

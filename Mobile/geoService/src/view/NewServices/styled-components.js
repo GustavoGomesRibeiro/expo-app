@@ -8,6 +8,8 @@ export const Container = styled.SafeAreaView`
 
 export const ScrollView = styled.ScrollView``;
 
+export const Content = styled.View``;
+
 export const ImageContainer = styled.View``;
 
 export const ScrollViewHorizontal = styled.ScrollView.attrs(() => ({
@@ -34,8 +36,10 @@ export const Title = styled.Text`
 `;
 
 export const AddService = styled.TouchableOpacity`
-  margin-top: 16px;
+  /* margin-top: 16px;
+  flex-direction: row; */
   flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export const Description = styled.Text`

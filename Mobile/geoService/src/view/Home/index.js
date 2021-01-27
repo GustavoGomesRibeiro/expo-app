@@ -13,8 +13,6 @@ import {
 export default function Home() {
   const { signOut, user, establishment, token } = useContext(Contextapi);
 
-  console.log(user, establishment, token, "usuario esta sendo passado?");
-
   return (
     <Container>
       <Context>

@@ -4,7 +4,7 @@ module.exports = {
   async index(request, response) {
     const establishment_id = request.headers.authorization;
 
-    const listEstablishments = await connection("newEstablishments")
+    const listEstablishments = await connection("company")
       .where("establishment_id", establishment_id)
       .select("*");
 
@@ -14,10 +14,7 @@ module.exports = {
   async show(request, response) {
     const { id } = request.params;
 
-    const listEstablishment = await connection("newEstablishments").where(
-      "id",
-      id
-    );
+    const listEstablishment = await connection("company").where("id", id);
     return response.json(listEstablishment);
   },
 };

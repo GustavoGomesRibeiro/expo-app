@@ -50,18 +50,19 @@ export default function Details() {
 
   const [services, setServices] = useState();
   const [establishments, setEstablishments] = useState();
+  const [images, setImages] = useState([]);
   const [isFavorite, setIsFavorite] = useState([]);
-  const [favorite, setFavorite] = useState(true);
+  // const [favorite, setFavorite] = useState(true);
   const params = route.params;
 
   const message = `Olá ${params.name}, gostaria de avaliar o valor dos serviços, msg teste`;
 
   useEffect(() => {
     async function loadServices() {
-      const response = await api.get("/services", {
+      const response = await api.get(`/services`, {
         headers: {
           Token: `Bearer ${token}`,
-          Authorization: user.id,
+          Authorization: params.id,
         },
       });
       setServices(response.data);
@@ -69,7 +70,7 @@ export default function Details() {
     loadServices();
 
     async function loadEstablishment() {
-      const response = await api.get(`/newEstablishments/${params.id}`, {
+      const response = await api.get(`/company/${params.id}`, {
         headers: {
           Token: `Bearer ${token}`,
         },
@@ -78,11 +79,21 @@ export default function Details() {
     }
     loadEstablishment();
 
+    async function loadImages() {
+      const response = await api.get(`/images`, {
+        headers: {
+          Token: `Bearer ${token}`,
+        },
+      });
+      setImages(response.data);
+    }
+    loadImages();
+
     async function loadFavorites() {
       const response = await api.get(`/favoriteEstablishments`, {
         headers: {
           Token: `Bearer ${token}`,
-          Authorization: user.id,
+          Authorization: params.id,
         },
       });
       setIsFavorite(response.data);
@@ -117,11 +128,13 @@ export default function Details() {
   async function handleAddToFavorites() {
     await api.post(
       "/favoriteEstablishments",
-      { favorite },
+      {
+        user_id: user.id,
+        company_id: params.id,
+      },
       {
         headers: {
           Token: `Bearer ${token}`,
-          Authorization: user.id,
         },
       }
     );
@@ -131,7 +144,7 @@ export default function Details() {
     await api.delete(`/favoriteEstablishments/${id}`, {
       headers: {
         Token: `Bearer ${token}`,
-        Authorization: user.id,
+        Authorization: params.id,
       },
     });
     setIsFavorite(isFavorite.filter((item) => item.id !== id));
@@ -146,12 +159,11 @@ export default function Details() {
             <Content key={establishment.id}>
               <ImageContainer>
                 <ScrollViewHorizontal>
-                  <Image
-                    source={{
-                      uri:
-                        "https://fmnova.com.br/images/noticias/safe_image.jpg",
-                    }}
-                  />
+                  {images.map((image) => {
+                    return (
+                      <Image key={image.id} source={{ uri: image.path }} />
+                    );
+                  })}
                 </ScrollViewHorizontal>
               </ImageContainer>
 
@@ -193,8 +205,8 @@ export default function Details() {
               <DetailsContainer>
                 <Title>Nossos Serviços</Title>
                 <AddService>
-                  {services.length ? (
-                    services.map((item) => {
+                  {services.map((item) => {
+                    if (services.length) {
                       return (
                         <Style key={item.id}>
                           <DescriptionService>
@@ -202,10 +214,12 @@ export default function Details() {
                           </DescriptionService>
                         </Style>
                       );
-                    })
-                  ) : (
-                    <Description>Sem serviços cadastrados</Description>
-                  )}
+                    } else {
+                      return (
+                        <Description>Sem serviços cadastrados</Description>
+                      );
+                    }
+                  })}
                 </AddService>
               </DetailsContainer>
 
@@ -239,54 +253,36 @@ export default function Details() {
                   </ScheduleItem>
                 )}
               </ScheduleContainer>
+              <Footer>
+                <ContainerButtons>
+                  {isFavorite.length ? (
+                    isFavorite.reduce((item) => {
+                      return (
+                        <ButtonUnFavorite
+                          onPress={() => handleDeleteToFavorites(item.id)}
+                        >
+                          <Ionicons
+                            name="md-heart-dislike"
+                            size={24}
+                            color="#fff"
+                          />
+                        </ButtonUnFavorite>
+                      );
+                    })
+                  ) : (
+                    <ButtonFavorite onPress={handleAddToFavorites}>
+                      <FontAwesome name="heart" size={24} color="#fff" />
+                    </ButtonFavorite>
+                  )}
+                  <ButtonWhatsApp onPress={sendWhatsapp}>
+                    <FontAwesome name="whatsapp" size={24} color="#FFF" />
+                    <Contact>Entrar em contato</Contact>
+                  </ButtonWhatsApp>
+                </ContainerButtons>
+              </Footer>
             </Content>
           );
         })}
-
-        <Footer>
-          <ContainerButtons>
-            {isFavorite.length ? (
-              isFavorite.reduce((item) => {
-                return (
-                  <Switch
-                    thumbColor="#fff"
-                    trackColor={{ false: "#ccc", true: "#39CC83" }}
-                    value={favorite}
-                    onPress={setFavorite}
-                    // favorited={}
-                  >
-                    <ButtonUnFavorite
-                      onPress={() => handleDeleteToFavorites(item.id)}
-                    >
-                      <Ionicons
-                        name="md-heart-dislike"
-                        size={24}
-                        color="#fff"
-                      />
-                    </ButtonUnFavorite>
-                  </Switch>
-                );
-              })
-            ) : (
-              <Switch
-                thumbColor="#fff"
-                trackColor={{ false: "#ccc", true: "#39CC83" }}
-                value={favorite}
-                onPress={setFavorite}
-                // favorited={}
-              >
-                <ButtonFavorite onPress={handleAddToFavorites}>
-                  <FontAwesome name="heart" size={24} color="#fff" />
-                </ButtonFavorite>
-              </Switch>
-            )}
-
-            <ButtonWhatsApp onPress={sendWhatsapp}>
-              <FontAwesome name="whatsapp" size={24} color="#FFF" />
-              <Contact>Entrar em contato</Contact>
-            </ButtonWhatsApp>
-          </ContainerButtons>
-        </Footer>
       </ScrollView>
     </Container>
   );

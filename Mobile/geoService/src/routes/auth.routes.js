@@ -8,7 +8,7 @@ import { FontAwesome5, FontAwesome } from "react-native-vector-icons";
 import Home from "../view/Home";
 import Search from "../view/Search";
 import Add from "../view/Add";
-import NewEstablishment from "../view/NewEstablishment";
+import Company from "../view/Company";
 import Favorites from "../view/Favorites";
 import Profile from "../view/Profile";
 import Details from "../view/Details";
@@ -159,7 +159,7 @@ export default function AuthRouter() {
       />
       {/* <Stack.Screen name='MainPage' component={Menu} options={{headerShown: false}}/>
             <Stack.Screen name='Details' component={Details} options={{headerShown: false}}/>
-            <Stack.Screen name='NewEstablishment' component={NewEstablishment} options={{headerShown: false}}/> */}
+            <Stack.Screen name='Company' component={Company} options={{headerShown: false}}/> */}
     </Stack.Navigator>
   );
 }

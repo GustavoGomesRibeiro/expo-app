@@ -12,7 +12,7 @@ Rotas:
     ✔ /establishment @done(20-10-18 19:47)
       ✔ Listar os estabelecimentos @done(20-10-18 19:47)
     
-    ✔ /newEstablishments @done(20-10-18 19:47)
+    ✔ /company @done(20-10-18 19:47)
         ✔ criar um estabelecimento @done(20-10-18 19:47)
     
     
@@ -22,7 +22,7 @@ Rotas:
     ✔ Senha @done(20-10-18 19:48)
     ✔ Whatsapp @done(20-10-18 19:48)
 
-  Rota NewEstablishment:
+  Rota Company:
     ✔ Nome do estabelecimento @done(20-10-18 19:45)
     ✔ Ramo de atividade @done(20-10-18 19:45)
     ✔ WhatsApp @done(20-10-18 19:45)

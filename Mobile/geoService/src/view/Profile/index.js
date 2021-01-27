@@ -21,6 +21,7 @@ export default function Profile({ navigation }) {
   const { token, establishment } = useContext(Contextapi);
 
   const [establishments, setEstablishments] = useState([]);
+  const [services, setServices] = useState([]);
 
   const image = { uri: "https://fmnova.com.br/images/noticias/safe_image.jpg" };
 
@@ -37,7 +38,19 @@ export default function Profile({ navigation }) {
       });
   }, []);
 
-  console.log(establishments);
+  // useEffect(() => {
+  //   api
+  //     .get(`/services`, {
+  //       headers: {
+  //         Token: `Bearer ${token}`,
+  //         Authorization: establishment.id,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setServices(response.data);
+  //     });
+  // }, []);
+
   return (
     <Container>
       <Context>
@@ -67,6 +80,8 @@ export default function Profile({ navigation }) {
                       whatsapp: establishment.whatsapp,
                       latitude: establishment.latitude,
                       longitude: establishment.longitude,
+                      company_id: establishment.company_id,
+                      service: establishment.service,
                     })
                   }
                 >

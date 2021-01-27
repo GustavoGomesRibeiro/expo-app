@@ -6,7 +6,7 @@ page Details:
   ✔ Carregar os servicos criados pelo establecimentos. @done(21-01-05 20:54)
   ☐ Corrigir scroll horizontal dos detalhes.
   
-page NewEstablishment:
+page Company:
   ✔ Criacao de novos servicos @done(20-12-31 17:19)
   ✔ Listar os servicos criados. @done(20-12-31 17:19)
   ☐ Possibilidade de remover os servicos cadastrados

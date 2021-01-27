@@ -2,8 +2,8 @@ exports.up = function (knex) {
   return knex.schema.createTable("favorites", function (table) {
     table.increments("id");
 
-    table.boolean("user_id").notNullable();
-    table.string("establishmentFavorited_id").notNullable();
+    table.integer("user_id").notNullable();
+    table.integer("company_id").notNullable();
     // table.boolean("isfavorite").notNullable();
 
     table
@@ -13,9 +13,9 @@ exports.up = function (knex) {
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
     table
-      .foreign("establishmentFavorited_id")
+      .foreign("company_id")
       .references("id")
-      .inTable("establishments")
+      .inTable("company")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
   });

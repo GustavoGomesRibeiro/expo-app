@@ -35,21 +35,7 @@ import {
 
 export default function Favorites() {
   const { token, user } = useContext(Contextapi);
-
   const [establishments, setEstablishments] = useState([]);
-
-  // useEffect(() => {
-  //   api
-  //     .get(`/favoriteEstablishments`, {
-  //       headers: {
-  //         Token: `Bearer ${token}`,
-  //         Authorization: user.id,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       setEstablishments(response.data);
-  //     });
-  // }, [establishments]);
 
   useEffect(() => {
     async function loadFavorites() {
@@ -62,7 +48,7 @@ export default function Favorites() {
       setEstablishments(response.data);
     }
     loadFavorites();
-  }, []);
+  }, [establishments]);
 
   function handleOnPressGoogleMaps(establishment) {
     Linking.openURL(
@@ -90,7 +76,7 @@ export default function Favorites() {
     await api.delete(`/favoriteEstablishments/${id}`, {
       headers: {
         Token: `Bearer ${token}`,
-        Authorization: user.id,
+        Authorization: establishments.id,
       },
     });
     setEstablishments(

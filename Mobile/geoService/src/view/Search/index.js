@@ -4,11 +4,13 @@ import {
   requestPermissionsAsync,
   getCurrentPositionAsync,
 } from "expo-location";
+
+import * as Location from "expo-location";
+import * as Permissions from "expo-permissions";
+
 import { MaterialIcons } from "@expo/vector-icons";
 import api from "../../service/api";
 import Headers from "../../components/Headers";
-
-// import * as Location from "expo-location";
 
 import {
   Container,
@@ -23,33 +25,9 @@ import { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
 
 export default function Search({ navigation }) {
   const { user, token } = useContext(Contextapi);
-  console.log(user, token, "search");
 
   const [establishments, setEstablishments] = useState([]);
   const [currentRegion, setCurrentRegion] = useState(null);
-
-  // const [location, setLocation] = useState(null);
-  // const [errorMsg, setErrorMsg] = useState(null);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     let { status } = await Location.requestPermissionsAsync();
-  //     if (status !== "granted") {
-  //       setErrorMsg("Permission to access location was denied");
-  //       return;
-  //     }
-
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLocation(location);
-  //   })();
-  // }, []);
-
-  // let text = "Waiting..";
-  // if (errorMsg) {
-  //   text = errorMsg;
-  // } else if (location) {
-  //   text = JSON.stringify(location);
-  // }
 
   useEffect(() => {
     async function loadInitialPosition() {
@@ -70,11 +48,13 @@ export default function Search({ navigation }) {
     loadInitialPosition();
   }, []);
 
-  console.log(establishments);
+  function handleRegionChanged(region) {
+    setCurrentRegion(region);
+  }
 
   useEffect(() => {
     api
-      .get("/newEstablishments", {
+      .get("/company", {
         headers: {
           Token: `Bearer ${token}`,
           // Authorization: user.id,
@@ -85,18 +65,15 @@ export default function Search({ navigation }) {
       });
   }, []);
 
-  function handleRegionChanged(region) {
-    console.log(region, "alteracao de lugar do mapa");
-    setCurrentRegion(region);
-  }
-
   return (
     <Container>
       <Headers title="Localizar estabelecimentos" />
       <Map
-        provider={PROVIDER_GOOGLE}
+        // provider={PROVIDER_GOOGLE}
         onRegionChangeComplete={handleRegionChanged}
         initialRegion={currentRegion}
+        showsUserLocation
+        loadingEnabled
       >
         {establishments.map((establishment) => {
           return (

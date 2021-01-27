@@ -8,7 +8,8 @@ const controllerSessionEstablishment = require("./controllers/controllerSessionE
 const controllerRegisterUsers = require("./controllers/controllerRegisterUsers");
 const controllerRegisterEstablishment = require("./controllers/controllerRegisterEstablishment");
 const controllerService = require("./controllers/controllerService");
-const controllerNewEstablishment = require("./controllers/controllerNewEstablishment");
+const controllerCompany = require("./controllers/controllerCompany");
+const controllerImages = require("./controllers/controllerImages");
 const controllerConnections = require("./controllers/controllerConnections");
 const controllerForgotPassword = require("./controllers/controllerForgotPassword");
 const controllerFavoriteEstablishments = require("./controllers/controllerFavoriteEstablishments");
@@ -38,13 +39,9 @@ routes.use(ensureAuthenticated);
 
 //new establishments
 
-routes.get("/newEstablishments", controllerNewEstablishment.index);
-routes.get("/newEstablishments/:id", controllerNewEstablishment.show);
-routes.post(
-  "/newEstablishments",
-  upload.array("images"),
-  controllerNewEstablishment.create
-);
+routes.get("/company", controllerCompany.index);
+routes.get("/company/:id", controllerCompany.show);
+routes.post("/company", upload.array("images"), controllerCompany.create);
 
 //quantify establishments
 
@@ -54,6 +51,10 @@ routes.get("/listEstablishments", controllerQuantifyEstablishments.show);
 //favorites establishments
 
 routes.get("/favoriteEstablishments", controllerFavoriteEstablishments.index);
+routes.get(
+  "/favoriteEstablishments/:id",
+  controllerFavoriteEstablishments.show
+);
 routes.post("/favoriteEstablishments", controllerFavoriteEstablishments.create);
 routes.delete(
   "/favoriteEstablishments/:id",
@@ -63,6 +64,7 @@ routes.delete(
 //service
 
 routes.get("/services", controllerService.index);
+routes.get("/services/:id", controllerService.show);
 routes.post("/services", controllerService.create);
 routes.delete("/services/:id", controllerService.delete);
 
@@ -70,5 +72,9 @@ routes.delete("/services/:id", controllerService.delete);
 
 routes.get("/connections", controllerConnections.index);
 routes.post("/connections", controllerConnections.create);
+
+//Images
+routes.get("/images", controllerImages.index);
+routes.get("/images/:id", controllerImages.show);
 
 module.exports = routes;

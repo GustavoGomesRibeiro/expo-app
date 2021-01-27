@@ -16,12 +16,10 @@ export const ScrollViewHorizontal = styled.ScrollView.attrs(() => ({
   horizontal: true,
   showHorizontalScrollIndicator: false,
   pagingEnabled: true,
-}))`
-  /* background: #000; */
-`;
+}))``;
 
 export const Image = styled.Image`
-  width: 100%;
+  width: 500px;
   height: 240px;
   resize-mode: cover;
 `;
@@ -38,13 +36,9 @@ export const Title = styled.Text`
 export const AddService = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
-  /* flex: 1; */
 `;
 
 export const Style = styled.View`
-  /* flex-wrap: wrap; */
-  /* align-content: flex-start; */
-  /* flex: 1; */
   justify-content: center;
   align-items: center;
   width: 170px;
@@ -170,7 +164,6 @@ export const Contact = styled.Text`
 `;
 
 export const Footer = styled.View`
-  /* background-color: #fafafc; */
   padding: 24px;
   align-items: center;
 `;
@@ -181,7 +174,6 @@ export const ContainerButtons = styled.View`
 `;
 
 export const Switch = styled.Switch`
-  /* background-color: #8257e5; */
   flex: 1;
   height: 56px;
   border-radius: 8px;
@@ -222,5 +214,4 @@ export const ButtonWhatsApp = styled(RectButton)`
   justify-content: center;
   align-items: center;
   padding: 15px;
-  /* margin-right: 8px; */
 `;

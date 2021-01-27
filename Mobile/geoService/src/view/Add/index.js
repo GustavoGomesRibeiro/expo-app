@@ -9,7 +9,7 @@ export default function Add() {
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
 
   function handleNextStep() {
-    navigation.navigate("NewEstablishment", { position });
+    navigation.navigate("Company", { position });
   }
 
   function handleSelectPostion(event) {

@@ -9,7 +9,7 @@ import Home from "../view/Home";
 import Add from "../view/Add";
 import Favorites from "../view/Favorites";
 import Profile from "../view/Profile";
-import NewEstablishment from "../view/NewEstablishment";
+import Company from "../view/Company";
 import Details from "../view/Details";
 import NewServices from "../view/NewServices";
 
@@ -109,8 +109,8 @@ export default function EstablishmentRouter() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="NewEstablishment"
-        component={NewEstablishment}
+        name="Company"
+        component={Company}
         options={{ headerShown: false }}
       />
       <Stack.Screen

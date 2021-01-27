@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Gustavo\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-native-modal
+  C:\Program Files\nodejs\node.exe C:\Users\Gustavo\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add expo-permissions@~9.3.0
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python39\Scripts\;C:\Python39\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\ProgramData\chocolatey\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\dotnet\;C:\Users\Gustavo\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Gustavo\AppData\Local\Microsoft\WindowsApps;E:\Microsoft VS Code\bin;C:\Program Files\Azure Data Studio\bin;C:\Users\Gustavo\AppData\Roaming\npm;C:\Users\Gustavo\.dotnet\tools;C:\Users\Gustavo\AppData\Roaming\nvm;C:\Program Files\nodejs
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, lstat 'C:\Users\Gustavo\Desktop\Projects\geoServices\Mobile\geoService\node_modules\bindings'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\Gustavo\Desktop\Projects\geoServices\Mobile\geoService\node_modules\@babel\plugin-syntax-jsx\node_modules\@babel\core\node_modules\.bin'
 
 npm manifest: 
   {
@@ -30,6 +30,7 @@ npm manifest:
       "@expo-google-fonts/archivo": "^0.1.0",
       "@expo-google-fonts/poppins": "^0.1.0",
       "@react-native-community/async-storage": "^1.12.0",
+      "@react-native-community/geolocation": "^2.0.2",
       "@react-native-community/masked-view": "^0.1.10",
       "@react-native-picker/picker": "^1.9.8",
       "@react-navigation/bottom-tabs": "^5.9.0",
@@ -46,6 +47,7 @@ npm manifest:
       "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.0.tar.gz",
       "react-native-gesture-handler": "1.7.0",
       "react-native-maps": "0.27.1",
+      "react-native-modal": "^11.6.1",
       "react-native-reanimated": "^1.13.1",
       "react-native-safe-area-context": "3.1.4",
       "react-native-screens": "2.10.1",
@@ -1363,6 +1365,11 @@ Lockfile:
       strip-ansi "^5.2.0"
       sudo-prompt "^9.0.0"
       wcwidth "^1.0.1"
+  
+  "@react-native-community/geolocation@^2.0.2":
+    version "2.0.2"
+    resolved "https://registry.yarnpkg.com/@react-native-community/geolocation/-/geolocation-2.0.2.tgz#ba8b40f560ead8d014740d1cdea970b33f19312e"
+    integrity sha512-tTNXRCgnhJBu79mulQwzabXRpDqfh/uaDqfHVpvF0nX4NTpolpy6mvTRiFg7eWFPGRArsnZz1EYp6rHfJWGgEA==
   
   "@react-native-community/masked-view@^0.1.10":
     version "0.1.10"
@@ -4844,6 +4851,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
     integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
   
+  react-native-animatable@1.3.3:
+    version "1.3.3"
+    resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.3.tgz#a13a4af8258e3bb14d0a9d839917e9bb9274ec8a"
+    integrity sha512-2ckIxZQAsvWn25Ho+DK3d1mXIgj7tITkrS4pYDvx96WyOttSvzzFeQnM2od0+FUMzILbdHDsDEqZvnz1DYNQ1w==
+    dependencies:
+      prop-types "^15.7.2"
+  
   react-native-gesture-handler@1.7.0:
     version "1.7.0"
     resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.7.0.tgz#0ef74a5ba836832e497dc49eb1ce58baa6c617e5"
@@ -4863,6 +4877,14 @@ Lockfile:
     version "0.27.1"
     resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.27.1.tgz#2f10cd417bb2fd938c9e015b1c9b6d9b1a44b97f"
     integrity sha512-HygBkZBecTnIVRYrSiLRAvu4OmXOYso/A7c6Cy73HkOh9CgGV8Ap5eBea24tvmFGptjj5Hg8AJ94/YbmWK1Okw==
+  
+  react-native-modal@^11.6.1:
+    version "11.6.1"
+    resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-11.6.1.tgz#6162a39731860fb3b6e8304059f72dc0a961f9fd"
+    integrity sha512-Xsd79nuBvbLOYwpRuur4btwJFQ3WkV9zp5LbAREidUtjl/Ajlp4QbNBx888FOPjo+EpOO3+U0riCRqs1dkdIzQ==
+    dependencies:
+      prop-types "^15.6.2"
+      react-native-animatable "1.3.3"
   
   react-native-reanimated@^1.13.1:
     version "1.13.1"
