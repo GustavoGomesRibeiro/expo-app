@@ -8,6 +8,7 @@ const controllerSessionEstablishment = require("./controllers/controllerSessionE
 const controllerRegisterUsers = require("./controllers/controllerRegisterUsers");
 const controllerRegisterEstablishment = require("./controllers/controllerRegisterEstablishment");
 const controllerService = require("./controllers/controllerService");
+const controllerSearch = require("./controllers/controllerSearch");
 const controllerCompany = require("./controllers/controllerCompany");
 const controllerImages = require("./controllers/controllerImages");
 const controllerConnections = require("./controllers/controllerConnections");
@@ -67,6 +68,9 @@ routes.get("/services", controllerService.index);
 routes.get("/services/:id", controllerService.show);
 routes.post("/services", controllerService.create);
 routes.delete("/services/:id", controllerService.delete);
+
+//search
+routes.get("/search", controllerSearch.index);
 
 //connections
 

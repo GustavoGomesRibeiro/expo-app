@@ -36,6 +36,7 @@ import {
 export default function Favorites() {
   const { token, user } = useContext(Contextapi);
   const [establishments, setEstablishments] = useState([]);
+  const [services, setServices] = useState([]);
 
   useEffect(() => {
     async function loadFavorites() {
@@ -49,6 +50,19 @@ export default function Favorites() {
     }
     loadFavorites();
   }, [establishments]);
+
+  useEffect(() => {
+    api
+      .get(`/services`, {
+        headers: {
+          Token: `Bearer ${token}`,
+          Authorization: user.id,
+        },
+      })
+      .then((response) => {
+        setServices(response.data);
+      });
+  }, []);
 
   function handleOnPressGoogleMaps(establishment) {
     Linking.openURL(
@@ -106,12 +120,13 @@ export default function Favorites() {
                   <ProfileFavoritedInfo>
                     <TextName> {establishment.name} </TextName>
                     <ContainerService>
-                      <Style>
-                        <TextServices>Mecanico</TextServices>
-                      </Style>
-                      <Style>
-                        <TextServices>Mecanico</TextServices>
-                      </Style>
+                      {services.map((item) => {
+                        return (
+                          <Style key={item.id}>
+                            <TextServices>{item.service}</TextServices>
+                          </Style>
+                        );
+                      })}
                     </ContainerService>
                   </ProfileFavoritedInfo>
                 </ProfileFavorited>

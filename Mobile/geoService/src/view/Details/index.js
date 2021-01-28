@@ -52,7 +52,8 @@ export default function Details() {
   const [establishments, setEstablishments] = useState();
   const [images, setImages] = useState([]);
   const [isFavorite, setIsFavorite] = useState([]);
-  // const [favorite, setFavorite] = useState(true);
+  const [favorite, setFavorite] = useState([]);
+
   const params = route.params;
 
   const message = `Olá ${params.name}, gostaria de avaliar o valor dos serviços, msg teste`;
@@ -88,19 +89,22 @@ export default function Details() {
       setImages(response.data);
     }
     loadImages();
+  }, [params.id]);
 
-    async function loadFavorites() {
-      const response = await api.get(`/favoriteEstablishments`, {
+  useEffect(() => {
+    api
+      .get(`/favoriteEstablishments`, {
         headers: {
           Token: `Bearer ${token}`,
           Authorization: params.id,
         },
+      })
+      .then((response) => {
+        setIsFavorite(response.data);
       });
-      setIsFavorite(response.data);
-    }
-    loadFavorites();
-  }, [params.id, isFavorite]);
+  }, [favorite]);
 
+  // console.log(isFavorite, "w");
   if (!establishments) {
     return <Title>Carregando...</Title>;
   }
@@ -126,7 +130,7 @@ export default function Details() {
   }
 
   async function handleAddToFavorites() {
-    await api.post(
+    const response = await api.post(
       "/favoriteEstablishments",
       {
         user_id: user.id,
@@ -138,6 +142,7 @@ export default function Details() {
         },
       }
     );
+    setFavorite(response.data);
   }
 
   async function handleDeleteToFavorites(id) {
@@ -205,8 +210,8 @@ export default function Details() {
               <DetailsContainer>
                 <Title>Nossos Serviços</Title>
                 <AddService>
-                  {services.map((item) => {
-                    if (services.length) {
+                  {services.length ? (
+                    services.map((item) => {
                       return (
                         <Style key={item.id}>
                           <DescriptionService>
@@ -214,12 +219,10 @@ export default function Details() {
                           </DescriptionService>
                         </Style>
                       );
-                    } else {
-                      return (
-                        <Description>Sem serviços cadastrados</Description>
-                      );
-                    }
-                  })}
+                    })
+                  ) : (
+                    <Description>Sem serviços cadastrados</Description>
+                  )}
                 </AddService>
               </DetailsContainer>
 

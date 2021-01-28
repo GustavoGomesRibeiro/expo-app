@@ -157,9 +157,6 @@ export default function AuthRouter() {
         component={LoginEstablishment}
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen name='MainPage' component={Menu} options={{headerShown: false}}/>
-            <Stack.Screen name='Details' component={Details} options={{headerShown: false}}/>
-            <Stack.Screen name='Company' component={Company} options={{headerShown: false}}/> */}
     </Stack.Navigator>
   );
 }

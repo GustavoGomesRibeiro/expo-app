@@ -72,16 +72,6 @@ const Menu = () => (
         },
       }}
     />
-    {/* <Tab.Screen
-      name="Favorites"
-      component={Favorites}
-      options={{
-        tabBarLabel: "Favoritos",
-        tabBarIcon: ({ color, size }) => {
-          return <FontAwesome name="heart" size={size} color={color} />;
-        },
-      }}
-    /> */}
     <Tab.Screen
       name="Profile"
       component={Profile}

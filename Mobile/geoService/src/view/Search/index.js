@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Contextapi } from "../../hooks/authContext";
+import { useNavigation } from "@react-navigation/native";
+
 import {
   requestPermissionsAsync,
   getCurrentPositionAsync,
 } from "expo-location";
 
-import * as Location from "expo-location";
-import * as Permissions from "expo-permissions";
-
 import { MaterialIcons } from "@expo/vector-icons";
 import api from "../../service/api";
 import Headers from "../../components/Headers";
+import { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
+import { KeyboardAvoidingView } from "react-native";
 
 import {
   Container,
@@ -21,12 +22,15 @@ import {
   FooterTextInput,
   FooterButton,
 } from "./styled-components";
-import { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
 
 export default function Search({ navigation }) {
   const { user, token } = useContext(Contextapi);
+  const navigationToResult = useNavigation();
 
   const [establishments, setEstablishments] = useState([]);
+  const [service, setService] = useState("");
+  const [serviceFiltered, setServiceFiltered] = useState([]);
+
   const [currentRegion, setCurrentRegion] = useState(null);
 
   useEffect(() => {
@@ -48,22 +52,49 @@ export default function Search({ navigation }) {
     loadInitialPosition();
   }, []);
 
-  function handleRegionChanged(region) {
-    setCurrentRegion(region);
-  }
-
   useEffect(() => {
     api
       .get("/company", {
         headers: {
           Token: `Bearer ${token}`,
-          // Authorization: user.id,
         },
       })
       .then((response) => {
         setEstablishments(response.data);
       });
   }, []);
+
+  function handleRegionChanged(region) {
+    setCurrentRegion(region);
+  }
+
+  async function handleFilter() {
+    const response = await api.get(`/search`, {
+      headers: {
+        Token: `Bearer ${token}`,
+      },
+      params: {
+        service,
+      },
+    });
+
+    setServiceFiltered(response.data);
+    {
+      serviceFiltered.map((service) => {
+        navigationToResult.navigate("Result", {
+          id: service.id,
+          name: service.name,
+          industry: service.industry,
+          latitude: service.latitude,
+          longitude: service.longitude,
+          service: service.service,
+          opening_hours: service.opening_hours,
+          open_on_weekends: service.open_on_weekends,
+          whatsapp: service.whatsapp,
+        });
+      });
+    }
+  }
 
   return (
     <Container>
@@ -109,17 +140,21 @@ export default function Search({ navigation }) {
         })}
       </Map>
 
-      <Footer>
-        <FooterTextInput
-          placeholder="Buscar por estabelecimentos"
-          placeholderTextColor="#999"
-          autoCapitalize="words"
-          autoCorrect={false}
-        />
-        <FooterButton onPress={() => {}}>
-          <MaterialIcons name="my-location" size={20} color="#FFF" />
-        </FooterButton>
-      </Footer>
+      <KeyboardAvoidingView behavior="position">
+        <Footer>
+          <FooterTextInput
+            placeholder="Buscar por estabelecimentos"
+            placeholderTextColor="#999"
+            autoCapitalize="words"
+            autoCorrect={false}
+            value={service}
+            onChangeText={setService}
+          />
+          <FooterButton onPress={handleFilter}>
+            <MaterialIcons name="my-location" size={32} color="#FFF" />
+          </FooterButton>
+        </Footer>
+      </KeyboardAvoidingView>
     </Container>
   );
 }

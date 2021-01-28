@@ -2,17 +2,20 @@ import styled from "styled-components/native";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  background: #000;
+  background: #f0f0f7;
 `;
 
-export const Context = styled.ScrollView``;
+export const Context = styled.ScrollView`
+  margin-top: -150px;
+  padding: 16px;
+`;
 
 export const Title = styled.Text`
   color: #fff;
   margin-top: 24px;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 26px;
-  font-family: Archivo_700Bold;
+  font-family: Poppins_600SemiBold;
   max-width: 340px;
   margin-left: 30px;
   /* margin-vertical: 100px; */
@@ -25,16 +28,6 @@ export const Content = styled.View`
   justify-content: center;
 `;
 export const ProfileContainer = styled.View``;
-// export const Image = styled.View`
-//   /* background: #ccc;
-//   width: 100px;
-//   height: 100px; */
-// `;
-// export const Img = styled.Image`
-//   width: 100%;
-//   height: 240px;
-//   resize-mode: cover;
-// `;
 
 export const ImageBackground = styled.ImageBackground`
   width: 100%;
@@ -59,4 +52,28 @@ export const Establishment = styled.Text`
   line-height: 30px;
   font-family: Poppins_600SemiBold;
   /* align-items: center; */
+`;
+
+export const ImageProfile = styled.View`
+  /* margin-top: 150px; */
+  /* justify-content: center; */
+  align-items: center;
+`;
+export const ProfileImg = styled.Image`
+  width: 500px;
+  resize-mode: contain;
+  margin-top: -120px;
+`;
+export const MessageProfile = styled.Text`
+  margin-top: -100px;
+  color: #000;
+  font-size: 32px;
+  font-family: "Archivo_400Regular";
+  line-height: 37px;
+`;
+
+export const Bold = styled.Text`
+  color: #000;
+  font-family: "Archivo_700Bold";
+  line-height: 37px;
 `;

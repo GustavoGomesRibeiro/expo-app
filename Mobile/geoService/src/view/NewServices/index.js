@@ -6,6 +6,7 @@ import { Contextapi } from "../../hooks/authContext";
 import { Linking } from "react-native";
 import Modal from "react-native-modal";
 import { useNavigation } from "@react-navigation/native";
+import { Alert } from "react-native";
 
 import api from "../../service/api";
 import Headers from "../../components/Headers";
@@ -56,6 +57,8 @@ export default function NewServices() {
 
   const [establishments, setEstablishments] = useState();
   const [loadServices, setLoadServices] = useState([]);
+  const [newService, setNewService] = useState("");
+  const [images, setImages] = useState([]);
 
   const [service, setService] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -71,19 +74,28 @@ export default function NewServices() {
       .then((response) => {
         setLoadServices(response.data);
       });
-  }, [loadServices]);
+  }, [newService]);
 
   useEffect(() => {
-    api
-      .get(`/company/${params.id}`, {
+    async function loadCompany() {
+      const response = await api.get(`/company/${params.id}`, {
         headers: {
           Token: `Bearer ${token}`,
-          // Authorization: user.id,
         },
-      })
-      .then((response) => {
-        setEstablishments(response.data);
       });
+      setEstablishments(response.data);
+    }
+    loadCompany();
+
+    async function loadImages() {
+      const response = await api.get(`/images`, {
+        headers: {
+          Token: `Bearer ${token}`,
+        },
+      });
+      setImages(response.data);
+    }
+    loadImages();
   }, [params.id]);
 
   if (!establishments) {
@@ -101,7 +113,7 @@ export default function NewServices() {
   }
 
   async function handleAddServices() {
-    await api.post(
+    const response = await api.post(
       "/services",
       { service: service, company_id: params.id },
       {
@@ -110,7 +122,10 @@ export default function NewServices() {
         },
       }
     );
-    navigation.navigate("NewServices");
+
+    setNewService(response.data);
+    Alert.alert("Serviço cadastrado com sucesso!");
+    // navigation.navigate("NewServices");
   }
 
   return (
@@ -122,12 +137,11 @@ export default function NewServices() {
             <Content key={establishment.id}>
               <ImageContainer>
                 <ScrollViewHorizontal>
-                  <Image
-                    source={{
-                      uri:
-                        "https://fmnova.com.br/images/noticias/safe_image.jpg",
-                    }}
-                  />
+                  {images.map((image) => {
+                    return (
+                      <Image key={image.id} source={{ uri: image.path }} />
+                    );
+                  })}
                 </ScrollViewHorizontal>
               </ImageContainer>
 
@@ -175,6 +189,7 @@ export default function NewServices() {
                     color="#1bd163"
                     onPress={toggleModalVisible}
                   />
+
                   {loadServices.length ? (
                     loadServices.map((item) => {
                       return (
@@ -188,8 +203,8 @@ export default function NewServices() {
                   ) : (
                     <EvilIcons
                       name="plus"
-                      size={36}
-                      color="#1bd163"
+                      size={0}
+                      color="#f9fafc"
                       onPress={toggleModalVisible}
                     />
                   )}
@@ -204,7 +219,8 @@ export default function NewServices() {
                       icon="settings"
                       value={service}
                       onChangeText={setService}
-                      // autoCapitalize="true"
+                      autoCapitalize="words"
+                      autoCorrect={false}
                     />
                     {/* </ContainerInput> */}
 

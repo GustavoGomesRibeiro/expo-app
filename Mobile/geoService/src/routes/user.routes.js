@@ -10,6 +10,7 @@ import Search from "../view/Search";
 import Favorites from "../view/Favorites";
 // import Profile from '../view/Profile';
 import Details from "../view/Details";
+import Result from "../view/Result";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -78,15 +79,6 @@ const Menu = () => (
         },
       }}
     />
-    {/* <Tab.Screen name='Profile' component={Profile} options={{
-            tabBarLabel: 'Perfil',
-            tabBarIcon: ({ color, size}) => {
-                return (
-                    <FontAwesome5 name='user-alt' size={size} color={color}/>
-                )
-            }
-            }}
-        /> */}
   </Tab.Navigator>
 );
 
@@ -101,6 +93,11 @@ export default function UserRouter() {
       <Stack.Screen
         name="Details"
         component={Details}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Result"
+        component={Result}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

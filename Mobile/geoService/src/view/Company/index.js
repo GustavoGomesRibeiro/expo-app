@@ -46,7 +46,6 @@ export default function Company() {
   const [open_on_weekends, setOpenOnWeekends] = useState(true);
   const [images, setImages] = useState([]);
 
-  console.log(params, "vaasdasd");
   async function handleCreateEstablishment() {
     const { latitude, longitude } = params.position;
     const data = new FormData();

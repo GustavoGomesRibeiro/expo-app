@@ -21,7 +21,7 @@ export const ScrollViewHorizontal = styled.ScrollView.attrs(() => ({
 `;
 
 export const Image = styled.Image`
-  width: 100%;
+  width: 500px;
   height: 240px;
   resize-mode: cover;
 `;
