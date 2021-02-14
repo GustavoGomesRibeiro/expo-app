@@ -1,10 +1,10 @@
 Tela de usuario:
   page Home:
-    ☐ Mostrar ultimos estabelecimentos acessados(cancelado).
+    ☐ Mostrar dicas a respeito do app???.
 
   page Search:
       ✔ Listar todos os estabelecimentos cadastrados @done(21-01-27 18:26)
-      ☐ Poder pesquisar por serviços desejados.
+      ✔ Poder pesquisar por serviços desejados. @done(21-01-28 15:43)
 
   page Details:
     ✔ Carregas dados do estabelecimento @done(21-01-27 18:27)
@@ -12,7 +12,7 @@ Tela de usuario:
     ✔ Funcionalidade no botão ver a rota @done(21-01-27 18:27)
     ✔ Carregar os servicos criados pelo establecimentos. @done(21-01-05 20:54)
     ✔ Corrigir scroll horizontal dos detalhes. @done(21-01-27 18:21)
-    ☐ Funcionalidade no botão Favoritar
+    ✔ Funcionalidade no botão Favoritar @done(21-02-07 14:19)
 
     page Favorites:
       ✔ Listar os estabelecimentos favoritados @done(21-01-27 18:28)

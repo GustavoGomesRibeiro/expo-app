@@ -29,14 +29,8 @@ export const Content = styled.View`
 `;
 export const ProfileContainer = styled.View``;
 
-export const ImageBackground = styled.ImageBackground`
-  width: 100%;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  resize-mode: cover;
-`;
 export const ButtonDetails = styled.TouchableOpacity``;
+
 export const ContentEstablishment = styled.View`
   width: 350px;
   height: 190px;
@@ -46,6 +40,15 @@ export const ContentEstablishment = styled.View`
   justify-content: center;
   margin-top: 25px;
 `;
+
+export const ImageBackground = styled.ImageBackground`
+  width: 100%;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  resize-mode: cover;
+`;
+
 export const Establishment = styled.Text`
   color: #fff;
   font-size: 26px;

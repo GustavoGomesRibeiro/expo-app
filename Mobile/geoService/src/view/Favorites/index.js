@@ -86,15 +86,17 @@ export default function Favorites() {
     });
   }
 
-  async function handleRemoveFavorite(id) {
-    await api.delete(`/favoriteEstablishments/${id}`, {
+  async function handleRemoveFavorite(establishment) {
+    await api.delete(`/favoriteEstablishments/${establishment.id}`, {
       headers: {
         Token: `Bearer ${token}`,
-        Authorization: establishments.id,
+        // Authorization: establishment.id,
       },
     });
     setEstablishments(
-      establishments.filter((establishment) => establishment.id !== id)
+      establishments.filter(
+        (establishment) => establishment.id !== establishment.id
+      )
     );
   }
 
@@ -163,7 +165,7 @@ export default function Favorites() {
                 <Footer>
                   <ContainerButtons>
                     <ButtonFavorite
-                      onPress={() => handleRemoveFavorite(establishment.id)}
+                      onPress={() => handleRemoveFavorite(establishment)}
                     >
                       <Ionicons
                         name="md-heart-dislike"

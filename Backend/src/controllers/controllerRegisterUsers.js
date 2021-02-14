@@ -1,37 +1,35 @@
-const connection = require('../database/connection');
+const connection = require("../database/connection");
 
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 module.exports = {
-    async  index  (request, response){
-        const user = await connection('users').select('*');
+  async index(request, response) {
+    const user = await connection("users").select("*");
 
-        return response.json({user});
-    },
-    
-    async  create  (request, response){
-        const { avatar, email, username, password } = request.body;
+    return response.json({ user });
+  },
 
-        const checkUser = await connection('users')
-        .where('username', username)
-        .where('email', email)
-        .first();
+  async create(request, response) {
+    const { avatar, email, username, password } = request.body;
 
-        if (checkUser){
-            throw new Error('Username or Email address already used.')
-        }
+    const checkUser = await connection("users")
+      .where("username", username)
+      .where("email", email)
+      .first();
 
-        const hashedPassword = await bcrypt.hash(password, 8);
+    if (checkUser) {
+      throw new Error("Username or Email address already used.");
+    }
 
-        await connection('users').insert({
-            avatar,
-            email,
-            username,
-            password: hashedPassword,
-        });
+    const hashedPassword = await bcrypt.hash(password, 8);
 
-        console.log();
+    await connection("users").insert({
+      avatar,
+      email,
+      username,
+      password: hashedPassword,
+    });
 
-        return response.json({avatar,email,username});
-    } 
-}
+    return response.json({ avatar, email, username });
+  },
+};

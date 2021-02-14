@@ -63,6 +63,7 @@ export const Register = styled.TouchableOpacity`
   align-items: center;
   height: 56px;
   margin-top: 32px;
+  margin-bottom: 32px;
 `;
 
 export const ButtonText = styled.Text`

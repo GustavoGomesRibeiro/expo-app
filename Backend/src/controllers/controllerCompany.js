@@ -4,8 +4,6 @@ const yup = require("yup");
 module.exports = {
   async index(request, response) {
     const listEstablishments = await connection("company").select("*");
-    // .join("images", "images.id", "=", "company.id")
-    // .select(["company.*", "images.path"]);
 
     return response.json(listEstablishments);
   },
@@ -61,26 +59,20 @@ module.exports = {
       abortEarly: false,
     });
 
-    const [id] = await connection("company").insert(data);
+    const [id] = await connection("company").returning("id").insert(data);
 
     const requestImages = request.files;
-    console.log(request.files);
 
     const images = requestImages.map((image) => {
       return { path: image.key, path: image.location };
     });
 
-    const { company_id } = request.body;
-    // const company_id = request.headers.authorization;
-
-    let img;
     for (const image of images) {
       const response = await connection("images").insert({
         path: image.path,
         url: image.location,
-        company_id,
+        company_id: id,
       });
-      // img.push(response);
     }
 
     return response.status(201).json({ id });

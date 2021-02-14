@@ -11,7 +11,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import api from "../../service/api";
 import Headers from "../../components/Headers";
 import { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
-import { KeyboardAvoidingView } from "react-native";
+import { Alert, KeyboardAvoidingView } from "react-native";
 
 import {
   Container,
@@ -69,30 +69,39 @@ export default function Search({ navigation }) {
   }
 
   async function handleFilter() {
-    const response = await api.get(`/search`, {
-      headers: {
-        Token: `Bearer ${token}`,
-      },
-      params: {
-        service,
-      },
-    });
-
-    setServiceFiltered(response.data);
-    {
-      serviceFiltered.map((service) => {
-        navigationToResult.navigate("Result", {
-          id: service.id,
-          name: service.name,
-          industry: service.industry,
-          latitude: service.latitude,
-          longitude: service.longitude,
-          service: service.service,
-          opening_hours: service.opening_hours,
-          open_on_weekends: service.open_on_weekends,
-          whatsapp: service.whatsapp,
+    if (!service) {
+      Alert.alert("O campo não pode estar vazio!");
+    } else {
+      try {
+        const response = await api.get(`/search`, {
+          headers: {
+            Token: `Bearer ${token}`,
+          },
+          params: {
+            service,
+          },
         });
-      });
+
+        setServiceFiltered(response.data);
+
+        {
+          serviceFiltered.map((service) => {
+            navigationToResult.navigate("Result", {
+              id: service.id,
+              name: service.name,
+              industry: service.industry,
+              latitude: service.latitude,
+              longitude: service.longitude,
+              service: service.service,
+              opening_hours: service.opening_hours,
+              open_on_weekends: service.open_on_weekends,
+              whatsapp: service.whatsapp,
+            });
+          });
+        }
+      } catch (error) {
+        Alert.alert("Ops! Alguma coisa deu errado!");
+      }
     }
   }
 
@@ -143,7 +152,7 @@ export default function Search({ navigation }) {
       <KeyboardAvoidingView behavior="position">
         <Footer>
           <FooterTextInput
-            placeholder="Buscar por estabelecimentos"
+            placeholder="Buscar por serviços"
             placeholderTextColor="#999"
             autoCapitalize="words"
             autoCorrect={false}

@@ -1,0 +1,168 @@
+openapi: "3.0.2"
+info:
+  title: API Geoservice
+  version: "1.0"
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /users:
+    get:
+      description: Lista usuarios criados.
+      responses:
+        "200":
+          description: OK
+      tags: [User]
+      summary: teste
+
+    post:
+      description: Cria um usuario.
+      responses:
+        "200":
+          description: OK
+      tags: [User]
+
+  /sessions/users:
+    post:
+      description: Realiza o login.
+      responses:
+        "200":
+          description: OK
+      tags: [User]
+
+  /forgotPassword:
+    post:
+      description: Solicita o reset de senha.
+      responses:
+        "200":
+          description: OK
+      tags: [User, Establishment]
+
+  /establishments:
+    get:
+      description: Lista establecimentos criados.
+      responses:
+        "200":
+          description: OK
+      tags: [Establishment]
+
+    post:
+      description: Cria um estabelecimento.
+      responses:
+        "200":
+          description: OK
+      tags: [Establishment]
+
+  /sessions/establishments:
+    post:
+      description: Realiza o login.
+      responses:
+        "200":
+          description: OK
+      tags: [Establishment]
+
+  /company:
+    get:
+      description: Traz as empresas criadas.
+      responses:
+        "200":
+          description: OK
+      tags: [Company]
+
+    post:
+      description: Cria uma empresa.
+      responses:
+        "200":
+          description: OK
+      tags: [Company]
+
+  /company/id:
+    get:
+      description: Traz as empresas criadas por id.
+      responses:
+        "200":
+          description: OK
+      tags: [Company]
+
+  /favoriteEstablishments:
+    get:
+      description: Traz as empresas criadas por id.
+      responses:
+        "200":
+          description: OK
+      tags: [Favorites]
+
+    post:
+      description: teste
+      responses:
+        "200":
+          description: OK
+      tags: [Favorites]
+
+  /favoriteEstablishments/id:
+    get:
+      description: Traz as empresas criadas por id.
+      responses:
+        "200":
+          description: OK
+      tags: [Favorites]
+
+    delete:
+      description: teste
+      responses:
+        "200":
+          description: OK
+      tags: [Favorites]
+
+  /services:
+    get:
+      description: Traz as empresas criadas por id.
+      responses:
+        "200":
+          description: OK
+      tags: [Services]
+
+    post:
+      description: teste
+      responses:
+        "200":
+          description: OK
+      tags: [Services]
+
+  /services/id:
+    get:
+      description: Traz as empresas criadas por id.
+      responses:
+        "200":
+          description: OK
+      tags: [Services]
+
+    delete:
+      description: teste
+      responses:
+        "200":
+          description: OK
+      tags: [Services]
+
+  /search:
+    get:
+      description: Traz as empresas criadas por id.
+      responses:
+        "200":
+          description: OK
+      tags: [Search]
+
+  /images:
+    get:
+      description: Traz as empresas criadas por id.
+      responses:
+        "200":
+          description: OK
+      tags: [Images]
+
+  /images/id:
+    get:
+      description: Traz as empresas criadas por id.
+      responses:
+        "200":
+          description: OK
+      tags: [Images]

@@ -11,7 +11,6 @@ const controllerService = require("./controllers/controllerService");
 const controllerSearch = require("./controllers/controllerSearch");
 const controllerCompany = require("./controllers/controllerCompany");
 const controllerImages = require("./controllers/controllerImages");
-const controllerConnections = require("./controllers/controllerConnections");
 const controllerForgotPassword = require("./controllers/controllerForgotPassword");
 const controllerFavoriteEstablishments = require("./controllers/controllerFavoriteEstablishments");
 const controllerQuantifyEstablishments = require("./controllers/controllerQuantifyEstablishments");
@@ -71,11 +70,6 @@ routes.delete("/services/:id", controllerService.delete);
 
 //search
 routes.get("/search", controllerSearch.index);
-
-//connections
-
-routes.get("/connections", controllerConnections.index);
-routes.post("/connections", controllerConnections.create);
 
 //Images
 routes.get("/images", controllerImages.index);

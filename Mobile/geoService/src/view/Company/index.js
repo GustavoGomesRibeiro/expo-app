@@ -48,6 +48,7 @@ export default function Company() {
 
   async function handleCreateEstablishment() {
     const { latitude, longitude } = params.position;
+    // const { id} = params;
     const data = new FormData();
 
     data.append("name", name);

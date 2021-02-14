@@ -1,28 +1,29 @@
 // Update with your config settings.
+require("dotenv").config();
 
 module.exports = {
-  // development: {
-  //   client: "pg",
-  //   connection: {
-  //     database: "postgres",
-  //     user: "postgres",
-  //     password: "cacete1711",
-  //   },
-  //   migrations: {
-  //     directory: "./src/database/migrations",
-  //   },
-  //   useNullAsDefault: true,
-  // },
   development: {
-    client: "sqlite3",
+    client: "pg",
     connection: {
-      filename: "./src/database/db.sqlite",
+      database: "postgres",
+      user: process.env.POSTGRES_USERNAME,
+      password: process.env.POSTGRES_PASSWORD,
     },
     migrations: {
       directory: "./src/database/migrations",
     },
     useNullAsDefault: true,
   },
+  // development: {
+  //   client: "sqlite3",
+  //   connection: {
+  //     filename: "./src/database/db.sqlite",
+  //   },
+  //   migrations: {
+  //     directory: "./src/database/migrations",
+  //   },
+  //   useNullAsDefault: true,
+  // },
 
   staging: {
     client: "postgresql",

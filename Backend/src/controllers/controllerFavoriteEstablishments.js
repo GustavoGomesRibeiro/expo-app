@@ -2,11 +2,11 @@ const connection = require("../database/connection");
 
 module.exports = {
   async index(request, response) {
-    const company_id = request.headers.authorization;
+    // const company_id = request.headers.authorization;
 
     const listFavoriteEstablishment = await connection("favorites")
-      .where("company_id", company_id)
-      .join("company")
+      // .where("company_id", company_id)
+      .join("company", "favorites.company_id", "=", "company.id")
       .select([
         "favorites.*",
         "company.name",
@@ -35,23 +35,23 @@ module.exports = {
       user_id,
       company_id,
     });
-    console.log();
     return response.json({ id });
   },
 
   async delete(request, response) {
     const { id } = request.params;
-    const company_id = request.headers.authorization;
+    // const company_id = request.headers.authorization;
 
     const favorite = await connection("favorites")
       .where("id", id)
       .select("company_id")
       .first();
 
-    if (favorite.company_id !== parseInt(company_id)) {
-      return response.status(401).json({ error: "Não autorizado" });
-    }
+    // if (favorite.company_id !== parseInt(company_id)) {
+    //   return response.status(401).json({ error: "Não autorizado" });
+    // }
     await connection("favorites").where("id", id).delete();
-    return response.status(204).send();
+    // return response.status(204).send();
+    return response.json({ favorite });
   },
 };

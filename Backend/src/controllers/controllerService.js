@@ -2,22 +2,6 @@ const connection = require("../database/connection");
 
 module.exports = {
   async index(request, response) {
-    //filtro
-
-    // const filters = request.query;
-
-    // if ( !filters.service) {
-    //     return response.status(400).json({
-    //         error: 'Missing filters to search!'
-    //     })
-    // }
-
-    // const service = await connection('services')
-    // .where('establishment_id', establishment_id)
-    // .where('services.service', '=', filters.service)
-    // .join('establishments', 'services.establishment_id', '=', 'establishments.id')
-    // .select(['services.*', 'establishments.*']);
-
     const company_id = request.headers.authorization;
 
     const service = await connection("services")

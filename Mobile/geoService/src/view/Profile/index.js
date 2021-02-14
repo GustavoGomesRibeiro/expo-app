@@ -65,8 +65,8 @@ export default function Profile({ navigation }) {
           <Title></Title>
         )}
         <Content>
-          {establishments.length ? (
-            establishments.map((establishment) => {
+          {images.length ? (
+            images.map((establishment) => {
               return (
                 <ProfileContainer key={establishment.id}>
                   <ButtonDetails
@@ -82,16 +82,9 @@ export default function Profile({ navigation }) {
                     }
                   >
                     <ContentEstablishment>
-                      {images.map((image) => {
-                        return (
-                          <ImageBackground
-                            key={image.id}
-                            source={{ uri: image.path }}
-                          >
-                            <Establishment>{establishment.name}</Establishment>
-                          </ImageBackground>
-                        );
-                      })}
+                      <ImageBackground source={{ uri: establishment.path }}>
+                        <Establishment>{establishment.name}</Establishment>
+                      </ImageBackground>
                     </ContentEstablishment>
                   </ButtonDetails>
                 </ProfileContainer>

@@ -4,6 +4,7 @@ import { Marker } from "react-native-maps";
 import { useRoute } from "@react-navigation/native";
 import { Contextapi } from "../../hooks/authContext";
 import { Linking } from "react-native";
+import AnimatedLoader from "react-native-animated-loader";
 
 import api from "../../service/api";
 import Headers from "../../components/Headers";
@@ -53,10 +54,11 @@ export default function Details() {
   const [images, setImages] = useState([]);
   const [isFavorite, setIsFavorite] = useState([]);
   const [favorite, setFavorite] = useState([]);
+  // const [isLoading, setLoading] = useState(false);
 
   const params = route.params;
 
-  const message = `Olá ${params.name}, gostaria de avaliar o valor dos serviços, msg teste`;
+  const message = `Olá ${params.name}, te encontrei pelo aplicativo geoService e gostaria de avaliar o valor dos serviços disponiveis.`;
 
   useEffect(() => {
     async function loadServices() {
@@ -104,9 +106,17 @@ export default function Details() {
       });
   }, [favorite]);
 
-  // console.log(isFavorite, "w");
   if (!establishments) {
-    return <Title>Carregando...</Title>;
+    // return <Title>Carregando...</Title>;
+    return (
+      <AnimatedLoader
+        // visible={visible}
+        overlayColor="rgba(255,255,255,0.75)"
+        source={require("../../assets/loader.json")}
+        animationStyle={{ width: 100, height: 100 }}
+        speed={1}
+      />
+    );
   }
 
   function handleOnPressGoogleMaps() {
@@ -259,7 +269,7 @@ export default function Details() {
               <Footer>
                 <ContainerButtons>
                   {isFavorite.length ? (
-                    isFavorite.reduce((item) => {
+                    isFavorite.map((item) => {
                       return (
                         <ButtonUnFavorite
                           onPress={() => handleDeleteToFavorites(item.id)}
