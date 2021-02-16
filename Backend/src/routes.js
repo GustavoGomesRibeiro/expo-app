@@ -15,13 +15,11 @@ const controllerForgotPassword = require("./controllers/controllerForgotPassword
 const controllerFavoriteEstablishments = require("./controllers/controllerFavoriteEstablishments");
 const controllerQuantifyEstablishments = require("./controllers/controllerQuantifyEstablishments");
 const ensureAuthenticated = require("./middlewares/ensureAuthenticated");
-// const controllerTest = require('./controllers/controllerTest');
 
 const routes = express.Router();
 const upload = multer(uploadConfig);
 
 // sessions
-// routes.post('/sessions', controllerSessionUsers.create, controllerSessionEstablishment.create);
 routes.post("/sessions/users", controllerSessionUsers.create);
 routes.post("/sessions/establishments", controllerSessionEstablishment.create);
 routes.post("/forgotPassword", controllerForgotPassword.create);

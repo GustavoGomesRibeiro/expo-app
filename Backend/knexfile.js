@@ -26,11 +26,13 @@ module.exports = {
   // },
 
   staging: {
-    client: "postgresql",
+    client: "pg",
     connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
+      host: "localhost",
+      port: 5432,
+      database: "postgres",
+      user: process.env.POSTGRES_USERNAME,
+      password: process.env.POSTGRES_PASSWORD,
     },
     pool: {
       min: 2,
@@ -38,15 +40,19 @@ module.exports = {
     },
     migrations: {
       tableName: "knex_migrations",
+      directory: "./src/database/migrations",
     },
   },
 
   production: {
-    client: "postgresql",
+    client: "pg",
     connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
+      // host: "ec2-3-213-85-90.compute-1.amazonaws.com",
+      // port: 5432,
+      // database: "d65a1vi9if13hv",
+      // user: process.env.HEROKU_POSTGRES_USERNAME,
+      // password: process.env.HEROKU_POSTGRES_PASSWORD,
+      url: process.env.DATABASE_URL
     },
     pool: {
       min: 2,
@@ -54,6 +60,7 @@ module.exports = {
     },
     migrations: {
       tableName: "knex_migrations",
+      directory: "./src/database/migrations",
     },
   },
 };

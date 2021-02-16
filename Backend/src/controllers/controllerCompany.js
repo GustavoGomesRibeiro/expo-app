@@ -15,8 +15,6 @@ module.exports = {
       "c.id",
       id
     );
-    // .innerJoin("images", "images.company_id", "=", "c.id")
-    // .select(["c.*", "images.path"]);
 
     return response.json(listEstablishment);
   },

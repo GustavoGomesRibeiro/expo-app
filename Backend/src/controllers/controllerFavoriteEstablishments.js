@@ -2,10 +2,8 @@ const connection = require("../database/connection");
 
 module.exports = {
   async index(request, response) {
-    // const company_id = request.headers.authorization;
 
     const listFavoriteEstablishment = await connection("favorites")
-      // .where("company_id", company_id)
       .join("company", "favorites.company_id", "=", "company.id")
       .select([
         "favorites.*",
