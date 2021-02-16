@@ -4,165 +4,498 @@ info:
   version: "1.0"
 servers:
   - url: https://api.server.test/v1
+
+components:
+  schemas:
+    Create User:
+      type: object
+      required:
+        - email
+        - username
+        - password
+      properties:
+        email:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+
+    User Login:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    Forgot Password:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+
+    Company:
+      type: object
+      required:
+        - name
+        - industry
+        - whatsapp
+        - latitude
+        - longitude
+        - open_on_weekends
+        - opening_hours
+
+      properties:
+        name:
+          type: string
+        industry:
+          type: string
+        whatsapp:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        open_on_weekends:
+          type: boolean
+        opening_hours:
+          type: string
+        images:
+          type: string
+
+    Favorites:
+      type: object
+      required:
+        - user_id
+        - company_id
+      properties:
+        user_id:
+          type: integer
+        company_id:
+          type: integer
+
+    Service:
+      type: object
+      required:
+        - service
+        - company_id
+      properties:
+        service:
+          type: string
+        company_id:
+          type: integer
+
+  responses:
+    name:
+      description: teste
+      content:
+        application/json:
+          schema:
+            type: string
+
+  securitySchemes:
+    token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+tags:
+  - name: User
+    description: Responsável por usuários cadastrados.
+
+  - name: Establishment
+    description: Responsável por estabelecimentos cadastrados.
+
+  - name: Company
+    description: Responsável por empresas cadastrados.
+
+  - name: Favorites
+    description: Responsável por exibir e administrar empresas favoritas.
+
+  - name: Services
+    description: Responsável gerenciar serviços da empresa.
+
+  - name: Search
+    description: Responsável por realizar buscas pelo serviço.
+
+  - name: Images
+    description: Reponsável por armazenar imagens.
+
 paths:
   /users:
     get:
+      tags:
+        - User
+      summary: Lista os usuários.
       description: Lista usuarios criados.
+      parameters:
+        - name: users
+          in: query
+          description: Lista todos usuários.
+          required: false
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [User]
-      summary: teste
 
     post:
+      tags:
+        - User
+      summary: Criação de usuários.
       description: Cria um usuario.
+
+      parameters:
+        - name: Body
+          in: body
+          description: Informações necessárias para cadastro.
+          required: true
+          schema:
+            $ref: "#/components/schemas/Create User"
+
       responses:
         "200":
           description: OK
-      tags: [User]
 
   /sessions/users:
     post:
+      tags:
+        - User
+      summary: Faz o login de um usuário.
       description: Realiza o login.
+
+      parameters:
+        - name: Body
+          in: body
+          description: Informações necessárias para cadastro.
+          required: true
+          schema:
+            $ref: "#/components/schemas/User Login"
+
       responses:
         "200":
           description: OK
-      tags: [User]
 
   /forgotPassword:
     post:
+      tags:
+        - User
+        - Establishment
+      summary: Reset de senha.
       description: Solicita o reset de senha.
+
+      parameters:
+        - name: Body
+          in: body
+          description: Informações necessárias para cadastro.
+          required: true
+          schema:
+            $ref: "#/components/schemas/Forgot Password"
+
       responses:
         "200":
           description: OK
-      tags: [User, Establishment]
 
   /establishments:
     get:
+      tags:
+        - Establishment
+      summary: Lista estabelecimentos criados.
       description: Lista establecimentos criados.
+      parameters:
+        - name: establishments
+          in: query
+          description: Lista todos usuários.
+          required: false
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [Establishment]
 
     post:
+      tags:
+        - Establishment
+      summary: Criação de establecimentos.
       description: Cria um estabelecimento.
+
+      parameters:
+        - name: Body
+          in: body
+          description: Informações necessárias para cadastro.
+          required: true
+          schema:
+            $ref: "#/components/schemas/Create User"
+
       responses:
         "200":
           description: OK
-      tags: [Establishment]
 
   /sessions/establishments:
     post:
+      tags:
+        - Establishment
+      summary: Realiza o login.
       description: Realiza o login.
+
+      parameters:
+        - name: Body
+          in: body
+          description: Informações necessárias para cadastro.
+          required: true
+          schema:
+            $ref: "#/components/schemas/User Login"
+
       responses:
         "200":
           description: OK
-      tags: [Establishment]
 
   /company:
     get:
-      description: Traz as empresas criadas.
+      tags:
+        - Company
+      summary: Lista as empresas criadas.
+      description: Lista as empresas criadas.
+      parameters:
+        - name: companys
+          in: header
+          description: Lista todos as empresas.
+          required: false
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [Company]
 
     post:
-      description: Cria uma empresa.
+      tags:
+        - Company
+      summary: Criação de uma empresa.
+      description: Criação de uma empresa.
+
+      parameters:
+        - name: Body
+          in: body
+          description: Informações necessárias para cadastro.
+          required: true
+          schema:
+            $ref: "#/components/schemas/Company"
+
       responses:
         "200":
           description: OK
-      tags: [Company]
 
   /company/id:
     get:
-      description: Traz as empresas criadas por id.
+      tags:
+        - Company
+      summary: Lista as empresas criadas por id.
+      description: Lista as empresas criadas por id.
+      parameters:
+        - name: company
+          in: query
+          description: Lista todas empresas por id.
+          required: false
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [Company]
 
   /favoriteEstablishments:
     get:
-      description: Traz as empresas criadas por id.
+      tags:
+        - Favorites
+      summary: Lista as empresas criadas.
+      description: Lista as empresas criadas.
+      parameters:
+        - name: favorites company
+          in: header
+          description: Lista todas empresas favoritadas.
+          required: false
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [Favorites]
 
     post:
-      description: teste
+      tags:
+        - Favorites
+      summary: Favorita uma empresa.
+      description: Favorita uma empresa.
+      parameters:
+        - name: Body
+          in: body
+          description: Informações necessárias para cadastro.
+          required: true
+          schema:
+            $ref: "#/components/schemas/Favorites"
+
       responses:
         "200":
           description: OK
-      tags: [Favorites]
 
   /favoriteEstablishments/id:
     get:
-      description: Traz as empresas criadas por id.
+      tags:
+        - Favorites
+      summary: Lista as empresas criadas por id.
+      description: Lista as empresas criadas por id.
+      parameters:
+        - name: favorite company
+          in: query
+          description: Lista todas empresas favoritadas por id.
+          required: false
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [Favorites]
+        "400":
+          description: ID Inválido.
 
     delete:
-      description: teste
+      tags:
+        - Favorites
+      summary: Deleta uma empresa dos favoritos.
+      description: Deleta uma empresa dos favoritos.
+      parameters:
+        - name: id
+          in: path
+          description: Insira o id para remover
+          required: true
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [Favorites]
 
   /services:
     get:
-      description: Traz as empresas criadas por id.
+      tags:
+        - Services
+      summary: Lista os serviços criados.
+      description: Lista os serviços criados.
+      parameters:
+        - name: services
+          in: header
+          description: Lista todos os serviços.
+          required: false
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [Services]
 
     post:
-      description: teste
+      tags:
+        - Services
+      summary: Criação de novos serviços.
+      description: Criação de novos serviços.
+      parameters:
+        - name: Body
+          in: body
+          description: Informações necessárias para cadastro.
+          required: true
+          schema:
+            $ref: "#/components/schemas/Service"
+
       responses:
         "200":
           description: OK
-      tags: [Services]
 
   /services/id:
     get:
-      description: Traz as empresas criadas por id.
+      tags:
+        - Services
+      summary: Lista os serviços criadas por id.
+      description: Lista os serviços criadas por id.
+      parameters:
+        - name: service
+          in: query
+          description: Lista todos os serviços por id.
+          required: false
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [Services]
 
     delete:
-      description: teste
+      tags:
+        - Services
+      summary: Remove serviços criados.
+      description: Remove serviços criados.
+      parameters:
+        - name: id
+          in: path
+          description: Insira o id para remover
+          required: true
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [Services]
+        "400":
+          description: ID Inválido.
 
   /search:
     get:
-      description: Traz as empresas criadas por id.
+      tags:
+        - Search
+      summary: Filtra serviços.
+      description: Filtra serviços.
+
+      parameters:
+        - name: search
+          in: header
+          description: Filtra os serviços.
+          required: false
+          type: string
+
       responses:
         "200":
           description: OK
-      tags: [Search]
 
   /images:
     get:
+      tags:
+        - Images
+
+      parameters:
+        - name: images
+          in: header
+          description: Lista todas imagens.
+          required: false
+          type: string
+
       description: Traz as empresas criadas por id.
       responses:
         "200":
           description: OK
-      tags: [Images]
 
   /images/id:
     get:
+      tags:
+        - Images
+
+      parameters:
+        - name: images
+          in: query
+          description: Lista todas imagens por id.
+          required: false
+          type: string
+
       description: Traz as empresas criadas por id.
       responses:
         "200":
           description: OK
-      tags: [Images]
+# security:
+# - name: [Company, Favorites, Services, Search, Images]
