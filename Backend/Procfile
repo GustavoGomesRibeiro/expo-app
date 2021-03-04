@@ -1,1 +1,1 @@
-web: yarn start
+web: npx knex migrate:latest && npm start 
