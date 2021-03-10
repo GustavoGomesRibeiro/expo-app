@@ -124,8 +124,8 @@ export default function Search({ navigation }) {
                 y: 0.8,
               }}
               coordinate={{
-                latitude: establishment.latitude,
-                longitude: establishment.longitude,
+                latitude: Number(establishment.latitude),
+                longitude: Number(establishment.longitude),
               }}
             >
               <Callout

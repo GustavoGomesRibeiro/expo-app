@@ -137,8 +137,8 @@ export default function Favorites() {
                   <Map
                     // provider={PROVIDER_GOOGLE}
                     initialRegion={{
-                      latitude: establishment.latitude,
-                      longitude: establishment.longitude,
+                      latitude: Number(establishment.latitude),
+                      longitude: Number(establishment.longitude),
                       latitudeDelta: 0.008,
                       longitudeDelta: 0.008,
                     }}
@@ -149,8 +149,8 @@ export default function Favorites() {
                   >
                     <Marker
                       coordinate={{
-                        latitude: establishment.latitude,
-                        longitude: establishment.longitude,
+                        latitude: Number(establishment.latitude),
+                        longitude: Number(establishment.longitude),
                       }}
                     />
                   </Map>

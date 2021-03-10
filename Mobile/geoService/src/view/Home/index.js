@@ -25,12 +25,12 @@ export default function Home() {
             showHorizontalScrollIndicator={false}
             pagingEnabled={true}
           >
-            <Image
+            {/* <Image
               style={{ width: 500, height: 240, resizeMode: "cover" }}
               source={{
                 uri: "https://fmnova.com.br/images/noticias/safe_image.jpg",
               }}
-            />
+            /> */}
           </ScrollView>
         </Services>
       </Context>
