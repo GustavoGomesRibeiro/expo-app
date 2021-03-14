@@ -30,7 +30,7 @@ export default function Profile({ navigation }) {
   const [images, setImages] = useState([]);
 
   // const image = { uri: "https://fmnova.com.br/images/noticias/safe_image.jpg" };
-
+  console.log(images);
   useEffect(() => {
     async function loadEstablishment() {
       const response = await api.get(`/listEstablishments`, {

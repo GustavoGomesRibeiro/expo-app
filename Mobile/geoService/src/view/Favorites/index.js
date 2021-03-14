@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import CustomHeader from "../../components/CustomHeader";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
-import { Marker } from "react-native-maps";
+import { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Contextapi } from "../../hooks/authContext";
 import { Alert, Linking } from "react-native";
 import like from "../../assets/like.png";
@@ -135,7 +135,7 @@ export default function Favorites() {
 
                 <MapContainer>
                   <Map
-                    // provider={PROVIDER_GOOGLE}
+                    provider={PROVIDER_GOOGLE}
                     initialRegion={{
                       latitude: Number(establishment.latitude),
                       longitude: Number(establishment.longitude),

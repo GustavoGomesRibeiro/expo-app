@@ -13,11 +13,23 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gustavogomes.geoservice",
+      "config": {
+        "googleMapsApiKey": "AIzaSyBgTDNUbjWGBhUitJXpmIzA5RPaDRyfZcU"
+      },
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.gustavogomes.geoservice",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDxrli1ejgik-HvFZiH2LbKfkIJ2sSPr8o"
+        }
+      },
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

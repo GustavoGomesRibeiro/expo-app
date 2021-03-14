@@ -5,6 +5,7 @@ import { useRoute } from "@react-navigation/native";
 import { Contextapi } from "../../hooks/authContext";
 import { Linking } from "react-native";
 import AnimatedLoader from "react-native-animated-loader";
+import { PROVIDER_GOOGLE } from "react-native-maps";
 
 import api from "../../service/api";
 import Headers from "../../components/Headers";
@@ -49,7 +50,7 @@ export default function Details() {
   const { token, user } = useContext(Contextapi);
   const route = useRoute();
 
-  const [services, setServices] = useState();
+  const [services, setServices] = useState([]);
   const [establishments, setEstablishments] = useState();
   const [images, setImages] = useState([]);
   const [isFavorite, setIsFavorite] = useState([]);
@@ -61,17 +62,6 @@ export default function Details() {
   const message = `Olá ${params.name}, te encontrei pelo aplicativo geoService e gostaria de avaliar o valor dos serviços disponiveis.`;
 
   useEffect(() => {
-    async function loadServices() {
-      const response = await api.get(`/services`, {
-        headers: {
-          Token: `Bearer ${token}`,
-          Authorization: params.id,
-        },
-      });
-      setServices(response.data);
-    }
-    loadServices();
-
     async function loadEstablishment() {
       const response = await api.get(`/company/${params.id}`, {
         headers: {
@@ -91,6 +81,17 @@ export default function Details() {
       setImages(response.data);
     }
     loadImages();
+
+    async function loadServices() {
+      const response = await api.get(`/services`, {
+        headers: {
+          Token: `Bearer ${token}`,
+          Authorization: params.id,
+        },
+      });
+      setServices(response.data);
+    }
+    loadServices();
   }, [params.id]);
 
   useEffect(() => {
@@ -189,7 +190,7 @@ export default function Details() {
                 </Description>
                 <MapContainer>
                   <Map
-                    // provider={PROVIDER_GOOGLE}
+                    provider={PROVIDER_GOOGLE}
                     initialRegion={{
                       latitude: Number(establishment.latitude),
                       longitude: Number(establishment.longitude),
@@ -273,6 +274,7 @@ export default function Details() {
                       return (
                         <ButtonUnFavorite
                           onPress={() => handleDeleteToFavorites(item.id)}
+                          key={item.id}
                         >
                           <Ionicons
                             name="md-heart-dislike"

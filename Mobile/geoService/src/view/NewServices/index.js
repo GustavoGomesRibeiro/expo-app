@@ -7,6 +7,8 @@ import { Linking } from "react-native";
 import Modal from "react-native-modal";
 import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
+import { PROVIDER_GOOGLE } from "react-native-maps";
+import * as ImagePicker from "expo-image-picker";
 
 import api from "../../service/api";
 import Headers from "../../components/Headers";
@@ -19,6 +21,7 @@ import {
   ImageContainer,
   ScrollViewHorizontal,
   Image,
+  // Add,
   DetailsContainer,
   Title,
   AddService,
@@ -59,6 +62,7 @@ export default function NewServices() {
   const [loadServices, setLoadServices] = useState([]);
   const [newService, setNewService] = useState("");
   const [images, setImages] = useState([]);
+  const [loadImages, setLoadImages] = useState([]);
 
   const [service, setService] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -88,18 +92,60 @@ export default function NewServices() {
     loadCompany();
 
     async function loadImages() {
-      const response = await api.get(`/images`, {
+      const response = await api.get(`/images/${params.id}`, {
         headers: {
           Token: `Bearer ${token}`,
         },
       });
-      setImages(response.data);
+      setLoadImages(response.data);
     }
     loadImages();
   }, [params.id]);
 
   if (!establishments) {
     return <Title>Carregando...</Title>;
+  }
+
+  async function handleAddImage() {
+    const data = new FormData();
+
+    data.append("company_id", params.id);
+
+    images.forEach((image, index) => {
+      data.append("images", {
+        name: `image_${index}.jpg`,
+        type: "image/jpg",
+        uri: image,
+      });
+    });
+
+    await api.post("/images", data, {
+      headers: {
+        Token: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async function handleSelectImages() {
+    const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+
+    if (status !== "granted") {
+      Alert.alert("Precisamos de acesso às suas fotos...");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    });
+
+    if (result.cancelled) {
+      return;
+    }
+    const { uri: image } = result;
+
+    setImages([...images, image]);
   }
 
   function handleOnPressGoogleMaps() {
@@ -137,11 +183,17 @@ export default function NewServices() {
             <Content key={establishment.id}>
               <ImageContainer>
                 <ScrollViewHorizontal>
-                  {images.map((image) => {
+                  {loadImages.map((loadImage) => {
                     return (
-                      <Image key={image.id} source={{ uri: image.path }} />
+                      <Image
+                        key={loadImage.id}
+                        source={{ uri: loadImage.path }}
+                      />
                     );
                   })}
+                  {/* <Add onPress={(handleAddImage, handleSelectImages)}>
+                    <Feather name="plus" size={24} color="#000" />
+                  </Add> */}
                 </ScrollViewHorizontal>
               </ImageContainer>
 
@@ -152,10 +204,10 @@ export default function NewServices() {
                 </Description>
                 <MapContainer>
                   <Map
-                    // provider={PROVIDER_GOOGLE}
+                    provider={PROVIDER_GOOGLE}
                     initialRegion={{
-                      latitude: establishment.latitude,
-                      longitude: establishment.longitude,
+                      latitude: Number(establishment.latitude),
+                      longitude: Number(establishment.longitude),
                       latitudeDelta: 0.008,
                       longitudeDelta: 0.008,
                     }}
@@ -166,8 +218,8 @@ export default function NewServices() {
                   >
                     <Marker
                       coordinate={{
-                        latitude: establishment.latitude,
-                        longitude: establishment.longitude,
+                        latitude: Number(establishment.latitude),
+                        longitude: Number(establishment.longitude),
                       }}
                     />
                   </Map>

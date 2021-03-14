@@ -109,7 +109,7 @@ export default function Search({ navigation }) {
     <Container>
       <Headers title="Localizar estabelecimentos" />
       <Map
-        // provider={PROVIDER_GOOGLE}
+        provider={PROVIDER_GOOGLE}
         onRegionChangeComplete={handleRegionChanged}
         initialRegion={currentRegion}
         showsUserLocation

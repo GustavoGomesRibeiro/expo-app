@@ -10,7 +10,10 @@ export const ScrollView = styled.ScrollView``;
 
 export const Content = styled.View``;
 
-export const ImageContainer = styled.View``;
+export const ImageContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+`;
 
 export const ScrollViewHorizontal = styled.ScrollView.attrs(() => ({
   horizontal: true,
@@ -201,4 +204,15 @@ export const DescriptionService = styled.Text`
   font-family: "Archivo_400Regular";
   color: #000;
   line-height: 24px;
+`;
+
+export const Add = styled.TouchableOpacity`
+  border-style: dashed;
+  border-color: #000;
+  border-width: 1.4px;
+  border-radius: 20px;
+  height: 56px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 32px;
 `;

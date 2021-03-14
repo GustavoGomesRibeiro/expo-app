@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CustomHeader from "../../components/CustomHeader";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
-import { Marker } from "react-native-maps";
+import { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
 import { useRoute } from "@react-navigation/native";
 
@@ -58,7 +58,7 @@ export default function Result() {
 
               <MapContainer>
                 <Map
-                  // provider={PROVIDER_GOOGLE}
+                  provider={PROVIDER_GOOGLE}
                   initialRegion={{
                     latitude: establishment.latitude,
                     longitude: establishment.longitude,
