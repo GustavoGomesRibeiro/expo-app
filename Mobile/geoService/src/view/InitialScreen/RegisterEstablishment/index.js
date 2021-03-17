@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-// import logo from '../../assets/logo.png';
+import logo from "../../../assets/logo.png";
+import { AntDesign } from "@expo/vector-icons";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { Alert } from "react-native";
 import {
   Container,
-  // Image,
+  Icon,
+  Image,
   Description,
   Title,
 } from "./styled-components";
@@ -36,7 +38,15 @@ export default function RegisterEstablishment({ navigation }) {
 
   return (
     <Container>
-      {/* <Image source={logo}/> */}
+      <Icon>
+        <AntDesign
+          name="arrowleft"
+          size={20}
+          onPress={() => navigation.navigate("Signin")}
+        />
+      </Icon>
+
+      <Image source={logo} />
 
       <Description>
         <Title> Crie sua conta </Title>

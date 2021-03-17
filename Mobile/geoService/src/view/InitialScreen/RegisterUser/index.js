@@ -4,8 +4,15 @@ import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { Alert } from "react-native";
 import api from "../../../service/api";
+import { AntDesign } from "@expo/vector-icons";
 
-import { Container, Image, Description, Title } from "./styled-components";
+import {
+  Container,
+  Image,
+  Description,
+  Title,
+  Icon,
+} from "./styled-components";
 
 export default function RegisterUser({ navigation }) {
   // const { registerUser } = useContext(Contextapi);
@@ -36,6 +43,13 @@ export default function RegisterUser({ navigation }) {
 
   return (
     <Container>
+      <Icon>
+        <AntDesign
+          name="arrowleft"
+          size={20}
+          onPress={() => navigation.navigate("Signin")}
+        />
+      </Icon>
       <Image source={logo} />
 
       <Description>

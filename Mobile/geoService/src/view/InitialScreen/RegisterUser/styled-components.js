@@ -6,6 +6,7 @@ export const Container = styled.View`
     justify-content: center;
 `;
 
+export const Icon = styled.View``;
 
 export const Image = styled.Image`
     width: 100%;
