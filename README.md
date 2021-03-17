@@ -91,7 +91,7 @@ O **GeoService** é uma aplicação Mobile feita para auxiliar na conexão entre
     2.1. Executando a Aplicação Backend:
 
 ```sh
-  # API
+  # Aplicação Back-end
   $ cd Backend
 
   # Instalando as dependências do projeto.
