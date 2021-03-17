@@ -16,12 +16,11 @@
   <a href="#memo-licença">Licença</a>
 </p>
 
-<p align="center">
-![desing](https://user-images.githubusercontent.com/32501381/111509414-78811100-872b-11eb-94be-bde602190cec.png)
-<p>
+
 
 ## :books: Sobre
-
+![desing](https://user-images.githubusercontent.com/32501381/111509414-78811100-872b-11eb-94be-bde602190cec.png)
+    
 O **GeoService** é uma aplicação Mobile feita para auxiliar na conexão entre os clientes e os mecânicos. Esta aplicação oferece aos mecânicos a possibilidade de registrar o estabelecimento, adicionar serviços que prestam e aos clientes a possibilidade de buscar pelos serviços cadastradas ou pelo estabelecimento mais proximo da sua região.
 
 ## :computer: Tecnologias
