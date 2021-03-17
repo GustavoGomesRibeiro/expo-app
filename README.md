@@ -16,11 +16,10 @@
   <a href="#memo-licença">Licença</a>
 </p>
 
-
-
 ## :books: Sobre
+
 ![desing](https://user-images.githubusercontent.com/32501381/111509414-78811100-872b-11eb-94be-bde602190cec.png)
-    
+
 O **GeoService** é uma aplicação Mobile feita para auxiliar na conexão entre os clientes e os mecânicos. Esta aplicação oferece aos mecânicos a possibilidade de registrar o estabelecimento, adicionar serviços que prestam e aos clientes a possibilidade de buscar pelos serviços cadastradas ou pelo estabelecimento mais proximo da sua região.
 
 ## :computer: Tecnologias
@@ -72,6 +71,14 @@ O **GeoService** é uma aplicação Mobile feita para auxiliar na conexão entre
 
   # Inicie a aplicação mobile
   $ yarn start ou npm start
+
+  #Definindo o seu IP local, conseguirá realizar testes localmente.
+  $ Dentro da chamada API definir o IP que será exibido ao executar o expo:
+
+  # Diretório /service
+  const api = axios.create({
+    baseURL: "http://192.168.0.169:3333",
+  });
 ```
 
 - ### **Pré-requisitos aplicação Backend**
