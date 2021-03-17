@@ -9,7 +9,7 @@
   <a href="https://insomnia.rest/run/?label=GeoService&uri=https%3A%2F%2Fgithub.com%2FGustavoGomesRibeiro%2FgeoServices%2Fblob%2Fmain%2FBackend%2Fgeoservice_api.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
 <p align="center">
-  <a href="#bookmark-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#books-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#computer-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#bookmark-api">API</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-como-executar">Como Executar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -17,10 +17,10 @@
 </p>
 
 <p align="center">
-  <img alt="design do projeto" width="650px" src="./.github/design.png" />
+![desing](https://user-images.githubusercontent.com/32501381/111509414-78811100-872b-11eb-94be-bde602190cec.png)
 <p>
 
-## :bookmark: Sobre
+## :books: Sobre
 
 O **GeoService** é uma aplicação Mobile feita para auxiliar na conexão entre os clientes e os mecânicos. Esta aplicação oferece aos mecânicos a possibilidade de registrar o estabelecimento, adicionar serviços que prestam e aos clientes a possibilidade de buscar pelos serviços cadastradas ou pelo estabelecimento mais proximo da sua região.
 
