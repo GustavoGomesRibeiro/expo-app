@@ -31,18 +31,19 @@ module.exports = {
 
   async delete(request, response) {
     const { id } = request.params;
-    const company_id = request.headers.authorization;
+    // const company_id = request.headers.authorization;
 
     const service = await connection("services")
       .where("id", id)
       .select("company_id")
       .first();
 
-    if (service.company_id !== company_id) {
-      return response.status(401).json({ error: "Não autorizado" });
-    }
+    // if (service.company_id !== company_id) {
+    //   return response.status(401).json({ error: "Não autorizado" });
+    // }
     await connection("services").where("id", id).delete();
 
-    return response.status(204).send();
+    // return response.status(204).send();
+    return response.json({ service });
   },
 };
