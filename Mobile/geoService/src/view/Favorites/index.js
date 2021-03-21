@@ -39,17 +39,20 @@ export default function Favorites() {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    async function loadFavorites() {
-      const response = await api.get("/favoriteEstablishments", {
-        headers: {
-          Token: `Bearer ${token}`,
-          Authorization: user.id,
-        },
-      });
-      setEstablishments(response.data);
-    }
-    loadFavorites();
-  }, [establishments]);
+    const interval = setInterval(() => {
+      api
+        .get("/favoriteEstablishments", {
+          headers: {
+            Token: `Bearer ${token}`,
+            Authorization: user.id,
+          },
+        })
+        .then((response) => {
+          setEstablishments(response.data);
+        });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     api

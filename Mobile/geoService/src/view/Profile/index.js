@@ -97,9 +97,9 @@ export default function Profile({ navigation }) {
                             color="#000"
                           />
                           <Clock>
-                            {establishment.open_on_weekends == true
+                            {establishment.open_on_weekends == "true"
                               ? "Atendemos final de senama"
-                              : "Não atendemos final de semana"}
+                              : "Não atendemos \n final de semana"}
                           </Clock>
                         </Style>
                         <Style>

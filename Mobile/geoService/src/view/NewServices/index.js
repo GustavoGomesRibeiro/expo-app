@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
 import { PROVIDER_GOOGLE } from "react-native-maps";
 import * as ImagePicker from "expo-image-picker";
-import AlertToast from "../../components/Toast";
+// import AlertToast from "../../components/Toast";
 
 import Toast from "react-native-tiny-toast";
 
@@ -50,6 +50,8 @@ import {
   CloseModal,
   TextTitle,
   // ContainerStyle,
+  Close,
+  X,
   Style,
   DescriptionService,
   // ContainerInput,
@@ -73,17 +75,20 @@ export default function NewServices() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    api
-      .get(`/services`, {
-        headers: {
-          Token: `Bearer ${token}`,
-          Authorization: params.id,
-        },
-      })
-      .then((response) => {
-        setLoadServices(response.data);
-      });
-  }, [newService]);
+    const interval = setInterval(() => {
+      api
+        .get(`/services`, {
+          headers: {
+            Token: `Bearer ${token}`,
+            Authorization: params.id,
+          },
+        })
+        .then((response) => {
+          setLoadServices(response.data);
+        });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     async function loadCompany() {
@@ -194,6 +199,16 @@ export default function NewServices() {
     }
   }
 
+  async function handleRemoveService(item) {
+    await api.delete(`/services/${item.id}`, {
+      headers: {
+        Token: `Bearer ${token}`,
+        Authorization: establishment.id,
+      },
+    });
+    setLoadServices(loadServices.filter((item) => item.id !== item.id));
+  }
+
   return (
     <Container>
       <ScrollView>
@@ -278,6 +293,9 @@ export default function NewServices() {
                     loadServices.map((item) => {
                       return (
                         <Style key={item.id}>
+                          <Close onPress={() => handleRemoveService(item)}>
+                            <X>X</X>
+                          </Close>
                           <DescriptionService>
                             {item.service}
                           </DescriptionService>

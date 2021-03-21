@@ -49,11 +49,10 @@ export const Title = styled.Text`
   font-family: "Archivo_700Bold";
 `;
 
-export const AddService = styled.TouchableOpacity`
-  /* margin-top: 16px;
-  flex-direction: row; */
+export const AddService = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
 `;
 
 export const Description = styled.Text`
@@ -202,6 +201,20 @@ export const TextTitle = styled.Text`
   color: #fff;
   font-size: 18px;
   font-family: Archivo_700Bold;
+`;
+
+export const Close = styled.TouchableOpacity`
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #4d5156;
+  margin-left: 70px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const X = styled.Text`
+  color: #fff;
 `;
 
 export const Style = styled.View`
