@@ -36,30 +36,40 @@ export const ContentEstablishment = styled.View`
   height: 190px;
   border-radius: 15px;
   background: #fff;
-  align-items: center;
-  justify-content: center;
   margin-top: 25px;
+  flex-direction: row;
+  padding: 24px;
 `;
 
-export const ImageBackground = styled.ImageBackground`
-  width: 100%;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  resize-mode: cover;
+export const ImageBackground = styled.Image`
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
 `;
 
 export const Establishment = styled.Text`
-  color: #fff;
+  color: #000;
   font-size: 26px;
   line-height: 30px;
   font-family: Poppins_600SemiBold;
-  /* align-items: center; */
+  padding-left: 15px;
+`;
+
+export const DetailsEstablishment = styled.View``;
+
+export const Style = styled.View`
+  padding: 5px 15px;
+  flex-direction: row;
+`;
+export const Clock = styled.Text`
+  color: #000;
+  font-size: 14px;
+  /* line-height: 30px; */
+  font-family: Poppins_600SemiBold;
+  padding-left: 15px;
 `;
 
 export const ImageProfile = styled.View`
-  /* margin-top: 150px; */
-  /* justify-content: center; */
   align-items: center;
 `;
 export const ProfileImg = styled.Image`

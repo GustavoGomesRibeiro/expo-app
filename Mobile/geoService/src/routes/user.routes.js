@@ -3,12 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome5, FontAwesome } from "react-native-vector-icons";
 
-// import PlusButton from '../components/PlusButton';
 // routes
 import Home from "../view/Home";
 import Search from "../view/Search";
 import Favorites from "../view/Favorites";
-// import Profile from '../view/Profile';
 import Details from "../view/Details";
 import Result from "../view/Result";
 
@@ -22,11 +20,10 @@ const Menu = () => (
         elevation: 0,
         shadowOpacity: 0,
         height: 80,
-        backgroundColor: "#131418",
-        borderTopColor: "rgba(255,255,255,0.2)",
+        backgroundColor: "#000",
+        borderTopColor: "#000",
       },
       tabStyle: {
-        // flexDirection: 'row',
         alignItems: "center",
         justifyContent: "center",
       },
@@ -41,10 +38,7 @@ const Menu = () => (
         fontFamily: "Archivo_700Bold",
         fontSize: 13,
         alignItems: "center",
-        // marginLeft: 16,
       },
-      // inactiveBackgroundColor: '#fafafc',
-      // activeBackgroundColor: '#ebebf5',
       inactiveTintColor: "#92929c",
       activeTintColor: "#fff",
     }}

@@ -9,6 +9,9 @@ import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
 import { PROVIDER_GOOGLE } from "react-native-maps";
 import * as ImagePicker from "expo-image-picker";
+import AlertToast from "../../components/Toast";
+
+import Toast from "react-native-tiny-toast";
 
 import api from "../../service/api";
 import Headers from "../../components/Headers";
@@ -19,9 +22,11 @@ import {
   Container,
   Content,
   ImageContainer,
+  UploadImages,
+  LoadImage,
   ScrollViewHorizontal,
   Image,
-  // Add,
+  Add,
   DetailsContainer,
   Title,
   AddService,
@@ -62,7 +67,7 @@ export default function NewServices() {
   const [loadServices, setLoadServices] = useState([]);
   const [newService, setNewService] = useState("");
   const [images, setImages] = useState([]);
-  const [loadImages, setLoadImages] = useState([]);
+  // const [loadImages, setLoadImages] = useState([]);
 
   const [service, setService] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -97,7 +102,7 @@ export default function NewServices() {
           Token: `Bearer ${token}`,
         },
       });
-      setLoadImages(response.data);
+      setImages(response.data);
     }
     loadImages();
   }, [params.id]);
@@ -108,8 +113,6 @@ export default function NewServices() {
 
   async function handleAddImage() {
     const data = new FormData();
-
-    data.append("company_id", params.id);
 
     images.forEach((image, index) => {
       data.append("images", {
@@ -169,9 +172,26 @@ export default function NewServices() {
       }
     );
 
-    setNewService(response.data);
-    Alert.alert("Serviço cadastrado com sucesso!");
-    // navigation.navigate("NewServices");
+    if (response.status == 200) {
+      Toast.showSuccess("Serviço cadastrado!", {
+        position: Toast.position.center,
+        containerStyle: {
+          backgroundColor: "#54a634",
+          borderRadius: 15,
+        },
+        textStyle: {
+          color: "#fff",
+        },
+        imgStyle: {},
+        mask: false,
+        maskStyle: {},
+        duration: 2000,
+        animation: true,
+      });
+
+      setNewService(response.data);
+      setIsModalVisible(!isModalVisible);
+    }
   }
 
   return (
@@ -183,19 +203,31 @@ export default function NewServices() {
             <Content key={establishment.id}>
               <ImageContainer>
                 <ScrollViewHorizontal>
-                  {loadImages.map((loadImage) => {
+                  {/* {loadImages.map((loadImage) => {
                     return (
                       <Image
                         key={loadImage.id}
                         source={{ uri: loadImage.path }}
                       />
                     );
-                  })}
-                  {/* <Add onPress={(handleAddImage, handleSelectImages)}>
-                    <Feather name="plus" size={24} color="#000" />
-                  </Add> */}
+                  })} */}
+                  <UploadImages>
+                    {images.map((loadImage) => {
+                      return (
+                        <LoadImage
+                          key={loadImage.id}
+                          source={{ uri: loadImage.path }}
+                        />
+                      );
+                    })}
+                  </UploadImages>
                 </ScrollViewHorizontal>
+                <Add onPress={(handleSelectImages, handleAddImage)}>
+                  <Feather name="plus" size={24} color="#000" />
+                </Add>
               </ImageContainer>
+
+              <Divider />
 
               <DetailsContainer>
                 <Title>{establishment.name}</Title>
@@ -263,11 +295,11 @@ export default function NewServices() {
                 </AddService>
                 <Modal isVisible={isModalVisible}>
                   <ContainerModal>
-                    <Description> Serviços</Description>
+                    <Description> Cadastre um novo serviço </Description>
                     {/* <ContainerInput> */}
                     <InputModal
                       name="service"
-                      placeholder="Digite o seus serviços"
+                      placeholder="Digite o seu serviço"
                       icon="settings"
                       value={service}
                       onChangeText={setService}

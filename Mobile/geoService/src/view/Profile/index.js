@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Contextapi } from "../../hooks/authContext";
 import api from "../../service/api";
 import CustomHeader from "../../components/CustomHeader";
+import { FontAwesome, Feather } from "react-native-vector-icons";
 import profile from "../../assets/profile.png";
 
 import {
@@ -16,6 +17,9 @@ import {
   ButtonDetails,
   ContentEstablishment,
   Establishment,
+  DetailsEstablishment,
+  Style,
+  Clock,
   Services,
   ImageProfile,
   ProfileImg,
@@ -29,8 +33,6 @@ export default function Profile({ navigation }) {
   const [establishments, setEstablishments] = useState([]);
   const [images, setImages] = useState([]);
 
-  // const image = { uri: "https://fmnova.com.br/images/noticias/safe_image.jpg" };
-  console.log(images);
   useEffect(() => {
     async function loadEstablishment() {
       const response = await api.get(`/listEstablishments`, {
@@ -82,9 +84,29 @@ export default function Profile({ navigation }) {
                     }
                   >
                     <ContentEstablishment>
-                      <ImageBackground source={{ uri: establishment.path }}>
+                      <ImageBackground
+                        source={{ uri: establishment.path }}
+                      ></ImageBackground>
+
+                      <DetailsEstablishment>
                         <Establishment>{establishment.name}</Establishment>
-                      </ImageBackground>
+                        <Style>
+                          <FontAwesome
+                            name="calendar-o"
+                            size={20}
+                            color="#000"
+                          />
+                          <Clock>
+                            {establishment.open_on_weekends == true
+                              ? "Atendemos final de senama"
+                              : "Não atendemos final de semana"}
+                          </Clock>
+                        </Style>
+                        <Style>
+                          <Feather name="clock" size={20} color="#000" />
+                          <Clock>{establishment.opening_hours}</Clock>
+                        </Style>
+                      </DetailsEstablishment>
                     </ContentEstablishment>
                   </ButtonDetails>
                 </ProfileContainer>

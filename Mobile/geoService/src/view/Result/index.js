@@ -34,7 +34,7 @@ export default function Result() {
 
   return (
     <Container>
-      <CustomHeader title="Resultada da seu Busca" />
+      <CustomHeader title="Resultada da sua Busca" />
       <Context>
         {establishments.map((establishment) => {
           return (

@@ -11,8 +11,19 @@ export const ScrollView = styled.ScrollView``;
 export const Content = styled.View``;
 
 export const ImageContainer = styled.View`
-  justify-content: center;
-  align-items: center;
+  padding: 0px 15px;
+`;
+
+export const UploadImages = styled.View`
+  flex-direction: row;
+`;
+
+export const LoadImage = styled.Image`
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  margin-bottom: 32px;
+  margin-right: 8px;
 `;
 
 export const ScrollViewHorizontal = styled.ScrollView.attrs(() => ({
@@ -47,6 +58,8 @@ export const AddService = styled.TouchableOpacity`
 
 export const Description = styled.Text`
   font-family: "Archivo_400Regular";
+  font-size: 20px;
+  font-weight: bold;
   color: #000;
   line-height: 24px;
   margin-top: 16px;
@@ -197,11 +210,15 @@ export const Style = styled.View`
   width: 80px;
   height: 30px;
   border-radius: 15px;
+  background: #1bd163;
   border: 1px solid #1bd163;
   margin-left: 15px;
+  margin-top: 10px;
 `;
 export const DescriptionService = styled.Text`
   font-family: "Archivo_400Regular";
+  font-size: 16px;
+  font-weight: bold;
   color: #000;
   line-height: 24px;
 `;
