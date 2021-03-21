@@ -2,11 +2,8 @@ const connection = require("../database/connection");
 
 module.exports = {
   async index(request, response) {
-    // const listImages = await connection("images").select("*");
-    // const establishment_id = request.headers.authorization;
     const listImages = await connection("images")
-      // .where("establishment_id", establishment_id)
-      .join("company", "company.establishment_id", "=", "images.id")
+      .join("company", "images.company_id", "=", "company.id")
       .select(["company.*", "images.*"]);
     return response.json(listImages);
   },
@@ -16,25 +13,28 @@ module.exports = {
 
     const listImages = await connection({ i: "images" })
       .where("i.id", id)
-      .join("company")
+      .join("company", "i.company_id", "=", "company.id")
       .select(["company.*", "i.path"]);
     return response.json(listImages);
   },
   async create(request, response) {
+    const { path } = request.body;
+
+    const [id] = await connection("images").returning("id").insert({
+      path,
+    });
+
     const requestImages = request.files;
 
     const images = requestImages.map((image) => {
       return { path: image.key, path: image.location };
     });
 
-    const { company_id } = request.body;
-    // const company_id = request.headers.authorization;
-
     for (const image of images) {
       const img = await connection("images").insert({
         path: image.path,
         url: image.location,
-        company_id,
+        company_id: id,
       });
       return response.json({ img });
     }

@@ -3,11 +3,11 @@ info:
   title: API Geoservice
   version: "1.0"
 servers:
-  - url: https://api.server.test/v1
+  - url: https://backend-geoservice.herokuapp.com
 
 components:
   schemas:
-    Create User:
+    CreateUser:
       type: object
       required:
         - email
@@ -21,7 +21,7 @@ components:
         password:
           type: string
 
-    User Login:
+    UserLogin:
       type: object
       required:
         - username
@@ -32,7 +32,7 @@ components:
         password:
           type: string
 
-    Forgot Password:
+    ForgotPassword:
       type: object
       required:
         - email
@@ -135,7 +135,7 @@ paths:
       summary: Lista os usuários.
       description: Lista usuarios criados.
       parameters:
-        - name: users
+        - name: List Users
           in: query
           description: Lista todos usuários.
           required: false
@@ -151,13 +151,13 @@ paths:
       summary: Criação de usuários.
       description: Cria um usuario.
 
-      parameters:
-        - name: Body
-          in: body
-          description: Informações necessárias para cadastro.
-          required: true
-          schema:
-            $ref: "#/components/schemas/Create User"
+      requestBody:
+        description: Informações necessárias para cadastro.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUser"
 
       responses:
         "200":
@@ -170,17 +170,19 @@ paths:
       summary: Faz o login de um usuário.
       description: Realiza o login.
 
-      parameters:
-        - name: Body
-          in: body
-          description: Informações necessárias para cadastro.
-          required: true
-          schema:
-            $ref: "#/components/schemas/User Login"
+      requestBody:
+        description: Informações necessárias para login.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserLogin"
 
       responses:
         "200":
           description: OK
+        "401":
+          description: Incorrect Username/Password try again!
 
   /forgotPassword:
     post:
@@ -190,13 +192,13 @@ paths:
       summary: Reset de senha.
       description: Solicita o reset de senha.
 
-      parameters:
-        - name: Body
-          in: body
-          description: Informações necessárias para cadastro.
-          required: true
-          schema:
-            $ref: "#/components/schemas/Forgot Password"
+      requestBody:
+        description: Informações necessárias troca de senha.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ForgotPassword"
 
       responses:
         "200":
@@ -225,13 +227,13 @@ paths:
       summary: Criação de establecimentos.
       description: Cria um estabelecimento.
 
-      parameters:
-        - name: Body
-          in: body
-          description: Informações necessárias para cadastro.
-          required: true
-          schema:
-            $ref: "#/components/schemas/Create User"
+      requestBody:
+        description: Informações necessárias para cadastro.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUser"
 
       responses:
         "200":
@@ -244,13 +246,13 @@ paths:
       summary: Realiza o login.
       description: Realiza o login.
 
-      parameters:
-        - name: Body
-          in: body
-          description: Informações necessárias para cadastro.
-          required: true
-          schema:
-            $ref: "#/components/schemas/User Login"
+      requestBody:
+        description: Informações necessárias para login.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserLogin"
 
       responses:
         "200":
@@ -279,13 +281,21 @@ paths:
       summary: Criação de uma empresa.
       description: Criação de uma empresa.
 
-      parameters:
-        - name: Body
-          in: body
-          description: Informações necessárias para cadastro.
-          required: true
-          schema:
-            $ref: "#/components/schemas/Company"
+      # consumes:
+      #   - multipart/form-data
+      # parameters:
+      #   - in: formData
+      #     name: upfile
+      #     type: file
+      #     description: The file to upload.
+
+      requestBody:
+        description: Informações necessárias para login.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Company"
 
       responses:
         "200":
@@ -330,13 +340,14 @@ paths:
         - Favorites
       summary: Favorita uma empresa.
       description: Favorita uma empresa.
-      parameters:
-        - name: Body
-          in: body
-          description: Informações necessárias para cadastro.
-          required: true
-          schema:
-            $ref: "#/components/schemas/Favorites"
+
+      requestBody:
+        description: Informações necessárias para cadastro.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Favorites"
 
       responses:
         "200":
@@ -399,13 +410,14 @@ paths:
         - Services
       summary: Criação de novos serviços.
       description: Criação de novos serviços.
-      parameters:
-        - name: Body
-          in: body
-          description: Informações necessárias para cadastro.
-          required: true
-          schema:
-            $ref: "#/components/schemas/Service"
+
+      requestBody:
+        description: Informações necessárias para cadastro.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Service"
 
       responses:
         "200":

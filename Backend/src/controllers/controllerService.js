@@ -22,7 +22,7 @@ module.exports = {
   async create(request, response) {
     const { service, company_id } = request.body;
 
-    const [id] = await connection("services").insert({
+    const [id] = await connection("services").returning("id").insert({
       service,
       company_id,
     });

@@ -8,11 +8,11 @@ module.exports = (error, request, response, next) => {
   //stack
   //constructor
 
-  const a = connection("error").insert({
-    errorMessage: error.toString(),
-    request,
-    response,
-  });
+  // const a = connection("error").insert({
+  //   errorMessage: error.toString(),
+  //   request,
+  //   response,
+  // });
 
   return response.status(500).json({ message: "Internal Server Error" });
 };

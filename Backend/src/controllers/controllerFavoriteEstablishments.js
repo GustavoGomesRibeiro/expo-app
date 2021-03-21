@@ -2,7 +2,6 @@ const connection = require("../database/connection");
 
 module.exports = {
   async index(request, response) {
-
     const listFavoriteEstablishment = await connection("favorites")
       .join("company", "favorites.company_id", "=", "company.id")
       .select([
@@ -29,7 +28,7 @@ module.exports = {
   async create(request, response) {
     const { user_id, company_id } = request.body;
 
-    const [id] = await connection("favorites").insert({
+    const [id] = await connection("favorites").returning("id").insert({
       user_id,
       company_id,
     });
