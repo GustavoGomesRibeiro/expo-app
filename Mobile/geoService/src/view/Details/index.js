@@ -72,26 +72,29 @@ export default function Details() {
     }
     loadEstablishment();
 
-    async function loadImages() {
-      const response = await api.get(`/images`, {
-        headers: {
-          Token: `Bearer ${token}`,
-        },
-      });
-      setImages(response.data);
-    }
-    loadImages();
+    const interval = setInterval(() => {
+      async function loadImages() {
+        const response = await api.get(`/images`, {
+          headers: {
+            Token: `Bearer ${token}`,
+          },
+        });
+        setImages(response.data);
+      }
+      loadImages();
 
-    async function loadServices() {
-      const response = await api.get(`/services`, {
-        headers: {
-          Token: `Bearer ${token}`,
-          Authorization: params.id,
-        },
-      });
-      setServices(response.data);
-    }
-    loadServices();
+      async function loadServices() {
+        const response = await api.get(`/services`, {
+          headers: {
+            Token: `Bearer ${token}`,
+            Authorization: params.id,
+          },
+        });
+        setServices(response.data);
+      }
+      loadServices();
+    }, 1000);
+    return () => clearInterval(interval);
   }, [params.id]);
 
   useEffect(() => {

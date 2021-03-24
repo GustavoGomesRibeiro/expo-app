@@ -69,7 +69,6 @@ export default function NewServices() {
   const [loadServices, setLoadServices] = useState([]);
   const [newService, setNewService] = useState("");
   const [images, setImages] = useState([]);
-  // const [loadImages, setLoadImages] = useState([]);
 
   const [service, setService] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -101,15 +100,18 @@ export default function NewServices() {
     }
     loadCompany();
 
-    async function loadImages() {
-      const response = await api.get(`/images/${params.id}`, {
-        headers: {
-          Token: `Bearer ${token}`,
-        },
-      });
-      setImages(response.data);
-    }
-    loadImages();
+    const intervalImage = setInterval(() => {
+      async function loadImages() {
+        const response = await api.get(`/images/${params.id}`, {
+          headers: {
+            Token: `Bearer ${token}`,
+          },
+        });
+        setImages(response.data);
+      }
+      loadImages();
+    }, 1000);
+    return () => clearInterval(intervalImage);
   }, [params.id]);
 
   if (!establishments) {
@@ -118,6 +120,8 @@ export default function NewServices() {
 
   async function handleAddImage() {
     const data = new FormData();
+
+    data.append("company_id", params.id);
 
     images.forEach((image, index) => {
       data.append("images", {
@@ -218,14 +222,6 @@ export default function NewServices() {
             <Content key={establishment.id}>
               <ImageContainer>
                 <ScrollViewHorizontal>
-                  {/* {loadImages.map((loadImage) => {
-                    return (
-                      <Image
-                        key={loadImage.id}
-                        source={{ uri: loadImage.path }}
-                      />
-                    );
-                  })} */}
                   <UploadImages>
                     {images.map((loadImage) => {
                       return (

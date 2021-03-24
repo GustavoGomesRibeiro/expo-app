@@ -208,7 +208,7 @@ export const Close = styled.TouchableOpacity`
   height: 20px;
   border-radius: 10px;
   background-color: #4d5156;
-  margin-left: 70px;
+  margin-left: 80px;
   justify-content: center;
   align-items: center;
 `;
@@ -220,8 +220,7 @@ export const X = styled.Text`
 export const Style = styled.View`
   justify-content: center;
   align-items: center;
-  width: 80px;
-  height: 30px;
+  width: 90px;
   border-radius: 15px;
   background: #1bd163;
   border: 1px solid #1bd163;
@@ -233,7 +232,7 @@ export const DescriptionService = styled.Text`
   font-size: 16px;
   font-weight: bold;
   color: #000;
-  line-height: 24px;
+  margin-bottom: 15px;
 `;
 
 export const Add = styled.TouchableOpacity`

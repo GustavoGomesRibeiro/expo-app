@@ -72,5 +72,6 @@ routes.get("/search", controllerSearch.index);
 //Images
 routes.get("/images", controllerImages.index);
 routes.get("/images/:id", controllerImages.show);
+routes.post("/images", upload.array("images"), controllerImages.create);
 
 module.exports = routes;

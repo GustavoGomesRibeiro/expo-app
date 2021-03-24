@@ -18,11 +18,8 @@ module.exports = {
     return response.json(listImages);
   },
   async create(request, response) {
-    const { path } = request.body;
 
-    const [id] = await connection("images").returning("id").insert({
-      path,
-    });
+    const { company_id } = request.body;
 
     const requestImages = request.files;
 
@@ -34,9 +31,9 @@ module.exports = {
       const img = await connection("images").insert({
         path: image.path,
         url: image.location,
-        company_id: id,
+        company_id,
       });
-      return response.json({ img });
     }
+    return response.json({ images });
   },
 };
