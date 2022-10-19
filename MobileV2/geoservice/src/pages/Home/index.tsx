@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import { Container, Text} from './styled';
 
 export default function Home() {
