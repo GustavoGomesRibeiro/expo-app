@@ -1,10 +1,14 @@
 import React from 'react';
-import { Container, Text } from './styled';
+
+import PageCallToAction from '../../../components/PageCallToAction';
+
+import { Container } from './styled';
 
 export default function SessionUser() {
+
     return (
         <Container>
-            <Text> SessionUser</Text>
+            <PageCallToAction>Para começar, você precisa se cadastrar para poder buscar serviços pela região.</PageCallToAction>
         </Container>
     )
 }

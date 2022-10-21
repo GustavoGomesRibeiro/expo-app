@@ -1,9 +1,29 @@
 import styled from 'styled-components/native';
 
 
-export const Container = styled.View``;
+export const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+
+`;
 
 export const Logo = styled.View``;
+
+export const ContentDescription = styled.View`
+  margin-top: 20px;
+  padding-left: 30px;
+`;
+
+export const Welcome = styled.Text`
+  font-size: 18px;
+  font-family: 'Poppins_400Regular';
+`;
+
+export const LabelOption = styled.Text`
+  font-size: 16px;
+  font-family: 'Poppins_700Bold';
+`;
+
 
 export const Img = styled.Image.attrs({
         resizeMode: "contain"

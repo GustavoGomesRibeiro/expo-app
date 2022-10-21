@@ -1,10 +1,13 @@
 import React from 'react';
-import { Container, Text } from './styled';
+
+import PageCallToAction from '../../../components/PageCallToAction';
+
+import { Container } from './styled';
 
 export default function SessionEstablishment() {
     return (
         <Container>
-            <Text> SessionEstablishment</Text>
+            <PageCallToAction>Para começar, você precisa se cadastrar para poder cadastrar seus serviços.</PageCallToAction>
         </Container>
     )
 }
