@@ -7,10 +7,10 @@ import {
     Text
 } from './styled';
 
-    export default function Button({ children, ...rest}: Props) {
+    export default function Button({ children, onPress, ...rest}: Props) {
     return (
-        <Container>
-            <Btn>
+        <Container {...rest}>
+            <Btn onPress={onPress}>
                 <Text> {children} </Text>
             </Btn>
         </Container>

@@ -1,4 +1,6 @@
 export interface Props {
-    children: React.ReactNode;
-    onPress: () => void;
+    sessionUser?: string;
+    sessionEstablishment?: string;
+    children?: React.ReactNode;
+    onPress?: () => void;
 } 

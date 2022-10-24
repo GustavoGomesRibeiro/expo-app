@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
 import { ReceiveScreen } from '../../../utils/NavigationRoutes';
 
+import { FontAwesome, MaterialCommunityIcons  } from '@expo/vector-icons'; 
+import logo from '../../../assets/imgs/logo.png';
 import { 
     Container, 
     TextUser, 
@@ -18,8 +20,7 @@ import {
     ContainerText 
 } from './styled';
 
-import { FontAwesome, MaterialCommunityIcons  } from '@expo/vector-icons'; 
-import logo from '../../../assets/imgs/logo.png';
+
 
 
 export default function Main() {

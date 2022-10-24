@@ -17,7 +17,7 @@ import {
 } from './styled';
 
 
-export default function PageCallToAction({children, ...rest}: Props) {
+export default function PageCallToAction({children, sessionUser, sessionEstablishment, ...rest}: Props) {
 
     const navigation = useNavigation<ReceiveScreen>();
 
@@ -33,8 +33,8 @@ export default function PageCallToAction({children, ...rest}: Props) {
                 <Description> { children }</Description>
             </ContentDescription>
             <ContentButtons>
-                <Button onPress={() => {}}> Entrar </Button>
-                <Button onPress={() => {}}> Registrar </Button>
+                <Button onPress={() => sessionUser ? navigation.navigate("Home") : navigation.navigate("Main")}> Entrar </Button>
+                <Button onPress={() => sessionUser ? navigation.navigate("RegisterUser") : navigation.navigate("RegisterEstablishment")}> Registrar </Button>
             </ContentButtons>
         </Container>
     )

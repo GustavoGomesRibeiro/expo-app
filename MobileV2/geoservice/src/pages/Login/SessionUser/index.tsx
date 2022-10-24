@@ -8,7 +8,7 @@ export default function SessionUser() {
 
     return (
         <Container>
-            <PageCallToAction>Para começar, você precisa se cadastrar para poder buscar serviços pela região.</PageCallToAction>
+            <PageCallToAction sessionUser="user">Para começar, você precisa se cadastrar para poder buscar serviços pela região.</PageCallToAction>
         </Container>
     )
 }
