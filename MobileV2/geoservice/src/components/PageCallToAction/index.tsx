@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native'; 
 import { ReceiveScreen } from '../../../utils/NavigationRoutes';
 
-import { Props } from '../../utils/interfaces/interfaceProps';
+import { GeneralProps } from '../../utils/interfaces/interfaceGeneralProps';
 import Button from '../../components/Button/index';
 
 import { AntDesign  } from '@expo/vector-icons'; 
@@ -17,7 +17,7 @@ import {
 } from './styled';
 
 
-export default function PageCallToAction({children, sessionUser, sessionEstablishment, ...rest}: Props) {
+export default function PageCallToAction({children, sessionUser, sessionEstablishment, ...rest}: GeneralProps) {
 
     const navigation = useNavigation<ReceiveScreen>();
 
@@ -33,8 +33,8 @@ export default function PageCallToAction({children, sessionUser, sessionEstablis
                 <Description> { children }</Description>
             </ContentDescription>
             <ContentButtons>
-                <Button onPress={() => sessionUser ? navigation.navigate("Home") : navigation.navigate("Main")}> Entrar </Button>
-                <Button onPress={() => sessionUser ? navigation.navigate("RegisterUser") : navigation.navigate("RegisterEstablishment")}> Registrar </Button>
+                <Button onPress={() => sessionUser ? navigation.navigate("Signin", {session: 'user'}) : navigation.navigate("Signin", {session: 'establishment'})}> Entrar </Button>
+                <Button onPress={() => sessionUser ? navigation.navigate("RegisterUser") : navigation.navigate("RegisterEstablishment")}> Cadastrar </Button>
             </ContentButtons>
         </Container>
     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Props } from '../../utils/interfaces/interfaceProps';
+import { GeneralProps } from '../../utils/interfaces/interfaceGeneralProps';
 
 import {
     Container,
@@ -7,7 +7,7 @@ import {
     Text
 } from './styled';
 
-    export default function Button({ children, onPress, ...rest}: Props) {
+    export default function Button({ children, onPress, ...rest}: GeneralProps) {
     return (
         <Container {...rest}>
             <Btn onPress={onPress}>

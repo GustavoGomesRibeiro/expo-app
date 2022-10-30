@@ -8,7 +8,7 @@ import Home from '../pages/Home/index';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
-export default function Route() {
+export default function EstablishmentRoute() {
     return (
         <RootStack.Navigator>
             <RootStack.Screen name="Home" component={Home} options={{ headerShown: false}}/>
