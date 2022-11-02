@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { KeyboardAvoidingView  } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { ReceiveScreen } from '../../../utils/NavigationRoutes';
 import { ContextApi } from '../../../hooks/authContext';
@@ -10,17 +11,29 @@ import Header from '../../../components/Header';
 import { Container, ContainerInput, Text } from './styled';
 
 export default function Signin() {
+    const [ username, setUsername] = useState();
+    const [ password, setPassword] = useState();
 
-    const { authenticationUser } = useContext(ContextApi);
+    const { authenticationUser, authenticationEstablishment } = useContext(ContextApi);
     const navigation = useNavigation<ReceiveScreen>()
     const route = useRoute();
     
 
     const handleLogin = () => {
-        authenticationUser({
-            username: 'Gustavo',
-            password: '123456'
-        })
+        if(route.params?.session === 'user') {
+            authenticationUser({
+                username: username,
+                password: password
+            })
+            navigation.navigate('Home');
+        } else {
+            authenticationEstablishment({
+                username: username,
+                password: password
+            })
+            navigation.navigate('Home');
+        }
+
     }
 
     const routeNavigation = () => {
@@ -34,12 +47,14 @@ export default function Signin() {
     return (
         <Container>
             <Header icon="arrow-left" onPress={routeNavigation}/>
-            <ContainerInput>
-                <Text> Main screen to Sigin</Text>
-                <Input placeholder="Username" placeholderTextColor="white" icon="user"/>
-                <Input placeholder="Password" placeholderTextColor="white" icon="lock"/>
-                <Button onPress={handleLogin}> Entrar </Button>
-            </ContainerInput>
+            <KeyboardAvoidingView behavior="position">
+                <ContainerInput>
+                    <Text> Main screen to Sigin</Text>
+                    <Input placeholder="Username" value={username} onChangeText={setUsername} placeholderTextColor="white" icon="user"/>
+                    <Input placeholder="Password" value={password} onChangeText={setPassword} placeholderTextColor="white" icon="lock" secureTextEntry={true}/>
+                    <Button onPress={handleLogin}> Entrar </Button>
+                </ContainerInput>
+            </KeyboardAvoidingView>
         </Container>
     )
 }

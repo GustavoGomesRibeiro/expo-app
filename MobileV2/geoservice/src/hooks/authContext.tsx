@@ -6,8 +6,17 @@ const ContextApi = createContext(null);
 
 function AuthProvider({children} :IAuthentication) {
     
-    const authenticationUser = useCallback(async({username, password}) => {
+    const authenticationUser = useCallback(async({username, password}: IAuthentication) => {
         const response = await connectionApi.post('/sessions/users', {
+            username,
+            password
+        }) 
+    
+        console.log(response, 'response')
+    },[])
+
+    const authenticationEstablishment = useCallback(async({username, password}: IAuthentication) => {
+        const response = await connectionApi.post('/sessions/establishments', {
             username,
             password
         }) 
@@ -18,7 +27,8 @@ function AuthProvider({children} :IAuthentication) {
     return (
         <ContextApi.Provider
             value={{
-                authenticationUser
+                authenticationUser,
+                authenticationEstablishment
             }}
         >
             {children}

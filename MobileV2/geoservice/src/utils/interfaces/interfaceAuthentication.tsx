@@ -1,6 +1,7 @@
 export interface IAuthentication {
-    email?: string;
+    username?: string;
     password?: string;
     children?: React.ReactNode;
     authenticationUser?: () => void;
+    authenticationEstablishment?: () => void;
 }
