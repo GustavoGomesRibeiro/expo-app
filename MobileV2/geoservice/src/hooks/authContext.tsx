@@ -2,7 +2,7 @@ import React,{ createContext, useCallback } from 'react';
 import { IAuthentication } from '../utils/interfaces/interfaceAuthentication';
 import connectionApi from '../services/controllerApi';
 
-const ContextApi = createContext(null);
+const ContextApi = createContext<IAuthentication>({} as IAuthentication);
 
 function AuthProvider({children} :IAuthentication) {
     
