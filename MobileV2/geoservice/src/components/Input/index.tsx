@@ -1,24 +1,28 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
 
-import { GeneralProps, ITextInput } from '../../utils/interfaces/interfaceGeneralProps';
+import { GeneralPropsInput, ITextInput } from '../../utils/interfaces/interfaceGeneralProps';
 
 import {
     Container,
     TextInput,
-    Icon
+    Icon,
+    Button
 } from './styled';
 
 export default function Input({ 
     name,
     secureTextEntry, 
-    value, 
-    onChangeText, 
     placeholder,
     placeholderTextColor, 
-    icon, 
+    icon,
+    icon_eye_opened, 
+    icon_eye_closed,
+    isVisible, 
+    onChangeText, 
+    visible,
     ...rest
-}: GeneralProps) {
+}: GeneralPropsInput) {
 
     const inputRef = useRef<ITextInput>(null);
 
@@ -59,6 +63,9 @@ export default function Input({
       [onChangeText]
     )
 
+
+    console.log(isVisible, 'is visible?')
+
     return (
         <Container {...rest}>
             <Icon  name={icon} size={20} color="#fff"/>
@@ -71,6 +78,9 @@ export default function Input({
                 defaultValue={defaultValue}
                 {...rest}                
             />
+            <Button onPress={visible}>
+              <Icon name={isVisible ? icon_eye_opened : icon_eye_closed} size={20} color="#fff"/>
+            </Button>
         </Container>
     )
 }

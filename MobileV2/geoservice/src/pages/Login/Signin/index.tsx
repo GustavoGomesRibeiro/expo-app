@@ -12,12 +12,14 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import Header from '../../../components/Header';
 
-import { Container, ContainerInput, Text } from './styled';
+import Login from '../../../assets/imgs/login.svg'
 
-export default function Signin() {
+import { Container, ContainerInput, Text, Logo, ContainerHeader } from './styled';
+
+export default function Signin() {    
     const formRef = useRef<FormHandles>(null);
 
-    const { authenticationUser, authenticationEstablishment } = useContext(ContextApi);
+    const { authenticationUser, authenticationEstablishment, enableVision, visible } = useContext(ContextApi);
     const navigation = useNavigation<ReceiveScreen>()
     const route = useRoute();
     
@@ -50,10 +52,14 @@ export default function Signin() {
 
     return (
         <Container>
-            <Header icon="arrow-left" onPress={routeNavigation}/>
+            <ContainerHeader>
+                <Header icon="arrow-left" onPress={routeNavigation} title="Login"/>
+            </ContainerHeader>
             <KeyboardAvoidingView behavior="position">
                 <ContainerInput>
-                    <Text> Main screen to Sigin</Text>
+                    <Logo>
+                        <Login width={250} height={250} />
+                    </Logo>
                     <Form ref={formRef} onSubmit={handleLogin}>
                         <Input 
                             name="username" 
@@ -71,7 +77,11 @@ export default function Signin() {
                             placeholder="Password"
                             placeholderTextColor="white" 
                             icon="lock"
-                            secureTextEntry={true}   
+                            icon_eye_opened="eye"
+                            icon_eye_closed="eye-off"
+                            secureTextEntry={!!visible}
+                            visible={enableVision}
+                            isVisible={visible}   
                             onSubmitEditing ={() => {
                                 formRef.current?.submitForm();
                             }}                     

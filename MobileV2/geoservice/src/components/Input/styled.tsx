@@ -20,6 +20,8 @@ export const TextInput = styled.TextInput`
     font-family: 'Archivo_700Bold';
 `;
 
+export const Button = styled.TouchableOpacity``;
+
 export const Icon = styled(Feather) `
   padding: 10px;
 `;

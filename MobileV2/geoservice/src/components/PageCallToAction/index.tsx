@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native'; 
 import { ReceiveScreen } from '../../../utils/NavigationRoutes';
 
-import { GeneralProps } from '../../utils/interfaces/interfaceGeneralProps';
+import { GeneralPropsCallToAction } from '../../utils/interfaces/interfaceGeneralProps';
 import Button from '../../components/Button/index';
 
 import { AntDesign  } from '@expo/vector-icons'; 
@@ -17,7 +17,7 @@ import {
 } from './styled';
 
 
-export default function PageCallToAction({children, sessionUser, sessionEstablishment, ...rest}: GeneralProps) {
+export default function PageCallToAction({children, sessionUser, sessionEstablishment, ...rest}: GeneralPropsCallToAction) {
 
     const navigation = useNavigation<ReceiveScreen>();
 
