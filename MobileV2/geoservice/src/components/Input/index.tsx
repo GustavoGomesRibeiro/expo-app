@@ -64,8 +64,6 @@ export default function Input({
     )
 
 
-    console.log(isVisible, 'is visible?')
-
     return (
         <Container {...rest}>
             <Icon  name={icon} size={20} color="#fff"/>
