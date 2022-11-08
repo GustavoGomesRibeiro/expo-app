@@ -8,13 +8,12 @@ export interface IAuthentication {
     password?: string;
     children?: React.ReactNode;
     visible?: boolean;
-    error: string;
-    authenticated: {
-        user: string;
-        establishment: string;
-        token: string;
-    }
+    error?: string;
+    user?: string;
+    establishment?: string;
+    token?: string;
     authenticationUser?: ({username, password}: ISignin) => Promise<void>;
     authenticationEstablishment?: ({username, password}: ISignin) => Promise<void>;
+    signOut?: () => Promise<void>;
     enableVision?: () => void;
 }

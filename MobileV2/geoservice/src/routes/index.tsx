@@ -1,17 +1,21 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ContextApi } from '../hooks/authContext';
 
-import RootStackParamList from './RootStackParamList/index';
+import AuthRoute from './auth.route';
+import UserRoute from './user.route';
+import EstablishmentRoute from './establishment.route';
 
-import Home from '../pages/Home/index';
+const Router = () => {
+    const { user, establishment } = useContext(ContextApi);
 
-const RootStack = createNativeStackNavigator<RootStackParamList>();
-
-export default function Route() {
-    return (
-        <RootStack.Navigator>
-            <RootStack.Screen name="Home" component={Home} options={{ headerShown: false}}/>
-        </RootStack.Navigator>
-    )
+    return user ? (
+        <UserRoute/>
+    ) : establishment ? (
+        <EstablishmentRoute/>
+    ) : ( 
+        <AuthRoute/>
+    );
 }
+
+export default Router;

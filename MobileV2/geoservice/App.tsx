@@ -5,7 +5,7 @@ import {Poppins_400Regular, Poppins_700Bold, useFonts} from '@expo-google-fonts/
 
 import { NavigationContainer } from '@react-navigation/native';
 import AppProvider  from './src/hooks/index';
-import Route from './src/routes/auth.route';
+import Router from './src/routes/index';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -23,7 +23,7 @@ export default function App() {
     <AppProvider>
       <NavigationContainer>
         <StatusBar style="auto" />
-        <Route/>
+        <Router/>
       </NavigationContainer>
     </AppProvider>
   );

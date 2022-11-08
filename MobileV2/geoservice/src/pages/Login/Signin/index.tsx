@@ -21,7 +21,7 @@ export default function Signin() {
     const formRef = useRef<FormHandles>(null);
 
     const { authenticationUser, authenticationEstablishment, enableVision, visible, error } = useContext(ContextApi);
-    const navigation = useNavigation<ReceiveScreen>()
+    const navigation = useNavigation<ReceiveScreen>();
     const route = useRoute();
     
 

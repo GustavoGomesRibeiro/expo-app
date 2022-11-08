@@ -1,4 +1,5 @@
 import React,{ createContext, useCallback, useState, useEffect } from 'react';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { IAuthentication } from '../utils/interfaces/interfaceAuthentication';
@@ -7,9 +8,9 @@ import connectionApi from '../services/controllerApi';
 const ContextApi = createContext<IAuthentication>({} as IAuthentication);
 
 function AuthProvider({children} :IAuthentication) {
-    const [ authenticated, setAuthenticated] = useState({});
+    const [ authenticated, setAuthenticated] = useState<IAuthentication>({} as IAuthentication);
     const [loading, setLoading] = useState<boolean>(false);
-    const [ visible, setVisible ] = useState<boolean>(false);
+    const [ visible, setVisible ] = useState<boolean>(true);
     const [ error, setError ] = useState<string>('');
 
     useEffect(() => {
@@ -19,6 +20,7 @@ function AuthProvider({children} :IAuthentication) {
             "@geoService:user",
             "@geoService:establishment",
           ]);
+
           if (token[1] && user[1] && establishment[1]) {
             connectionApi.defaults.headers.Token = `Bearer ${token[1]}`;
     
@@ -77,7 +79,7 @@ function AuthProvider({children} :IAuthentication) {
     
             connectionApi.defaults.headers.Token = `Bearer ${token[1]}`;
     
-            setAuthenticated({ token, establishment  });            
+            setAuthenticated({ token, establishment });            
         } catch (error) {
             setError('error');
             
@@ -88,6 +90,16 @@ function AuthProvider({children} :IAuthentication) {
 
     },[])
 
+    const signOut = useCallback(async () => {
+        await AsyncStorage.multiRemove([
+            "@geoService:user",
+            "@geoService:establishment",
+            "@geoService:token",
+          ]);
+        setAuthenticated({});
+        // navigation.navigate('Main');
+    }, []);
+
     const enableVision = () => {
         setVisible(event => !event)
     }
@@ -97,6 +109,7 @@ function AuthProvider({children} :IAuthentication) {
             value={{
                 authenticationUser,
                 authenticationEstablishment,
+                signOut,
                 enableVision,
                 visible,
                 error,
