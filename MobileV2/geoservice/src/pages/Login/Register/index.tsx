@@ -1,27 +1,45 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useCallback } from 'react';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import { KeyboardAvoidingView  } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { ContextApi } from '../../../hooks/authContext';
 import { ReceiveScreen } from '../../../utils/NavigationRoutes';
+import { IRegister } from '../../../utils/interfaces/interfaceAuthentication';
+
 import { AlertToastError } from '../../../components/Alert';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import Header from '../../../components/Header';
 
-import Login from '../../../assets/imgs/login.svg'
+import Signup from '../../../assets/imgs/signup.svg'
 import { Container, ContainerHeader, ContainerInput, Logo,  Text } from './styled';
 
 export default function Register() {
-    const { enableVision, visible, error } = useContext(ContextApi);
+    const { registerUser, registerEstablishment, enableVision, visible, error } = useContext(ContextApi);
+    const route = useRoute();
+
     const formRef = useRef<FormHandles>(null);
     const navigation = useNavigation<ReceiveScreen>();
 
-    const handleLogin = (data) => {
-        console.log(data)
-    }
+
+    const handleRegister = useCallback(async (data: IRegister) => {
+        if(route.params?.session === 'user'){
+            registerUser({
+                email: data.email,
+                username: data.username,
+                password: data.password,
+            })
+        } else {
+            registerEstablishment({
+                email: data.email,
+                username: data.username,
+                password: data.password,
+            })
+        }
+    },[])
+
     return (
         <Container>
             <ContainerHeader>
@@ -33,10 +51,10 @@ export default function Register() {
             <KeyboardAvoidingView behavior="position">
                 <ContainerInput>
                     <Logo>
-                        <Login width={250} height={250} />
+                        <Signup width={250} height={250} />
                     </Logo>
 
-                    <Form ref={formRef} onSubmit={handleLogin}>
+                    <Form ref={formRef} onSubmit={handleRegister}>
                         <Input 
                             name='email'
                             type='email'
@@ -72,7 +90,7 @@ export default function Register() {
                                 formRef.current?.submitForm();
                             }}
                         />
-                        <Button> Cadastrar </Button>
+                        <Button onPress={() => formRef.current?.submitForm()}> Cadastrar </Button>
                     </Form>
                 </ContainerInput>
             </KeyboardAvoidingView>

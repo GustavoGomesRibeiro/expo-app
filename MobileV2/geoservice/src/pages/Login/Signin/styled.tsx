@@ -9,8 +9,6 @@ export const ContainerInput = styled.View`
 `;
 
 export const ContainerHeader = styled.View`
-  flex-direction: row;
-  align-items: center;
 `;
 
 export const Text = styled.Text``;

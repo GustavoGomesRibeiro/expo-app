@@ -2,10 +2,10 @@
 type RootStackParamList  = {
     Home: undefined,
     Main: undefined,
-    Register: undefined,
+    Register: { session: 'user' | 'establishment'},
     SessionUser: undefined,
     SessionEstablishment: undefined,
-    Signin: { session: 'user'},
+    Signin: { session: 'user' | 'establishment'},
 }
 
 export default RootStackParamList;

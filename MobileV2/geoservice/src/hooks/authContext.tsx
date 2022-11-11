@@ -2,7 +2,7 @@ import React,{ createContext, useCallback, useState, useEffect } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { IAuthentication } from '../utils/interfaces/interfaceAuthentication';
+import { IAuthentication, IRegister } from '../utils/interfaces/interfaceAuthentication';
 import connectionApi from '../services/controllerApi';
 
 const ContextApi = createContext<IAuthentication>({} as IAuthentication);
@@ -33,61 +33,125 @@ function AuthProvider({children} :IAuthentication) {
           setLoading(false);
         }
         loadStorageData();
-      }, []);
+    }, []);
 
     const authenticationUser = useCallback(async({username, password}: IAuthentication) => {
-        try {
-            const response = await connectionApi.post('/sessions/users', {
-                username,
-                password
-            });
-            
-            const { token, user } = response.data;
-
-            await AsyncStorage.multiSet([
-                ["@gerService:token", token],
-                ["@gerService:user", JSON.stringify(user)],
-            ]);
-
-            connectionApi.defaults.headers.Token = `Bearer ${token[1]}`;
-
-            setAuthenticated({ token, user });
-        } catch (error) {
+        if(!username || !password) {
             setError('error');
-            
+                
             setTimeout(() => {
-              setError('');
+                setError('');
             }, 3000);
-        }
+            
+        } else {
+            try {
+                const response = await connectionApi.post('/sessions/users', {
+                    username,
+                    password
+                });
+                
+                const { token, user } = response.data;
 
+                await AsyncStorage.multiSet([
+                    ["@gerService:token", token],
+                    ["@gerService:user", JSON.stringify(user)],
+                ]);
+
+                connectionApi.defaults.headers.Token = `Bearer ${token[1]}`;
+
+                setAuthenticated({ token, user });
+            } catch (error) {
+                setError('error');
+                
+                setTimeout(() => {
+                    setError('');
+                }, 3000);
+            }
+        }
     
     },[])
 
     const authenticationEstablishment = useCallback(async({username, password}: IAuthentication) => {
-        try {
-            const response = await connectionApi.post('/sessions/establishments', {
-                username,
-                password
-            }) 
-        
-            const { token, establishment  } = response.data;
-    
-            await AsyncStorage.multiSet([
-                ["@gerService:token", token],
-                ["@gerService:establishment ", JSON.stringify(establishment)],
-            ]);
-    
-            connectionApi.defaults.headers.Token = `Bearer ${token[1]}`;
-    
-            setAuthenticated({ token, establishment });            
-        } catch (error) {
+        if(!username || !password) {
             setError('error');
-            
+                
             setTimeout(() => {
-              setError('');
-            }, 3000);            
+                setError('');
+            }, 3000);
+        } else {
+            try {
+                const response = await connectionApi.post('/sessions/establishments', {
+                    username,
+                    password
+                }) 
+            
+                const { token, establishment  } = response.data;
+        
+                await AsyncStorage.multiSet([
+                    ["@gerService:token", token],
+                    ["@gerService:establishment ", JSON.stringify(establishment)],
+                ]);
+        
+                connectionApi.defaults.headers.Token = `Bearer ${token[1]}`;
+        
+                setAuthenticated({ token, establishment });            
+            } catch (error) {
+                setError('error');
+                
+                setTimeout(() => {
+                    setError('');
+                }, 3000);            
+            }
         }
+    },[])
 
+    const registerUser = useCallback(async({email, username, password} : IRegister) => {
+        if(!email || !username || !password) {
+            setError('error');
+
+            setTimeout(() => {
+                setError('');
+            }, 3000);
+        } else {
+            try {
+                const response = await connectionApi.post('/users', {
+                    email,
+                    username,
+                    password
+                })
+            } catch (error) {
+                setError('error');
+
+                setTimeout(() => {
+                    setError('');
+                }, 3000);
+            }
+        }
+    },[])
+
+    const registerEstablishment = useCallback(async ({email, username, password}: IRegister) => {
+        if(!email || !username || !password) {
+            setError('error');
+
+            setTimeout(() => {
+                setError('');
+            }, 3000);
+        } else {
+            try {
+                const response = await connectionApi.post('/establishments', {
+                    email,
+                    username,
+                    password
+                })
+        
+            } catch (error) {
+                setError('error');
+
+                setTimeout(() => {
+                    setError('');
+                }, 3000);
+            }
+        }
     },[])
 
     const signOut = useCallback(async () => {
@@ -109,6 +173,8 @@ function AuthProvider({children} :IAuthentication) {
             value={{
                 authenticationUser,
                 authenticationEstablishment,
+                registerUser,
+                registerEstablishment,
                 signOut,
                 enableVision,
                 visible,

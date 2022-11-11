@@ -34,7 +34,7 @@ export default function PageCallToAction({children, sessionUser, sessionEstablis
             </ContentDescription>
             <ContentButtons>
                 <Button onPress={() => sessionUser ? navigation.navigate("Signin", {session: 'user'}) : navigation.navigate("Signin", {session: 'establishment'})}> Entrar </Button>
-                <Button onPress={() => navigation.navigate("Register")}> Cadastrar </Button>
+                <Button onPress={() => sessionUser ? navigation.navigate("Register", {session: 'user'}) : navigation.navigate("Register", {session: 'establishment'})}> Cadastrar </Button>
             </ContentButtons>
         </Container>
     )

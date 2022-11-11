@@ -7,6 +7,7 @@ export default function Header({icon, title, onPress, ...rest}: GeneralPropsHead
         <Container> 
             <HeaderIcon onPress={onPress} name={icon} size={30} color="black"/>
             <Text>{title}</Text>
+            <HeaderIcon/>
         </Container>
     )
 }

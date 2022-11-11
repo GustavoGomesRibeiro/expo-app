@@ -3,6 +3,12 @@ export interface ISignin {
     password: string;
 }
 
+export interface IRegister {
+    email: string;
+    username: string;
+    password: string;
+}
+
 export interface IAuthentication {
     username?: string;
     password?: string;
@@ -14,6 +20,8 @@ export interface IAuthentication {
     token?: string;
     authenticationUser?: ({username, password}: ISignin) => Promise<void>;
     authenticationEstablishment?: ({username, password}: ISignin) => Promise<void>;
+    registerUser?: ({email, username, password}: IRegister) => Promise<void>;
+    registerEstablishment?: ({email, username, password}: IRegister) => Promise<void>;
     signOut?: () => Promise<void>;
     enableVision?: () => void;
 }
