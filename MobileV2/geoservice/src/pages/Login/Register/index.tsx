@@ -2,7 +2,8 @@ import React, { useRef, useContext, useCallback } from 'react';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import { KeyboardAvoidingView  } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp  } from '@react-navigation/native';
+import * as Yup from 'yup';
 
 import { ContextApi } from '../../../hooks/authContext';
 import { ReceiveScreen } from '../../../utils/NavigationRoutes';
@@ -18,25 +19,48 @@ import { Container, ContainerHeader, ContainerInput, Logo,  Text } from './style
 
 export default function Register() {
     const { registerUser, registerEstablishment, enableVision, visible, error } = useContext(ContextApi);
-    const route = useRoute();
+    const route: RouteProp<{params: {session: string}}>  = useRoute();
 
     const formRef = useRef<FormHandles>(null);
     const navigation = useNavigation<ReceiveScreen>();
 
 
     const handleRegister = useCallback(async (data: IRegister) => {
-        if(route.params?.session === 'user'){
-            registerUser({
-                email: data.email,
-                username: data.username,
-                password: data.password,
-            })
-        } else {
-            registerEstablishment({
-                email: data.email,
-                username: data.username,
-                password: data.password,
-            })
+        
+        try {
+            formRef.current.setErrors({});
+
+            const schema = Yup.object().shape({
+                email: Yup.string().email('Digite um e-mail válido').required('Email obrigatório'),
+                username: Yup.string().required('Usuário obrigatório'),
+                password: Yup.string().min(8, 'Senha deve ter pelo menos 8 caracteres').required('Senha obrigatória'),
+            });
+
+            await schema.validate(data, {
+                abortEarly: false,
+            });
+
+            if(route.params?.session === 'user'){
+                await registerUser({
+                    email: data.email,
+                    username: data.username,
+                    password: data.password,
+                })
+            } else {
+                await registerEstablishment({
+                    email: data.email,
+                    username: data.username,
+                    password: data.password,
+                })
+            }
+        } catch (err) {
+            const validationErrors = {};
+            if (err instanceof Yup.ValidationError) {
+              err.inner.forEach(error => {
+                validationErrors[error.path] = error.message;
+              });
+              formRef.current.setErrors(validationErrors);
+            }
         }
     },[])
 
@@ -46,7 +70,7 @@ export default function Register() {
                 <Header icon="arrow-left" onPress={() => navigation.goBack()} title="Cadastro"/>
             </ContainerHeader>
             
-            {error === 'error' ? <AlertToastError /> : null }
+            {error === 'error' ? <AlertToastError>Algo deu errado, tente novamente!</AlertToastError> : null }
 
             <KeyboardAvoidingView behavior="position">
                 <ContainerInput>

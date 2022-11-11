@@ -28,7 +28,7 @@ const AlertToastSuccess = () => {
     );
 }
 
-const AlertToastError = () => {
+const AlertToastError = ({children}: any) => {
     return (
         <Animated.View
             entering={FadeInUp}
@@ -48,7 +48,7 @@ const AlertToastError = () => {
             </Error>
             <ContainerWhite>
                 <Title>Ops...</Title>
-                <Description>Valide usuário e senha!</Description>
+                <Description>{children}</Description>
             </ContainerWhite>
         </Animated.View>
     );

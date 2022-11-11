@@ -10,18 +10,16 @@ export interface IRegister {
 }
 
 export interface IAuthentication {
-    username?: string;
-    password?: string;
     children?: React.ReactNode;
-    visible?: boolean;
-    error?: string;
-    user?: string;
-    establishment?: string;
-    token?: string;
-    authenticationUser?: ({username, password}: ISignin) => Promise<void>;
-    authenticationEstablishment?: ({username, password}: ISignin) => Promise<void>;
-    registerUser?: ({email, username, password}: IRegister) => Promise<void>;
-    registerEstablishment?: ({email, username, password}: IRegister) => Promise<void>;
+    visible: boolean;
+    error: string;
+    user: string;
+    establishment: string;
+    token: string;
+    authenticationUser: ({ username, password }: ISignin) => Promise<void>;
+    authenticationEstablishment: ({username, password}: ISignin) => Promise<void>;
+    registerUser: ({email, username, password}: IRegister) => Promise<void>;
+    registerEstablishment: ({email, username, password}: IRegister) => Promise<void>;
     signOut?: () => Promise<void>;
     enableVision?: () => void;
 }

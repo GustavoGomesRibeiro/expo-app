@@ -22,6 +22,16 @@ export const TextInput = styled.TextInput`
 
 export const Button = styled.TouchableOpacity``;
 
+export const Text = styled.Text`
+  color: #f00;
+  margin-right: 10px;
+`;
+
+export const ContentRequired = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const Icon = styled(Feather) `
   padding: 10px;
 `;

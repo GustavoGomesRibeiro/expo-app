@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
+import { Feather } from '@expo/vector-icons';
 
 import { GeneralPropsInput, ITextInput } from '../../utils/interfaces/interfaceGeneralProps';
 
@@ -7,7 +8,9 @@ import {
     Container,
     TextInput,
     Icon,
-    Button
+    Button,
+    Text,
+    ContentRequired
 } from './styled';
 
 export default function Input({ 
@@ -65,6 +68,7 @@ export default function Input({
 
 
     return (
+      <>
         <Container {...rest}>
             <Icon  name={icon} size={20} color="#fff"/>
             <TextInput 
@@ -80,5 +84,12 @@ export default function Input({
               <Icon name={isVisible ? icon_eye_opened : icon_eye_closed} size={20} color="#fff"/>
             </Button>
         </Container>
+        {error && (
+          <ContentRequired>
+            <Text>{error}</Text>
+            <Feather name="alert-circle" size={20} color="#f00" />
+          </ContentRequired>
+          )}
+      </>
     )
 }

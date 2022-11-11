@@ -11,6 +11,16 @@ export const ContainerInput = styled.View`
 export const ContainerHeader = styled.View`
 `;
 
-export const Text = styled.Text``;
 
 export const Logo = styled.View``;
+
+export const Footer = styled.View`
+  margin-top: 15px;
+`;
+
+export const ForgotPassword = styled.TouchableOpacity``;
+
+export const Text = styled.Text`
+  font-size: 14px;
+  font-family: "Archivo_700Bold";
+`;

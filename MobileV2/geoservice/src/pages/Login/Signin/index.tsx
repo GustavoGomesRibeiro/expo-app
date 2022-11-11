@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useCallback } from 'react';
 import { KeyboardAvoidingView  } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native'
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 
@@ -15,19 +15,18 @@ import { AlertToastError } from '../../../components/Alert';
 
 import Login from '../../../assets/imgs/login.svg'
 
-import { Container, ContainerInput, Text, Logo, ContainerHeader } from './styled';
+import { Container, ContainerInput, Text, Logo, ContainerHeader, Footer, ForgotPassword } from './styled';
 
 export default function Signin() {    
     const formRef = useRef<FormHandles>(null);
 
     const { authenticationUser, authenticationEstablishment, enableVision, visible, error } = useContext(ContextApi);
     const navigation = useNavigation<ReceiveScreen>();
-    const route = useRoute();
+    const route: RouteProp<{ params: {session: string}}> = useRoute();
     
 
     const handleLogin = useCallback(async (data: ISignin) => {
         try {
-      
             if(route.params?.session === 'user') {
                 authenticationUser({
                     username: data.username,
@@ -50,7 +49,7 @@ export default function Signin() {
                 <Header icon="arrow-left" onPress={() => navigation.goBack()} title="Login"/>
             </ContainerHeader>
             
-            {error === 'error' ? <AlertToastError /> : null }
+            {error === 'error' ? <AlertToastError>Valide usuário e senha!</AlertToastError> : null }
 
             <KeyboardAvoidingView behavior="position">
                 <ContainerInput>
@@ -62,7 +61,7 @@ export default function Signin() {
                     <Form ref={formRef} onSubmit={handleLogin}>
                         <Input 
                             name="username" 
-                            type="email"
+                            type="username"
                             placeholder="Username" 
                             placeholderTextColor="white" 
                             icon="user"
@@ -87,6 +86,9 @@ export default function Signin() {
                         />
                         <Button onPress={() => formRef.current?.submitForm()}> Entrar </Button>
                     </Form>
+                    <Footer>
+                        <ForgotPassword onPress={() => {}}><Text>Esqueci minha senha</Text></ForgotPassword>
+                    </Footer>
                 </ContainerInput>
             </KeyboardAvoidingView>
         </Container>

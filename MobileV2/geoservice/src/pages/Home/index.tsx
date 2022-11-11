@@ -6,7 +6,9 @@ import { Container, Text} from './styled';
 
 export default function Home() {
 
-    const {  signOut } = useContext(ContextApi)
+    const {  signOut, user } = useContext(ContextApi)
+
+    console.log(user, 'a')
     return (
         <Container>
             <Text> Home </Text>

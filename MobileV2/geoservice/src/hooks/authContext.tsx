@@ -2,10 +2,12 @@ import React,{ createContext, useCallback, useState, useEffect } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { IAuthentication, IRegister } from '../utils/interfaces/interfaceAuthentication';
+import { IAuthentication, IRegister, ISignin } from '../utils/interfaces/interfaceAuthentication';
 import connectionApi from '../services/controllerApi';
 
 const ContextApi = createContext<IAuthentication>({} as IAuthentication);
+
+
 
 function AuthProvider({children} :IAuthentication) {
     const [ authenticated, setAuthenticated] = useState<IAuthentication>({} as IAuthentication);
@@ -35,7 +37,7 @@ function AuthProvider({children} :IAuthentication) {
         loadStorageData();
     }, []);
 
-    const authenticationUser = useCallback(async({username, password}: IAuthentication) => {
+    const authenticationUser = useCallback(async({username, password}: ISignin) => {
         if(!username || !password) {
             setError('error');
                 
@@ -71,7 +73,7 @@ function AuthProvider({children} :IAuthentication) {
     
     },[])
 
-    const authenticationEstablishment = useCallback(async({username, password}: IAuthentication) => {
+    const authenticationEstablishment = useCallback(async({username, password}: ISignin) => {
         if(!username || !password) {
             setError('error');
                 
@@ -106,13 +108,6 @@ function AuthProvider({children} :IAuthentication) {
     },[])
 
     const registerUser = useCallback(async({email, username, password} : IRegister) => {
-        if(!email || !username || !password) {
-            setError('error');
-
-            setTimeout(() => {
-                setError('');
-            }, 3000);
-        } else {
             try {
                 const response = await connectionApi.post('/users', {
                     email,
@@ -126,7 +121,7 @@ function AuthProvider({children} :IAuthentication) {
                     setError('');
                 }, 3000);
             }
-        }
+        
     },[])
 
     const registerEstablishment = useCallback(async ({email, username, password}: IRegister) => {
