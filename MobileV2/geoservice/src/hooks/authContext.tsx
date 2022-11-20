@@ -2,11 +2,10 @@ import React,{ createContext, useCallback, useState, useEffect } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { IAuthentication, IRegister, ISignin } from '../utils/interfaces/interfaceAuthentication';
+import { IAuthentication, IRegister, ISignin } from '@utils/interfaces/interfaceAuthentication';
 import connectionApi from '../services/controllerApi';
 
 const ContextApi = createContext<IAuthentication>({} as IAuthentication);
-
 
 
 function AuthProvider({children} :IAuthentication) {
@@ -14,7 +13,8 @@ function AuthProvider({children} :IAuthentication) {
     const [loading, setLoading] = useState<boolean>(false);
     const [ visible, setVisible ] = useState<boolean>(true);
     const [ error, setError ] = useState<string>('');
-
+    const [ success, setSuccess ] = useState<string>(''); 
+    
     useEffect(() => {
         async function loadStorageData() {
           const [token, user, establishment] = await AsyncStorage.multiGet([
@@ -38,14 +38,6 @@ function AuthProvider({children} :IAuthentication) {
     }, []);
 
     const authenticationUser = useCallback(async({username, password}: ISignin) => {
-        if(!username || !password) {
-            setError('error');
-                
-            setTimeout(() => {
-                setError('');
-            }, 3000);
-            
-        } else {
             try {
                 const response = await connectionApi.post('/sessions/users', {
                     username,
@@ -69,18 +61,9 @@ function AuthProvider({children} :IAuthentication) {
                     setError('');
                 }, 3000);
             }
-        }
-    
     },[])
 
     const authenticationEstablishment = useCallback(async({username, password}: ISignin) => {
-        if(!username || !password) {
-            setError('error');
-                
-            setTimeout(() => {
-                setError('');
-            }, 3000);
-        } else {
             try {
                 const response = await connectionApi.post('/sessions/establishments', {
                     username,
@@ -104,7 +87,6 @@ function AuthProvider({children} :IAuthentication) {
                     setError('');
                 }, 3000);            
             }
-        }
     },[])
 
     const registerUser = useCallback(async({email, username, password} : IRegister) => {
@@ -114,6 +96,13 @@ function AuthProvider({children} :IAuthentication) {
                     username,
                     password
                 })
+
+                setSuccess('ok');
+                
+                setTimeout(() => {
+                    setSuccess('');
+                }, 3000);
+
             } catch (error) {
                 setError('error');
 
@@ -125,19 +114,18 @@ function AuthProvider({children} :IAuthentication) {
     },[])
 
     const registerEstablishment = useCallback(async ({email, username, password}: IRegister) => {
-        if(!email || !username || !password) {
-            setError('error');
-
-            setTimeout(() => {
-                setError('');
-            }, 3000);
-        } else {
             try {
                 const response = await connectionApi.post('/establishments', {
                     email,
                     username,
                     password
                 })
+
+                setSuccess('ok');
+
+                setTimeout(() => {
+                    setSuccess('');
+                }, 3000);
         
             } catch (error) {
                 setError('error');
@@ -146,7 +134,6 @@ function AuthProvider({children} :IAuthentication) {
                     setError('');
                 }, 3000);
             }
-        }
     },[])
 
     const signOut = useCallback(async () => {
@@ -174,6 +161,7 @@ function AuthProvider({children} :IAuthentication) {
                 enableVision,
                 visible,
                 error,
+                success,
                 token: authenticated.token,
                 user: authenticated.user,
                 establishment : authenticated.establishment,

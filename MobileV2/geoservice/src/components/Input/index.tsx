@@ -2,16 +2,9 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
 import { Feather } from '@expo/vector-icons';
 
-import { GeneralPropsInput, ITextInput } from '../../utils/interfaces/interfaceGeneralProps';
+import { GeneralPropsInput, ITextInput } from '@utils/interfaces/interfaceGeneralProps';
 
-import {
-    Container,
-    TextInput,
-    Icon,
-    Button,
-    Text,
-    ContentRequired
-} from './styled';
+import * as Style from './styled';
 
 export default function Input({ 
     name,
@@ -69,9 +62,9 @@ export default function Input({
 
     return (
       <>
-        <Container {...rest}>
-            <Icon  name={icon} size={20} color="#fff"/>
-            <TextInput 
+        <Style.Container {...rest}>
+            <Style.Icon  name={icon} size={20} color="#fff"/>
+            <Style.TextInput 
                 placeholder={placeholder} 
                 placeholderTextColor={placeholderTextColor}
                 secureTextEntry={secureTextEntry}
@@ -80,15 +73,15 @@ export default function Input({
                 defaultValue={defaultValue}
                 {...rest}                
             />
-            <Button onPress={visible}>
-              <Icon name={isVisible ? icon_eye_opened : icon_eye_closed} size={20} color="#fff"/>
-            </Button>
-        </Container>
+            <Style.Button onPress={visible}>
+              <Style.Icon name={isVisible ? icon_eye_opened : icon_eye_closed} size={20} color="#fff"/>
+            </Style.Button>
+        </Style.Container>
         {error && (
-          <ContentRequired>
-            <Text>{error}</Text>
+          <Style.ContentRequired>
+            <Style.Text>{error}</Style.Text>
             <Feather name="alert-circle" size={20} color="#f00" />
-          </ContentRequired>
+          </Style.ContentRequired>
           )}
       </>
     )

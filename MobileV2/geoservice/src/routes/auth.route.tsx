@@ -4,11 +4,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import RootStackParamList from './RootStackParamList/index';
 
-import Main from '../pages/Login/Main/index';
-import SessionUser from '../pages/Login/SessionUser/index';
-import SessionEstablishment from '../pages/Login/SessionEstablishment/index';
-import Signin from '../pages/Login/Signin/index';
-import Register from '../pages/Login/Register/index';
+import Main from '@pages/Login/Main/index';
+import SessionUser from '@pages/Login/SessionUser/index';
+import SessionEstablishment from '@pages/Login/SessionEstablishment/index';
+import Signin from '@pages/Login/Signin/index';
+import Register from '@pages/Login/Register/index';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 

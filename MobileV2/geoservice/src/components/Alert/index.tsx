@@ -1,8 +1,8 @@
 import React from 'react';
 import Animated,{FadeInUp,FadeOutUp} from 'react-native-reanimated'; 
-import { Container, ContainerWhite, Icon, Success, Error, Title, Description, ModalAlert } from './styled';
+import * as Style from './styled';
 
-const AlertToastSuccess = () => {
+const AlertToastSuccess = ({children}: any) => {
     return (
         <Animated.View
             entering={FadeInUp}
@@ -17,13 +17,13 @@ const AlertToastSuccess = () => {
                 position: "absolute",
             }}
         >
-            <Success>
-                <Icon name="checkcircleo" size={28} color="white"/>
-            </Success>
-            <ContainerWhite>
-                <Title>Oba...</Title>
-                <Description>Cadastro realizado com sucesso!</Description>
-            </ContainerWhite>
+            <Style.Success>
+                <Style.Icon name="checkcircleo" size={28} color="white"/>
+            </Style.Success>
+            <Style.ContainerWhite>
+                <Style.Title>Oba...</Style.Title>
+                <Style.Description>{children}</Style.Description>
+            </Style.ContainerWhite>
         </Animated.View>
     );
 }
@@ -43,13 +43,13 @@ const AlertToastError = ({children}: any) => {
                 position: "absolute",
             }}
         >
-            <Error>
-                <Icon name="closecircleo" size={28} color="white"/>
-            </Error>
-            <ContainerWhite>
-                <Title>Ops...</Title>
-                <Description>{children}</Description>
-            </ContainerWhite>
+            <Style.Error>
+                <Style.Icon name="closecircleo" size={28} color="white"/>
+            </Style.Error>
+            <Style.ContainerWhite>
+                <Style.Title>Ops...</Style.Title>
+                <Style.Description>{children}</Style.Description>
+            </Style.ContainerWhite>
         </Animated.View>
     );
 }

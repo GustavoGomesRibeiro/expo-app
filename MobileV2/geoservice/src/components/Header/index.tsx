@@ -1,13 +1,14 @@
 import React from 'react';
-import { GeneralPropsHeader } from '../../utils/interfaces/interfaceGeneralProps';
+import { GeneralPropsHeader } from '@utils/interfaces/interfaceGeneralProps';
 
-import { Container, HeaderIcon, Text } from './styled'
+import * as Style from './styled';
+
 export default function Header({icon, title, onPress, ...rest}: GeneralPropsHeader) {
     return (
-        <Container> 
-            <HeaderIcon onPress={onPress} name={icon} size={30} color="black"/>
-            <Text>{title}</Text>
-            <HeaderIcon/>
-        </Container>
+        <Style.Container> 
+            <Style.HeaderIcon onPress={onPress} name={icon} size={30} color="black"/>
+            <Style.Text>{title}</Style.Text>
+            <Style.HeaderIcon/>
+        </Style.Container>
     )
 }

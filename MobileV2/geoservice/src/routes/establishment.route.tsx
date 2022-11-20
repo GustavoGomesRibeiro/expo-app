@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import RootStackParamList from './RootStackParamList/index';
 
-import Home from '../pages/Home/index';
+import Home from '@pages/Home/index';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 

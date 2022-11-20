@@ -25,8 +25,8 @@ export interface GeneralPropsButton {
     children?: React.ReactNode;
 }
 export interface GeneralPropsCallToAction {
-    sessionUser: string;
-    sessionEstablishment: string;
+    sessionUser?: string;
+    sessionEstablishment?: string;
     children?: React.ReactNode;
 }
 export interface ITextInput extends TextInput {

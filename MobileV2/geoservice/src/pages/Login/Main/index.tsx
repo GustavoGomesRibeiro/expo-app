@@ -1,24 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
-import { ReceiveScreen } from '../../../utils/NavigationRoutes';
+import { ReceiveScreen } from '@utils/NavigationRoutes';
 
 import { FontAwesome, MaterialCommunityIcons  } from '@expo/vector-icons'; 
-import logo from '../../../assets/imgs/logo.png';
-import { 
-    Container, 
-    TextUser, 
-    TextEstablishment, 
-    Logo,
-    ContentDescription, 
-    Welcome,
-    LabelOption,
-    Img, 
-    ContainerButton, 
-    ButtonUser, 
-    ButtonEstablishment, 
-    Icon, 
-    ContainerText 
-} from './styled';
+
+import logo from '@assets/imgs/logo.png';
+
+import * as Style from './styled';
 
 
 
@@ -29,36 +17,36 @@ export default function Main() {
 
     const navigation = useNavigation<ReceiveScreen>();
     return (
-        <Container>
-            <Logo>
-                <Img source={logo}/>
-            </Logo>
+        <Style.Container>
+            <Style.Logo>
+                <Style.Img source={logo}/>
+            </Style.Logo>
 
-            <ContentDescription>
-                <Welcome> Seja bem-vindo,</Welcome>
-                <LabelOption> O que deseja fazer?</LabelOption>
-            </ContentDescription>
+            <Style.ContentDescription>
+                <Style.Welcome> Seja bem-vindo,</Style.Welcome>
+                <Style.LabelOption> O que deseja fazer?</Style.LabelOption>
+            </Style.ContentDescription>
 
-            <ContainerButton>
-                <ButtonUser onPress={() => navigation.navigate('SessionUser')} user={user}>
-                    <Icon>
+            <Style.ContainerButton>
+                <Style.ButtonUser onPress={() => navigation.navigate('SessionUser')} user={user}>
+                    <Style.Icon>
                         <FontAwesome name="users" size={26} color="black" />
-                    </Icon>
+                    </Style.Icon>
 
-                    <ContainerText>
-                        <TextUser>Área do Usuário</TextUser>
-                    </ContainerText>
-                </ButtonUser>
+                    <Style.ContainerText>
+                        <Style.TextUser>Área do Usuário</Style.TextUser>
+                    </Style.ContainerText>
+                </Style.ButtonUser>
 
-                <ButtonEstablishment onPress={() => navigation.navigate('SessionEstablishment')} establishment={establishment}>
-                    <Icon>
+                <Style.ButtonEstablishment onPress={() => navigation.navigate('SessionEstablishment')} establishment={establishment}>
+                    <Style.Icon>
                         <MaterialCommunityIcons name="warehouse" size={26} color="white" />
-                    </Icon>
-                    <ContainerText>
-                        <TextEstablishment>Área do Estabelecimento</TextEstablishment>
-                    </ContainerText>
-                </ButtonEstablishment>
-            </ContainerButton>
-        </Container>
+                    </Style.Icon>
+                    <Style.ContainerText>
+                        <Style.TextEstablishment>Área do Estabelecimento</Style.TextEstablishment>
+                    </Style.ContainerText>
+                </Style.ButtonEstablishment>
+            </Style.ContainerButton>
+        </Style.Container>
     )
 }

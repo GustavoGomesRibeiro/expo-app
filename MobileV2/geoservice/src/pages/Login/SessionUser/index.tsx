@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PageCallToAction from '../../../components/PageCallToAction';
+import PageCallToAction from '@components/PageCallToAction';
 
 import { Container } from './styled';
 

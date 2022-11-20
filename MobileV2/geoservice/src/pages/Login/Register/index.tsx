@@ -5,20 +5,22 @@ import { KeyboardAvoidingView  } from 'react-native';
 import { useNavigation, useRoute, RouteProp  } from '@react-navigation/native';
 import * as Yup from 'yup';
 
-import { ContextApi } from '../../../hooks/authContext';
-import { ReceiveScreen } from '../../../utils/NavigationRoutes';
-import { IRegister } from '../../../utils/interfaces/interfaceAuthentication';
 
-import { AlertToastError } from '../../../components/Alert';
-import Input from '../../../components/Input';
-import Button from '../../../components/Button';
-import Header from '../../../components/Header';
+import { ContextApi } from '@hooks/authContext';
+import { ReceiveScreen } from '@utils/NavigationRoutes';
+import { IRegister } from '@utils/interfaces/interfaceAuthentication';
 
-import Signup from '../../../assets/imgs/signup.svg'
-import { Container, ContainerHeader, ContainerInput, Logo,  Text } from './styled';
+import { AlertToastError, AlertToastSuccess } from '@components/Alert';
+import Header from '@components/Header';
+import Input from '@components/Input';
+import Button from '@components/Button';
+
+import Signup from '@assets/imgs/signup.png';
+
+import * as Style from './styled';
 
 export default function Register() {
-    const { registerUser, registerEstablishment, enableVision, visible, error } = useContext(ContextApi);
+    const { registerUser, registerEstablishment, enableVision, visible, error, success } = useContext(ContextApi);
     const route: RouteProp<{params: {session: string}}>  = useRoute();
 
     const formRef = useRef<FormHandles>(null);
@@ -46,12 +48,18 @@ export default function Register() {
                     username: data.username,
                     password: data.password,
                 })
+                setTimeout(() => {
+                    navigation.navigate('Signin', {session: 'user'});
+                }, 2000);
             } else {
                 await registerEstablishment({
                     email: data.email,
                     username: data.username,
                     password: data.password,
                 })
+                setTimeout(() => {
+                    navigation.navigate('Signin', {session: 'establishment'});
+                }, 2000);
             }
         } catch (err) {
             const validationErrors = {};
@@ -65,18 +73,19 @@ export default function Register() {
     },[])
 
     return (
-        <Container>
-            <ContainerHeader>
+        <Style.Container>
+            <Style.ContainerHeader>
                 <Header icon="arrow-left" onPress={() => navigation.goBack()} title="Cadastro"/>
-            </ContainerHeader>
+            </Style.ContainerHeader>
             
             {error === 'error' ? <AlertToastError>Algo deu errado, tente novamente!</AlertToastError> : null }
+            {success === 'ok' ? <AlertToastSuccess>Cadastro realizado com sucesso!</AlertToastSuccess> : null }
 
             <KeyboardAvoidingView behavior="position">
-                <ContainerInput>
-                    <Logo>
+                <Style.ContainerInput>
+                    <Style.Logo>
                         <Signup width={250} height={250} />
-                    </Logo>
+                    </Style.Logo>
 
                     <Form ref={formRef} onSubmit={handleRegister}>
                         <Input 
@@ -116,8 +125,8 @@ export default function Register() {
                         />
                         <Button onPress={() => formRef.current?.submitForm()}> Cadastrar </Button>
                     </Form>
-                </ContainerInput>
+                </Style.ContainerInput>
             </KeyboardAvoidingView>
-        </Container>
+        </Style.Container>
     )
 }

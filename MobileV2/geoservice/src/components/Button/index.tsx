@@ -1,5 +1,5 @@
 import React from 'react';
-import { GeneralPropsButton } from '../../utils/interfaces/interfaceGeneralProps';
+import { GeneralPropsButton } from '@utils/interfaces/interfaceGeneralProps';
 
 import {
     Container,

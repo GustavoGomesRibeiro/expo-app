@@ -4,18 +4,18 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native'
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 
-import { ReceiveScreen } from '../../../utils/NavigationRoutes';
-import { ContextApi } from '../../../hooks/authContext';
-import { ISignin } from '../../../utils/interfaces/interfaceAuthentication';
+import { ContextApi } from '@hooks/authContext';
+import { ReceiveScreen } from '@utils/NavigationRoutes';
+import { ISignin } from '@utils/interfaces/interfaceAuthentication';
 
-import Input from '../../../components/Input';
-import Button from '../../../components/Button';
-import Header from '../../../components/Header';
-import { AlertToastError } from '../../../components/Alert';
+import { AlertToastError } from '@components/Alert';
+import Header from '@components/Header';
+import Input from '@components/Input';
+import Button from '@components/Button';
 
-import Login from '../../../assets/imgs/login.svg'
+import Login from '@assets/imgs/login.svg'
 
-import { Container, ContainerInput, Text, Logo, ContainerHeader, Footer, ForgotPassword } from './styled';
+import * as Style from './styled';
 
 export default function Signin() {    
     const formRef = useRef<FormHandles>(null);
@@ -44,19 +44,19 @@ export default function Signin() {
     },[])
 
     return (
-        <Container>
-            <ContainerHeader>
+        <Style.Container>
+            <Style.ContainerHeader>
                 <Header icon="arrow-left" onPress={() => navigation.goBack()} title="Login"/>
-            </ContainerHeader>
+            </Style.ContainerHeader>
             
             {error === 'error' ? <AlertToastError>Valide usuário e senha!</AlertToastError> : null }
 
             <KeyboardAvoidingView behavior="position">
-                <ContainerInput>
+                <Style.ContainerInput>
                     
-                    <Logo>
+                    <Style.Logo>
                         <Login width={250} height={250} />
-                    </Logo>
+                    </Style.Logo>
                     
                     <Form ref={formRef} onSubmit={handleLogin}>
                         <Input 
@@ -86,11 +86,11 @@ export default function Signin() {
                         />
                         <Button onPress={() => formRef.current?.submitForm()}> Entrar </Button>
                     </Form>
-                    <Footer>
-                        <ForgotPassword onPress={() => {}}><Text>Esqueci minha senha</Text></ForgotPassword>
-                    </Footer>
-                </ContainerInput>
+                    <Style.Footer>
+                        <Style.ForgotPassword onPress={() => {}}><Style.Text>Esqueci minha senha</Style.Text></Style.ForgotPassword>
+                    </Style.Footer>
+                </Style.ContainerInput>
             </KeyboardAvoidingView>
-        </Container>
+        </Style.Container>
     )
 }

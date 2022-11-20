@@ -13,6 +13,7 @@ export interface IAuthentication {
     children?: React.ReactNode;
     visible: boolean;
     error: string;
+    success: string;
     user: string;
     establishment: string;
     token: string;
