@@ -13,9 +13,8 @@ export const Container = styled.View`
 export const HeaderIcon = styled(Feather)``;
 
 export const Text = styled.Text`
-
-        color: #000;
         font-size: 22px;
-        font-family: 'Poppins_700Bold';
+        color: ${ props => props.theme.fonts_poppins.primaryColor};
+        font-family: ${props => props.theme.fonts_poppins.strong};
 `;
 

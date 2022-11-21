@@ -15,9 +15,10 @@ export const Container = styled.View`
 export const TextInput = styled.TextInput`
     flex: 1;
     border-radius: 10px;
-    color: #fff;
     font-size: 14px;
-    font-family: 'Archivo_700Bold';
+    color: ${ props => props.theme.fonts_archivo.secondaryColor};
+    font-family: ${props => props.theme.fonts_archivo.strong};
+
 `;
 
 export const Button = styled.TouchableOpacity``;

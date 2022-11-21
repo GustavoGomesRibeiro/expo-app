@@ -9,12 +9,12 @@ export const Btn = styled.TouchableOpacity`
     width: 290px;
     height: 50px;
     border-radius: 10px;
-    background-color: #000;
+    background-color: ${ props => props.theme.colorsButton.btnDefault};
     margin-top: 10px;
 `;
 
 export const Text = styled.Text`
-    color: #fff;
     font-size: 14px;
-    font-family: 'Archivo_700Bold';
+    color: ${ props => props.theme.fonts_archivo.secondaryColor};
+    font-family: ${props => props.theme.fonts_archivo.strong};
 `;

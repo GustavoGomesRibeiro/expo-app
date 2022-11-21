@@ -52,12 +52,12 @@ export const ContainerWhite = styled.View`
 
 export const Title = styled.Text`
     font-size: 18px;
-    font-family: 'Poppins_700Bold';
+    font-family: ${props => props.theme.fonts_poppins.strong};
 `;
 
 export const Description = styled.Text`
     font-size: 12px;
-    font-family: 'Poppins_400Regular';
+    font-family: ${props => props.theme.fonts_poppins.regular};
 `; 
 
 export const ModalAlert = styled.View``;

@@ -22,5 +22,5 @@ export const ForgotPassword = styled.TouchableOpacity``;
 
 export const Text = styled.Text`
   font-size: 14px;
-  font-family: "Archivo_700Bold";
+  font-family: ${props => props.theme.fonts_archivo.strong};
 `;

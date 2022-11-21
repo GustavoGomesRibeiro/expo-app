@@ -20,16 +20,16 @@ export const ContentDescription = styled.View`
 `;
 
 export const Title = styled.Text`
-    color: #000;
     font-size: 28px;
-    font-family: 'Archivo_700Bold';
+    color: ${ props => props.theme.fonts_archivo.primaryColor};
+    font-family: ${props => props.theme.fonts_archivo.strong};
 `;
 
 export const Description = styled.Text`
     margin-top: 20px;
-    color: #000;
     font-size: 16px;
-    font-family: 'Archivo_400Regular';
+    color: ${ props => props.theme.fonts_archivo.primaryColor};
+    font-family: ${props => props.theme.fonts_archivo.regular};
     line-height: 20px;
 
 `;

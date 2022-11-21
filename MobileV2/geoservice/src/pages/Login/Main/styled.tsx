@@ -16,12 +16,12 @@ export const ContentDescription = styled.View`
 
 export const Welcome = styled.Text`
   font-size: 18px;
-  font-family: 'Poppins_400Regular';
+  font-family: ${props => props.theme.fonts_poppins.regular};
 `;
 
 export const LabelOption = styled.Text`
   font-size: 16px;
-  font-family: 'Poppins_700Bold';
+  font-family: ${props => props.theme.fonts_poppins.strong};
 `;
 
 
@@ -45,7 +45,7 @@ export const ButtonUser = styled.TouchableOpacity`
   border: 1px solid #000;
   border-radius: 10px;
   margin: 10px;
-  background: #fff;
+  background-color: ${props => props.theme.colorsButton.btnUser};
 `;
 export const ButtonEstablishment = styled.TouchableOpacity`
   width: 160px;
@@ -53,7 +53,7 @@ export const ButtonEstablishment = styled.TouchableOpacity`
   border: 1px solid #000;
   border-radius: 10px;
   margin: 10px;
-  background: #000;
+  background-color: ${props => props.theme.colorsButton.btnEstablishment};
 `;
 
 export const Icon = styled.View`
@@ -69,13 +69,13 @@ export const ContainerText = styled.View`
 
 export const TextUser = styled.Text`
     font-size: 14px;
-    font-family: 'Poppins_700Bold';
-    color: #000;
+    font-family: ${props => props.theme.fonts_poppins.strong};
+    color: ${props => props.theme.fonts_poppins.primaryColor};
 `;
 
 export const TextEstablishment = styled.Text`
     font-size: 14px;
-    font-family: 'Poppins_700Bold';
-    color: #fff;
+    font-family: ${props => props.theme.fonts_poppins.strong};
+    color: ${props => props.theme.fonts_poppins.secondaryColor};
 `;
 
