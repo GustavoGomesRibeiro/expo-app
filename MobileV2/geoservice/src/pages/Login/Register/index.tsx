@@ -15,7 +15,7 @@ import Header from '@components/Header';
 import Input from '@components/Input';
 import Button from '@components/Button';
 
-import Signup from '@assets/imgs/signup.png';
+import Signup from '@assets/imgs/signup.svg';
 
 import * as Style from './styled';
 
@@ -30,7 +30,7 @@ export default function Register() {
     const handleRegister = useCallback(async (data: IRegister) => {
         
         try {
-            formRef.current.setErrors({});
+            formRef.current?.setErrors({});
 
             const schema = Yup.object().shape({
                 email: Yup.string().email('Digite um e-mail válido').required('Email obrigatório'),
@@ -67,7 +67,7 @@ export default function Register() {
               err.inner.forEach(error => {
                 validationErrors[error.path] = error.message;
               });
-              formRef.current.setErrors(validationErrors);
+              formRef.current?.setErrors(validationErrors);
             }
         }
     },[])

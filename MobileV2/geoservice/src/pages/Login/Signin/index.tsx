@@ -3,6 +3,7 @@ import { KeyboardAvoidingView  } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native'
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
 
 import { ContextApi } from '@hooks/authContext';
 import { ReceiveScreen } from '@utils/NavigationRoutes';
@@ -27,6 +28,17 @@ export default function Signin() {
 
     const handleLogin = useCallback(async (data: ISignin) => {
         try {
+            formRef.current?.setErrors({});
+
+            const schema = Yup.object().shape({
+                username: Yup.string().required('Usuário obrigatório.'),
+                password: Yup.string().required('Senha obrigatória.'),
+            })
+
+            await schema.validate(data, {
+                abortEarly: false,
+            })
+
             if(route.params?.session === 'user') {
                 authenticationUser({
                     username: data.username,
@@ -38,8 +50,14 @@ export default function Signin() {
                     password: data.password
                 })
             }            
-        } catch (error) {
-            console.log(error, 'error')
+        } catch (err) {
+            const validationErrors = {};
+            if (err instanceof Yup.ValidationError) {
+              err.inner.forEach(error => {
+                validationErrors[error.path] = error.message;
+              });
+              formRef.current?.setErrors(validationErrors);
+            }
         }
     },[])
 

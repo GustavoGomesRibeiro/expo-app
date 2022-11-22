@@ -1,30 +1,10 @@
+import { DefaultTheme } from './styles.d';
 import 'styled-components';
+import theme from '../assets/global/theme'
 
 declare module 'styled-components' {
-    export interface DefaultTheme {
-        colorsDefault: {
-            primaryBackground: string,
-            secondaryBackground: string,
-        },
-        textDefault: {
-            txtPrimary: string,
-        },
-        colorsButton: {
-            btnDefault: string,
-            btnUser: string,
-            btnEstablishment: string,
-        },
-        fonts_poppins: {
-            regular: string,
-            strong: string,
-            primaryColor: string,
-            secondaryColor: string,
-        },
-        fonts_archivo: {
-            regular: string,
-            strong: string,
-            primaryColor: string,
-            secondaryColor: string,
-        },
-    }
+
+    type ThemeType = typeof theme;
+
+    export interface DefaultTheme extends ThemeType{}
 }

@@ -8,8 +8,8 @@ export default {
     },
     colorsButton: {
         btnDefault: '#000',
-        btnUser: '#000',
-        btnEstablishment: '#fff',
+        btnUser: '#fff',
+        btnEstablishment: '#000',
     },
     fonts_poppins: {
         regular: 'Poppins_400Regular',
