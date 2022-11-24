@@ -44,7 +44,7 @@ const TabRoute = () => {
                     bottom: 0
                 },
                 tabBarLabel:({focused}) => {
-                    if(route.name === 'Home'){
+                    if(route.name === 'Main'){
                         return focused ? <Text style={{position: 'absolute', top: 45, bottom: 0, height: 50}}>•</Text> : null;
                     }
                     if(route.name === 'Search'){
@@ -57,12 +57,13 @@ const TabRoute = () => {
                         return focused ? <Text style={{position: 'absolute', top: 45, bottom: 0, height: 50}}>•</Text> : null;
                     }
                 },
+                headerShown: false,
                 tabBarActiveTintColor: '#1a1822',
                 tabBarInactiveTintColor: '#e5e5e5'
             })}
         >
             <Tab.Screen 
-                name="Home"
+                name="Main"
                 component={Home}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => {

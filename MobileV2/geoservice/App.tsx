@@ -21,8 +21,8 @@ export default function App() {
 
   return (
     <AppProvider>
+      <StatusBar style="auto" />
       <NavigationContainer>
-        <StatusBar style="auto" />
         <Router/>
       </NavigationContainer>
     </AppProvider>
