@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
 import { AntDesign } from '@expo/vector-icons'; 
 
-export const Container = styled.View`
+const Container = styled.View`
     flex-direction: row;
 `;
 
-export const Icon = styled(AntDesign)``;
+const Icon = styled(AntDesign)``;
 
-export const Success = styled.View`
+const Success = styled.View`
     justify-content: center;
     align-items: center;
     width: 80px;
@@ -21,7 +21,7 @@ export const Success = styled.View`
     elevation: 5;
 `;
 
-export const Error = styled.View`
+const Error = styled.View`
     justify-content: center;
     align-items: center;
     width: 80px;
@@ -35,7 +35,7 @@ export const Error = styled.View`
     elevation: 5;
 `;
 
-export const ContainerWhite = styled.View`
+const ContainerWhite = styled.View`
     justify-content: center;
     padding: 10px;
     background: #f4f4f4;
@@ -50,14 +50,53 @@ export const ContainerWhite = styled.View`
 `;
 
 
-export const Title = styled.Text`
+const Title = styled.Text`
     font-size: 18px;
     font-family: ${props => props.theme.fonts_poppins.strong};
 `;
 
-export const Description = styled.Text`
+const Description = styled.Text`
     font-size: 12px;
     font-family: ${props => props.theme.fonts_poppins.regular};
 `; 
 
-export const ModalAlert = styled.View``;
+const ModalAlert = styled.View`
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    background: #fff;
+    top: 290px;
+    left: 50px;
+    right: 50px;
+    position: absolute;
+    z-index: 1;
+`;
+
+const Content = styled.View`
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+`;
+
+const Alert = styled.View``;
+
+const ContainerBtn = styled.View`
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+
+const BtnConfirmation = styled.TouchableOpacity`
+    width: 80px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    background: #e7e7e7;
+    justify-content: center;
+    align-items: center;
+
+`;
+
+const Text = styled.Text``;
+
+export {Container, Icon, Success, Error, ContainerWhite, Title, Description, ModalAlert, Content, Alert, ContainerBtn, BtnConfirmation, Text}

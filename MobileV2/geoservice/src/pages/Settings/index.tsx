@@ -4,22 +4,29 @@ import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { ContextApi } from '@hooks/authContext';
 
 import HeaderCustom from '@components/HeaderCustom';
+import { AlertToastWarning } from '@components/Alert';
 
 import * as S from './styled';
 
 export default function Settings() {
   const [ isEnabled, setIsEnabled ] = useState<boolean>(false)
+  const [ isOpened, setIsOpened] = useState<boolean>(false);
 
   const { signOut } = useContext(ContextApi);
 
   const toggleSwitch = () => {
     setIsEnabled(event => !event)
   }
+
+  const openModal = () => {
+    setIsOpened(event => !event)
+  }
   
 
   return (
     <S.Container>
       <HeaderCustom>Configurações</HeaderCustom>
+      {isOpened && <AlertToastWarning isOpened={openModal}/>}
 
       <S.MainContainer>
         <S.Content>
@@ -29,7 +36,7 @@ export default function Settings() {
                 <S.Icon>
                   <MaterialIcons name="fingerprint" size={24} color="white" />
                 </S.Icon>
-                <S.Description>
+                <S.Description>   
                   <S.Text> Privacidade </S.Text>
                   <S.Label> Defina como quer acessar o app</S.Label>
                 </S.Description>
@@ -97,7 +104,7 @@ export default function Settings() {
 
         <S.Content>
           <S.Configs>
-            <S.Btn onPress={signOut}>
+            <S.Btn onPress={openModal}>
               <S.Item>
                 <S.Account>
                   <Ionicons name="log-in" size={24} color="#898989" />
