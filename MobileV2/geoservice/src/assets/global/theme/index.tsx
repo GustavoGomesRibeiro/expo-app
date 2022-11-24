@@ -3,6 +3,12 @@ export default {
         primaryBackground: '#000',
         secondaryBackground: '#fff',
     },
+    colorSetting: {
+        iconPrivacy: '#EF443A',
+        iconTheme: '#83769C',
+        iconFeedBack: '#FDBF38',
+        iconAbout: '#3B8EEA',
+    },
     textDefault: {
         txtPrimary:'#fff',
     },

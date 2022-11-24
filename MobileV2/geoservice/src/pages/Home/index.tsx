@@ -6,13 +6,10 @@ import { Container, Text} from './styled';
 
 export default function Home() {
 
-    const {  signOut, user } = useContext(ContextApi)
-
-    console.log(user, 'a')
     return (
         <Container>
             <Text> Home </Text>
-            <Button title='SignOut' onPress={signOut}/>
+            <Button title='SignOut'/>
         </Container>   
     )
 }

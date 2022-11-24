@@ -1,17 +1,17 @@
 import React,{ createContext, useCallback, useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components/native';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { IAuthentication, IRegister, ISignin } from '@utils/interfaces/interfaceAuthentication';
 import connectionApi from '../services/controllerApi';
 
+
 import THEME from '@assets/global/theme/';
 
 const ContextApi = createContext<IAuthentication>({} as IAuthentication);
 
-
 function AuthProvider({children} :IAuthentication) {
+
     const [ authenticated, setAuthenticated] = useState<IAuthentication>({} as IAuthentication);
     const [loading, setLoading] = useState<boolean>(false);
     const [ visible, setVisible ] = useState<boolean>(true);

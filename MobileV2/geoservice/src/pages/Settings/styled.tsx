@@ -1,48 +1,77 @@
 import styled from 'styled-components/native';
+import { Switch } from 'react-native';
 
-export const Container = styled.ScrollView`
+const Container = styled.ScrollView`
   flex: 1;
 `;
 
-export const MainContainer = styled.View``;
+const MainContainer = styled.View``;
 
-export const Content = styled.View`
+const Content = styled.View`
   justify-content: center;
   align-items: center;
   margin: 10px;
 `;
 
-export const ContainerLabel = styled.View`
+const ContainerTitle = styled.View`
   padding: 20px;
 `;
 
-export const Label = styled.Text`
+const Title = styled.Text`
     font-family: ${props => props.theme.fonts_poppins.strong};
     font-size: 24px;
     color: ${props => props.theme.fonts_poppins.primaryColor};
 `;
 
-export const Configs = styled.View`
+const Description = styled.View`
+  padding-left: 10px;
+`;
+
+const Label = styled.Text`
+  color:#A9A9A9;
+`;
+
+const Configs = styled.View`
     width: 350px;
     border-radius: 15px;
     background-color: #fff;
 `;
 
-export const Text = styled.Text`
-  padding-left: 10px;
+const Text = styled.Text`
+  font-family: ${props => props.theme.fonts_poppins.strong};
+  font-size: 14px;
 `;
 
-export const Icon = styled.View`
+const TextDelete = styled(Text)`
+  color: #E65A59;
+`;
+
+
+const Icon = styled.View`
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background-color: #EF443A;
-  /* background-color: #83769C; */
+  background-color: ${props => props.theme.colorSetting.iconPrivacy};
   justify-content: center;
   align-items: center;
 `;
 
-export const Btn = styled.TouchableOpacity`
+const Theme = styled(Icon)`
+    background-color: ${props => props.theme.colorSetting.iconTheme};
+`;
+
+const FeedBack = styled(Icon)`
+    background-color: ${props => props.theme.colorSetting.iconFeedBack};
+`;
+
+const About = styled(Icon)`
+    background-color: ${props => props.theme.colorSetting.iconAbout};
+`;
+const Account = styled(Icon)`
+  background-color: #fff;
+`;
+
+const Btn = styled.TouchableOpacity`
   flex-direction: row;
   height: 60px;
   justify-content: space-between;
@@ -50,13 +79,19 @@ export const Btn = styled.TouchableOpacity`
   padding: 0 10px;
 `;
 
-export const Item = styled.View`
+const Item = styled.View`
   flex-direction: row;
   align-items: center;
 `;
 
-export const Divider = styled.View`
+const Divider = styled.View`
   height: 350px;
   height: 1px;
   background-color: #F0F0F0;
 `;
+
+const SwitchTheme = styled(Switch)`
+
+`;
+
+export { MainContainer, Container, Content, ContainerTitle, Title, Description, Label, Configs, Text, TextDelete, Icon, Theme, FeedBack, About, Account, Btn, Item, Divider, SwitchTheme}

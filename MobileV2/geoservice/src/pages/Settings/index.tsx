@@ -1,96 +1,126 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+
+import { ContextApi } from '@hooks/authContext';
 
 import HeaderCustom from '@components/HeaderCustom';
 
-import * as Style from './styled';
+import * as S from './styled';
 
 export default function Settings() {
+  const [ isEnabled, setIsEnabled ] = useState<boolean>(false)
+
+  const { signOut } = useContext(ContextApi);
+
+  const toggleSwitch = () => {
+    setIsEnabled(event => !event)
+  }
+  
+
   return (
-    <Style.Container>
+    <S.Container>
       <HeaderCustom>Configurações</HeaderCustom>
 
-      <Style.MainContainer>
-        <Style.Content>
-          <Style.Configs>
-            <Style.Btn>
-              <Style.Item>
-                <Style.Icon>
+      <S.MainContainer>
+        <S.Content>
+          <S.Configs>
+            <S.Btn>
+              <S.Item>
+                <S.Icon>
                   <MaterialIcons name="fingerprint" size={24} color="white" />
-                </Style.Icon>
-                <Style.Text> Privacidade </Style.Text>
-              </Style.Item>
+                </S.Icon>
+                <S.Description>
+                  <S.Text> Privacidade </S.Text>
+                  <S.Label> Defina como quer acessar o app</S.Label>
+                </S.Description>
+              </S.Item>
               <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-            </Style.Btn>
+            </S.Btn>
 
-            <Style.Divider></Style.Divider>
+            <S.Divider></S.Divider>
 
-            <Style.Btn>
-              <Style.Item>
-                <Style.Icon>
+            <S.Btn>
+              <S.Item>
+                <S.Theme>
                   <Ionicons name="moon" size={24} color="white" />
-                </Style.Icon>
-                <Style.Text> Tema </Style.Text>
-              </Style.Item>
-              <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-            </Style.Btn>
-          </Style.Configs>
-        </Style.Content>
+                </S.Theme>
+                <S.Description>
+                  <S.Text> Tema </S.Text>
+                  <S.Label> Altere o tema</S.Label>
+                </S.Description>
+              </S.Item>
+              <S.SwitchTheme 
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </S.Btn>
+          </S.Configs>
+        </S.Content>
 
-        <Style.Content>
-          <Style.Configs>
-            <Style.Btn>
-              <Style.Item>
-                <Style.Icon>
+        <S.Content>
+          <S.Configs>
+            <S.Btn>
+              <S.Item>
+                <S.FeedBack>
                   <MaterialIcons name="messenger" size={24} color="white" />
-                </Style.Icon>
-                <Style.Text> Envie seu FeedBack </Style.Text>
-              </Style.Item>
+                </S.FeedBack>
+                <S.Description>
+                  <S.Text> Envie seu FeedBack </S.Text>
+                  <S.Label> Nos ajude a melhorar </S.Label>
+                </S.Description>
+              </S.Item>
               <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-            </Style.Btn>            
-          </Style.Configs>
-        </Style.Content>
+            </S.Btn>            
+          </S.Configs>
+        </S.Content>
 
-        <Style.Content>
-          <Style.Configs>
-            <Style.Btn>
-              <Style.Item>
-                <Style.Icon>
-                <Ionicons name="information-circle" size={24} color="white" />
-                </Style.Icon>
-                <Style.Text> Sobre </Style.Text>
-              </Style.Item>
+        <S.Content>
+          <S.Configs>
+            <S.Btn>
+              <S.Item>
+                <S.About>
+                  <Ionicons name="information-circle" size={24} color="white" />
+                </S.About>
+                <S.Description>
+                  <S.Text> Sobre </S.Text>
+                  <S.Label> Sobre o app</S.Label>
+                </S.Description>
+              </S.Item>
               <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-            </Style.Btn>            
-          </Style.Configs>
-        </Style.Content>
+            </S.Btn>            
+          </S.Configs>
+        </S.Content>
         
-        <Style.ContainerLabel>
-          <Style.Label>Conta</Style.Label>
-        </Style.ContainerLabel>
+        <S.ContainerTitle>
+          <S.Title>Conta</S.Title>
+        </S.ContainerTitle>
 
-        <Style.Content>
-          <Style.Configs>
-            <Style.Btn>
-              <Style.Item>
-                <Ionicons name="log-in" size={24} color="#898989" />
-                <Style.Text> Sair </Style.Text>
-              </Style.Item>
+        <S.Content>
+          <S.Configs>
+            <S.Btn onPress={signOut}>
+              <S.Item>
+                <S.Account>
+                  <Ionicons name="log-in" size={24} color="#898989" />
+                </S.Account>
+                <S.Text> Sair </S.Text>
+              </S.Item>
               <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-            </Style.Btn>
+            </S.Btn>
 
-            <Style.Divider></Style.Divider>
+            <S.Divider></S.Divider>
 
-            <Style.Btn>
-              <Style.Item>
-                <Ionicons name="trash" size={24} color="#898989" />
-                <Style.Text>Deletar conta </Style.Text>
-              </Style.Item>
+            <S.Btn>
+              <S.Item>
+                <S.Account>
+                  <Ionicons name="trash" size={24} color="#898989" />
+                </S.Account>
+                <S.TextDelete> Deletar conta </S.TextDelete>
+              </S.Item>
               <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-            </Style.Btn>
-          </Style.Configs>
-        </Style.Content>
-      </Style.MainContainer>
-    </Style.Container>
+            </S.Btn>
+          </S.Configs>
+        </S.Content>
+      </S.MainContainer>
+    </S.Container>
   );
 }
