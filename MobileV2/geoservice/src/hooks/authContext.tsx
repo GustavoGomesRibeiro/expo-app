@@ -1,4 +1,6 @@
 import React,{ createContext, useCallback, useState, useEffect } from 'react';
+import { useColorScheme } from 'react-native';
+
 import { ThemeProvider } from 'styled-components/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -6,12 +8,14 @@ import { IAuthentication, IRegister, ISignin } from '@utils/interfaces/interface
 import connectionApi from '../services/controllerApi';
 
 
-import THEME from '@assets/global/theme/';
+import { Light, Dark } from '@assets/global/theme/';
 
 const ContextApi = createContext<IAuthentication>({} as IAuthentication);
 
 function AuthProvider({children} :IAuthentication) {
+    const scheme = useColorScheme();
 
+    const [ theme, setTheme ] = useState<string>('light');
     const [ authenticated, setAuthenticated] = useState<IAuthentication>({} as IAuthentication);
     const [loading, setLoading] = useState<boolean>(false);
     const [ visible, setVisible ] = useState<boolean>(true);
@@ -20,11 +24,16 @@ function AuthProvider({children} :IAuthentication) {
     
     useEffect(() => {
         async function loadStorageData() {
+          const savedTheme = await AsyncStorage.getItem("@theme");
           const [token, user, establishment] = await AsyncStorage.multiGet([
             "@geoService:token",
             "@geoService:user",
             "@geoService:establishment",
           ]);
+
+          if(savedTheme) {
+            setTheme(savedTheme)
+          }
 
           if (token[1] && user[1] && establishment[1]) {
             connectionApi.defaults.headers.Token = `Bearer ${token[1]}`;
@@ -153,8 +162,19 @@ function AuthProvider({children} :IAuthentication) {
         setVisible(event => !event)
     }
 
+    const toggleTheme = () => {
+        let selectTheme;
+        if(theme === 'light'){
+            selectTheme = 'dark';
+        } else {
+            selectTheme = 'light';
+        }
+        setTheme(selectTheme);
+        AsyncStorage.setItem('@theme', selectTheme);
+    }
+
     return (
-        <ThemeProvider theme={THEME}>
+        <ThemeProvider theme={theme === 'light' ? Light : Dark}>
             <ContextApi.Provider
                 value={{
                     authenticationUser,
@@ -163,6 +183,8 @@ function AuthProvider({children} :IAuthentication) {
                     registerEstablishment,
                     signOut,
                     enableVision,
+                    toggleTheme,
+                    theme,
                     visible,
                     error,
                     success,

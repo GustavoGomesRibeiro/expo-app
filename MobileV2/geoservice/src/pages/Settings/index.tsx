@@ -12,11 +12,9 @@ export default function Settings() {
   const [ isEnabled, setIsEnabled ] = useState<boolean>(false)
   const [ isOpened, setIsOpened] = useState<boolean>(false);
 
-  const { signOut } = useContext(ContextApi);
+  const { toggleTheme, theme } = useContext(ContextApi);
 
-  const toggleSwitch = () => {
-    setIsEnabled(event => !event)
-  }
+  const isDarkMode = theme === 'dark';
 
   const openModal = () => {
     setIsOpened(event => !event)
@@ -57,8 +55,8 @@ export default function Settings() {
                 </S.Description>
               </S.Item>
               <S.SwitchTheme 
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={toggleTheme}
+                value={isDarkMode}
               />
             </S.Btn>
           </S.Configs>
@@ -107,7 +105,7 @@ export default function Settings() {
             <S.Btn onPress={openModal}>
               <S.Item>
                 <S.Account>
-                  <Ionicons name="log-in" size={24} color="#898989" />
+                  <Ionicons name="log-in" size={24} color={isDarkMode ? "#fff" : '#898989'} />
                 </S.Account>
                 <S.Text> Sair </S.Text>
               </S.Item>
@@ -119,7 +117,7 @@ export default function Settings() {
             <S.Btn>
               <S.Item>
                 <S.Account>
-                  <Ionicons name="trash" size={24} color="#898989" />
+                  <Ionicons name="trash" size={24} color={isDarkMode ? "#fff" : '#898989'} />
                 </S.Account>
                 <S.TextDelete> Deletar conta </S.TextDelete>
               </S.Item>

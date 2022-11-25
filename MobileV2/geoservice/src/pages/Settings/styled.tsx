@@ -3,6 +3,7 @@ import { Switch } from 'react-native';
 
 const Container = styled.ScrollView`
   flex: 1;
+  background-color: ${ props => props.theme.backgroundDefault.backgroundColor};
 `;
 
 const MainContainer = styled.View``;
@@ -20,7 +21,7 @@ const ContainerTitle = styled.View`
 const Title = styled.Text`
     font-family: ${props => props.theme.fonts_poppins.strong};
     font-size: 24px;
-    color: ${props => props.theme.fonts_poppins.primaryColor};
+    color: ${props => props.theme.fonts_poppins.colorDefault};
 `;
 
 const Description = styled.View`
@@ -29,17 +30,20 @@ const Description = styled.View`
 
 const Label = styled.Text`
   color:#A9A9A9;
+  font-family: ${props => props.theme.fonts_poppins.regular};
+  font-size: 12px;
 `;
 
 const Configs = styled.View`
     width: 350px;
     border-radius: 15px;
-    background-color: #fff;
+    background-color: ${props => props.theme.backgroundDefault.backgroundSettings};
 `;
 
 const Text = styled.Text`
   font-family: ${props => props.theme.fonts_poppins.strong};
   font-size: 14px;
+  color: ${props => props.theme.fonts_poppins.primaryColor};
 `;
 
 const TextDelete = styled(Text)`
@@ -68,7 +72,7 @@ const About = styled(Icon)`
     background-color: ${props => props.theme.colorSetting.iconAbout};
 `;
 const Account = styled(Icon)`
-  background-color: #fff;
+  background-color: ${props => props.theme.backgroundDefault.backgroundSettings};
 `;
 
 const Btn = styled.TouchableOpacity`

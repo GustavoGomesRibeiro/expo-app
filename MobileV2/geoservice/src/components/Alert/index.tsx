@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Animated,{FadeInUp,FadeOutUp} from 'react-native-reanimated'; 
-import { AuthProvider, ContextApi } from '@hooks/authContext';
+import { ContextApi } from '@hooks/authContext';
 
 import * as S from './styled';
 
@@ -58,9 +58,6 @@ const AlertToastError = ({children}: any) => {
 
 const AlertToastWarning = ({isOpened}: any) => {
     const { signOut } = useContext(ContextApi);
-    // console.log(isOpened, 'teste')
-
-    // const closedModal = () => {}
     return (
         <S.ModalAlert>
             <S.Content>

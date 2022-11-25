@@ -10,6 +10,6 @@ export const Title = styled.Text`
     margin-top: 30px;
     font-family: ${props => props.theme.fonts_poppins.strong};
     font-size: 28px;
-    color: ${props => props.theme.fonts_poppins.primaryColor};
+    color: ${props => props.theme.fonts_poppins.colorDefault};
     height: 50px;
 `;

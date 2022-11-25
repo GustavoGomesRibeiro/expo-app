@@ -1,10 +1,11 @@
 import { DefaultTheme } from './styles.d';
 import 'styled-components';
-import theme from '../assets/global/theme'
+import { Light, Dark } from '../assets/global/theme'
 
 declare module 'styled-components' {
 
-    type ThemeType = typeof theme;
+    type ThemeTypeLight = typeof Light;
+    type ThemeTypeDark = typeof Dark;
 
-    export interface DefaultTheme extends ThemeType{}
+    export interface DefaultTheme extends ThemeTypeLight,ThemeTypeDark {}
 }
