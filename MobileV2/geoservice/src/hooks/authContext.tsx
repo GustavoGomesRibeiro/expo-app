@@ -1,5 +1,5 @@
 import React,{ createContext, useCallback, useState, useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 import { ThemeProvider } from 'styled-components/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -13,7 +13,6 @@ import { Light, Dark } from '@assets/global/theme/';
 const ContextApi = createContext<IAuthentication>({} as IAuthentication);
 
 function AuthProvider({children} :IAuthentication) {
-    const scheme = useColorScheme();
 
     const [ theme, setTheme ] = useState<string>('light');
     const [ authenticated, setAuthenticated] = useState<IAuthentication>({} as IAuthentication);
@@ -173,8 +172,10 @@ function AuthProvider({children} :IAuthentication) {
         AsyncStorage.setItem('@theme', selectTheme);
     }
 
+    const isDarkMode = theme === 'dark';
     return (
         <ThemeProvider theme={theme === 'light' ? Light : Dark}>
+            <StatusBar style={isDarkMode ? 'light' : 'dark' }/>
             <ContextApi.Provider
                 value={{
                     authenticationUser,

@@ -1,5 +1,4 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import {Archivo_400Regular, Archivo_700Bold} from '@expo-google-fonts/archivo'
 import {Poppins_400Regular, Poppins_700Bold, useFonts} from '@expo-google-fonts/poppins'
 
@@ -21,7 +20,6 @@ export default function App() {
 
   return (
     <AppProvider>
-      <StatusBar style="auto" />
       <NavigationContainer>
         <Router/>
       </NavigationContainer>
