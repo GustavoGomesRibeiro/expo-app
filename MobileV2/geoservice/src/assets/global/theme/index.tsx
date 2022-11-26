@@ -11,6 +11,7 @@ export const Light = {
         iconTheme: '#83769C',
         iconFeedBack: '#FDBF38',
         iconAbout: '#3B8EEA',
+        divider: '#F0F0F0',
     },
     textDefault: {
         txtPrimary:'#fff',
@@ -49,6 +50,7 @@ export const Dark = {
         iconTheme: '#83769C',
         iconFeedBack: '#FDBF38',
         iconAbout: '#3B8EEA',
+        divider: '#a1a1a1'
     },
     textDefault: {
         txtPrimary:'#fff',

@@ -43,7 +43,7 @@ const Configs = styled.View`
 const Text = styled.Text`
   font-family: ${props => props.theme.fonts_poppins.strong};
   font-size: 14px;
-  color: ${props => props.theme.fonts_poppins.primaryColor};
+  color: ${props => props.theme.fonts_poppins.colorDefault};
 `;
 
 const TextDelete = styled(Text)`
@@ -89,9 +89,9 @@ const Item = styled.View`
 `;
 
 const Divider = styled.View`
-  height: 350px;
+  width: 350px;
   height: 1px;
-  background-color: #F0F0F0;
+  background-color: ${props => props.theme.colorSetting.divider};
 `;
 
 const SwitchTheme = styled(Switch)`

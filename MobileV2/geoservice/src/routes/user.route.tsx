@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Feather } from '@expo/vector-icons'; 
-import { Text } from 'react-native';
+import { ContextApi } from '@hooks/authContext';
+
+import { TabNavigation} from '@components/TabNavigation';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -18,6 +20,9 @@ const Tab = createBottomTabNavigator();
 
 
 const TabRoute = () => {
+    const { theme } = useContext(ContextApi);
+
+    const isDarkMode = theme === 'dark';
 
     return (
         <Tab.Navigator
@@ -28,8 +33,10 @@ const TabRoute = () => {
                     right: 20,
                     bottom: 50,
                     borderRadius: 25,
+                    borderTopColor: isDarkMode ? '#1C1C1E' : '#fff',
                     elevation: 0,
                     shadowOpacity: 0,
+                    backgroundColor: isDarkMode ? '#1C1C1E' : '#fff'
                 },
                 tabBarIconStyle: {
                     position: 'absolute',
@@ -45,21 +52,21 @@ const TabRoute = () => {
                 },
                 tabBarLabel:({focused}) => {
                     if(route.name === 'Main'){
-                        return focused ? <Text style={{position: 'absolute', top: 45, bottom: 0, height: 50}}>•</Text> : null;
+                        return focused ? <TabNavigation>•</TabNavigation> : null;
                     }
                     if(route.name === 'Search'){
-                        return focused ? <Text style={{position: 'absolute', top: 45, bottom: 0, height: 50}}>•</Text> : null;
+                        return focused ? <TabNavigation>•</TabNavigation> : null;
                     }
                     if(route.name === 'Favorite'){
-                        return focused ? <Text style={{position: 'absolute', top: 45, bottom: 0, height: 50}}>•</Text> : null;
+                        return focused ? <TabNavigation>•</TabNavigation> : null;
                     }
                     if(route.name === 'Settings'){
-                        return focused ? <Text style={{position: 'absolute', top: 45, bottom: 0, height: 50}}>•</Text> : null;
+                        return focused ? <TabNavigation>•</TabNavigation> : null;
                     }
                 },
                 headerShown: false,
-                tabBarActiveTintColor: '#1a1822',
-                tabBarInactiveTintColor: '#e5e5e5'
+                tabBarActiveTintColor: isDarkMode ? '#fff' : '#1a1822',
+                tabBarInactiveTintColor: isDarkMode ? '#e5e5e5' : '#1a1822'
             })}
         >
             <Tab.Screen 

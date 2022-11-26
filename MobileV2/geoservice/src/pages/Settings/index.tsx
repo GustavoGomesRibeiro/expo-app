@@ -39,7 +39,7 @@ export default function Settings() {
                   <S.Label> Defina como quer acessar o app</S.Label>
                 </S.Description>
               </S.Item>
-              <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
+              <MaterialIcons name="keyboard-arrow-right" size={24} color={isDarkMode ? "#fff" : 'black'} />
             </S.Btn>
 
             <S.Divider></S.Divider>
@@ -74,7 +74,7 @@ export default function Settings() {
                   <S.Label> Nos ajude a melhorar </S.Label>
                 </S.Description>
               </S.Item>
-              <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
+              <MaterialIcons name="keyboard-arrow-right" size={24} color={isDarkMode ? "#fff" : 'black'} />
             </S.Btn>            
           </S.Configs>
         </S.Content>
@@ -91,7 +91,7 @@ export default function Settings() {
                   <S.Label> Sobre o app</S.Label>
                 </S.Description>
               </S.Item>
-              <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
+              <MaterialIcons name="keyboard-arrow-right" size={24} color={isDarkMode ? "#fff" : 'black'} />
             </S.Btn>            
           </S.Configs>
         </S.Content>
@@ -109,7 +109,7 @@ export default function Settings() {
                 </S.Account>
                 <S.Text> Sair </S.Text>
               </S.Item>
-              <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
+              <MaterialIcons name="keyboard-arrow-right" size={24} color={isDarkMode ? "#fff" : 'black'} />
             </S.Btn>
 
             <S.Divider></S.Divider>
@@ -121,7 +121,7 @@ export default function Settings() {
                 </S.Account>
                 <S.TextDelete> Deletar conta </S.TextDelete>
               </S.Item>
-              <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
+              <MaterialIcons name="keyboard-arrow-right" size={24} color={isDarkMode ? "#fff" : 'black'} />
             </S.Btn>
           </S.Configs>
         </S.Content>
