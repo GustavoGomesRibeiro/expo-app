@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const connectionApi = axios.create({
-    baseURL: 'https://backend-geoservice.herokuapp.com',
+    baseURL: 'http:///192.168.0.181:3333'
 })
 
 export default connectionApi;

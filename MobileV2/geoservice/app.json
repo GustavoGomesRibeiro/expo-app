@@ -18,14 +18,24 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMaps": {
+            "apiKey": "AIzaSyBBrh_4Wi2iS5QYjargafSokb74XOmcKSQ"
+        }
+    }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.gustavogomesribeiro.geoservice"
+      "package": "com.gustavogomesribeiro.geoservice",
+      "config": {
+        "googleMaps": {
+            "apiKey": "AIzaSyBBrh_4Wi2iS5QYjargafSokb74XOmcKSQ"
+        }
+      }  
     },
     "web": {
       "favicon": "./assets/favicon.png"

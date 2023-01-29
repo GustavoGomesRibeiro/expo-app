@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import MapView from 'react-native-maps';
 import { RectButton } from "react-native-gesture-handler";
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 const Container = styled.View`
   flex: 1;
@@ -9,21 +10,19 @@ const Container = styled.View`
 
 const Header = styled.View`
   position: absolute;
-  bottom: 700px;
-  left: 20px;
-  right: 20px;
-  z-index: 5;
+  bottom: ${RFPercentage(85)}px;
+  padding: ${RFPercentage(3)}px;
   flex-direction: row;
 `;
 
 const SearchTextInput = styled.TextInput`
   flex: 1;
-  height: 55px;
+  height: 45px;
   background-color: #fff;
   color: #333;
   border-radius: 25px;
-  padding: 20px;
-  font-size: 16px;
+  padding: 0px 20px;
+  font-size: ${RFPercentage(2.2)}px;
   font-weight: bold;
   shadow-color: #000;
   shadow-opacity: 0.2;
@@ -39,9 +38,9 @@ const Map = styled(MapView)`
 `;
 
 const Button = styled(RectButton)`
-  width: 50px;
-  height: 50px;
-  background-color: #fc6963;
+  width: 45px;
+  height: 45px;
+  background-color: #1C1C1E;
   border-radius: 25px;
   justify-content: center;
   align-items: center;

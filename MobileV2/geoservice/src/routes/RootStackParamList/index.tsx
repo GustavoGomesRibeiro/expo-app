@@ -6,6 +6,8 @@ type RootStackParamList  = {
     SessionUser: undefined,
     SessionEstablishment: undefined,
     Signin: { session: 'user' | 'establishment'},
+    RegisterServices: undefined,
+    MoreDetails: undefined
 }
 
 export default RootStackParamList;

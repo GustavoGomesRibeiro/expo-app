@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { KeyboardAvoidingView } from 'react-native';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import {PROVIDER_GOOGLE} from 'react-native-maps';
 import * as Location from 'expo-location'
 
 import { MaterialIcons } from "@expo/vector-icons";
@@ -16,7 +16,9 @@ export default function Search(){
       const { status } = await Location.requestForegroundPermissionsAsync();
       
       if(status !== 'granted') {
-        const { coords } = await Location.getCurrentPositionAsync({});
+        const { coords } = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.Highest
+        });
 
         const { latitude, longitude } = coords;
         setCurrentRegion({
@@ -40,11 +42,11 @@ export default function Search(){
         provider={PROVIDER_GOOGLE}
         onRegionChangeComplete={handleRegionChanged}
         initialRegion={currentRegion}
-        showsUserLocation
+        showsUserLocation={true}
         loadingEnabled
       ></S.Map>
-
-      <KeyboardAvoidingView>
+            
+      <KeyboardAvoidingView behavior='position'>
         <S.Header>
           <S.SearchTextInput
             placeholder="Buscar serviços"
@@ -58,7 +60,7 @@ export default function Search(){
             <MaterialIcons name="my-location" size={32} color="#FFF" />
           </S.Button>          
         </S.Header>
-      </KeyboardAvoidingView>      
+      </KeyboardAvoidingView>  
     </S.Container>
   );
 }

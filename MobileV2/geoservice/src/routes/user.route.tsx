@@ -6,6 +6,7 @@ import { TabNavigation} from '@components/TabNavigation';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 import RootStackParamList from './RootStackParamList/index';
 
@@ -41,7 +42,7 @@ const TabRoute = () => {
                 tabBarIconStyle: {
                     position: 'absolute',
                     height: 50,
-                    top: 10,
+                    top: RFPercentage(0.4),
                     bottom: 0
                 },
                 tabBarLabelStyle: {
@@ -66,7 +67,7 @@ const TabRoute = () => {
                 },
                 headerShown: false,
                 tabBarActiveTintColor: isDarkMode ? '#fff' : '#1a1822',
-                tabBarInactiveTintColor: isDarkMode ? '#e5e5e5' : '#1a1822'
+                tabBarInactiveTintColor: isDarkMode ? '#b1b1b1' : '#1a1822'
             })}
         >
             <Tab.Screen 

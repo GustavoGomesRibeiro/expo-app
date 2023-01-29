@@ -14,7 +14,8 @@ const Router = () => {
     ) : establishment ? (
         <EstablishmentRoute/>
     ) : ( 
-        <AuthRoute/>
+        // <AuthRoute/>
+        <EstablishmentRoute/>
     );
 }
 
