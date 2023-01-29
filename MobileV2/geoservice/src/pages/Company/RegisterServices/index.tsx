@@ -7,6 +7,7 @@ import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import { Picker } from '@react-native-picker/picker';
 
+import { Feather } from '@expo/vector-icons';
 
 import * as S from './styled';
 
@@ -55,6 +56,15 @@ export default function RegisterServices(){
           </Picker>
 
           <S.Label>Fotos do Estabelecimento</S.Label>
+          <S.UploadPhotos>
+            <S.Image/>
+            <S.Image/>
+            <S.Image/>
+            <S.Image/>
+          </S.UploadPhotos>
+          <S.AddPhoto>
+            <Feather name="plus" size={24} color="#000"/>
+          </S.AddPhoto>
 
           <S.Label>Hórario de Funcionamento</S.Label>
           <Picker>
@@ -63,12 +73,18 @@ export default function RegisterServices(){
             <Picker.Item label="Das 8h às 18h" value="Das 9h às 18h"/>
           </Picker>
 
-          <S.Label></S.Label>
-          <S.SwitchWeek
-            thumbColor="#fff"
-            trackColor={{false: "#ccc", true: "#39CC83"}}
-          />
+          <S.SwitchContainer>
+            <S.Label>Atende final de semana?</S.Label>
+            <S.SwitchWeek
+              thumbColor="#fff"
+              trackColor={{false: "#ccc", true: "#39CC83"}}
+            />
+          </S.SwitchContainer>
         </Form>
+        
+        <S.Register>
+          <S.ButtonText> Cadastrar </S.ButtonText>
+        </S.Register>
       </S.ScrollView>
     </S.Container>
   );
