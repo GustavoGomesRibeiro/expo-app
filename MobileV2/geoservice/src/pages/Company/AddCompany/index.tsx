@@ -43,7 +43,7 @@ export default function AddCompany(){
 
       <S.ButtonContainer>
         {position.latitude !== 0 && (
-            <S.NextButton onPress={() => navigation.navigate('RegisterServices')}>
+            <S.NextButton onPress={() => navigation.navigate('RegisterServices', { position: position })}>
               <S.TextButton> Próximo </S.TextButton>
             </S.NextButton>
         )}

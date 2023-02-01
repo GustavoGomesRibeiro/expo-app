@@ -1,3 +1,4 @@
+import { IPosition } from "@utils/interfaces/interfacePosition";
 
 type RootStackParamList  = {
     Home: undefined,
@@ -6,7 +7,7 @@ type RootStackParamList  = {
     SessionUser: undefined,
     SessionEstablishment: undefined,
     Signin: { session: 'user' | 'establishment'},
-    RegisterServices: undefined,
+    RegisterServices: { position: IPosition },
     MoreDetails: undefined
 }
 

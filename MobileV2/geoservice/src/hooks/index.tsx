@@ -1,9 +1,17 @@
 import React from 'react';
-import { AuthProvider } from './authContext';
+import { AuthProvider, RegisterCompanyProvider } from './exportDefault';
 import { IAuthentication } from '../utils/interfaces/interfaceAuthentication';
 
 
-const AppProvider = ({children}: IAuthentication) => <AuthProvider>{children}</AuthProvider>
+const AppProvider = ({children}: IAuthentication) => {
+    return (
+        <>
+            <AuthProvider>
+                <RegisterCompanyProvider>{children}</RegisterCompanyProvider>
+            </AuthProvider>
+        </>
+    )
+}
 
 
 export default AppProvider
